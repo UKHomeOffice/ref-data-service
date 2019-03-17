@@ -1,9 +1,10 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   // in the `entry` property there is no need to 
   // specify `filename.js` at the end, its smart enough to figure out
-  entry: './src/client',
+  entry: ['./src/client', './src/client/sass/main.scss'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -18,9 +19,28 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
+      },
+      {
+        test: /\.(s*)css$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "assets/css/[name].css"
+            }
+          },
+          "sass-loader"
+        ]
       }
     ]
   },
+  plugins: [
+    new CopyPlugin([
+      { from: 'src/client/assets/javascript', to: 'javascript'},
+      { from: 'node_modules/govuk-frontend/all.js', to: 'javascript/all.js'},
+      { from: 'node_modules/govuk-frontend/assets', to: 'assets'}
+    ])
+  ],
   resolve: {
     alias: {
       Main: path.resolve(__dirname, 'src/client/components/Main.jsx')
