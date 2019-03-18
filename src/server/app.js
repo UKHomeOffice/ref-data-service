@@ -3,9 +3,10 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 
 // local imports
+import config from '../config/core';
 import logger from '../logger'
 
-const port = 5000;
+const port = config.serverPort || 5000;
 const app = express();
 
 // bodyParser allows POST requests

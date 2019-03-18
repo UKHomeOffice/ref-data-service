@@ -7,8 +7,8 @@
 module.exports = {
   logLevel: process.env.LOG_LEVEL || 'info',
   name: process.env.NAME || 'reference-data-governance-tool',
-  clientPort: process.env.PORT || 8080,
-  serverPort: process.env.PORT || 5000,
+  clientPort: process.env.CLIENT_PORT || 8080,
+  serverPort: process.env.SERVER_PORT || 5000,
   sessionSecret: process.env.SESSION_SECRET || 'anotverysecretsecretthing',
   title: process.env.TITLE || 'Reference Data Governance Tool',
 }
