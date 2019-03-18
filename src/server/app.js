@@ -1,7 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import winston from 'winston';
+
+// local imports
+import logger from '../logger'
 
 const port = 5000;
 const app = express();
@@ -14,5 +16,5 @@ app.use(
 );
 
 app.listen(port, () => {
-  winston.info(`Server Listening on Port: ${port}`);
+  logger.info(`Server Listening on Port: ${port}`);
 });
