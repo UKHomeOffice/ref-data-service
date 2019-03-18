@@ -15,5 +15,4 @@ app.use(
 
 app.listen(port, () => {
   winston.info(`Server Listening on Port: ${port}`);
-  winston.info('Press Ctrl+Shift+C to quit.');
 });
