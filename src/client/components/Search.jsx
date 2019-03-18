@@ -29,7 +29,6 @@ export default class Search extends React.Component {
                 <p className="govuk-body-m">Or build a search query to search for specific values in reference datasets</p>
                 <div className="govuk-form-group">
                   <label className="govuk-label" htmlFor="search">Search value</label>
-                  <span id="aircraftRegistration-hint" className="govuk-hint">For example, a name or description of a dataset</span>
                   <input className="govuk-input" id="search" name="name" type="text"/>
                   <label className="govuk-label" htmlFor="search">Select an operator</label>
                   <select className="govuk-select" id="dataset" name="dataset">
