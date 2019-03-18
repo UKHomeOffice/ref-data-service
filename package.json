@@ -1,0 +1,49 @@
+{
+  "name": "reference-data-governance-tool",
+  "version": "0.1.0",
+  "description": "A frontend service for interacting with the Reference Data Service API",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "webpack-dev-server --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UKHomeOffice/reference-data-governance-tool.git"
+  },
+  "author": "Pedro Miguel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UKHomeOffice/reference-data-governance-tool/issues"
+  },
+  "homepage": "https://github.com/UKHomeOffice/reference-data-governance-tool#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "govuk-frontend": "^2.8.0",
+    "npm": "^6.9.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.8.4",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "concurrently": "^4.1.0",
+    "css-loader": "^2.1.1",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.2.1"
+  }
+}
