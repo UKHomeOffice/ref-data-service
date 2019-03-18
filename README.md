@@ -13,7 +13,7 @@ Open your terminal and run the following commands from the project directory.
 $ npm install
 
 # build js bundle
-$ webpack --mode development
+$ npm run build-dev
 
 # run the backend end api and front end app concurrently
 $ npm run start-dev
