@@ -7,6 +7,7 @@
     "client": "webpack-dev-server --mode development",
     "server": "babel-node src/server/app",
     "build-dev": "webpack --mode development",
+    "build": "webpack -p",
     "start-dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
