@@ -30,5 +30,8 @@ module.exports = {
   devServer: {
     // in order to use `<Router>`, historyApiFallback needs to be enabled
     historyApiFallback: true,
+    proxy: {
+      '/api': 'http://localhost:5000'
+    }
   }
 }

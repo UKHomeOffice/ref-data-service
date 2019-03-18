@@ -4,7 +4,9 @@
   "description": "A frontend service for interacting with the Reference Data Service API",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "client": "webpack-dev-server --mode development"
+    "client": "webpack-dev-server --mode development",
+    "server": "babel-node src/server/app",
+    "start-dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
