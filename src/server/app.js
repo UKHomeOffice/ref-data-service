@@ -3,19 +3,18 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 
 // local imports
-import config from '../config/core';
-import logger from '../logger'
+import itemsRouter from './routers/items';
+import setsRouter from './routers/sets';
 
-const port = config.serverPort || 5000;
 const app = express();
 
 // bodyParser allows POST requests
 app.use(
   cors(),
   bodyParser.urlencoded({extended: true}),
-  bodyParser.json()
+  bodyParser.json(),
+  itemsRouter,
+  setsRouter
 );
 
-app.listen(port, () => {
-  logger.info(`Server Listening on Port: ${port}`);
-});
+module.exports = app;
