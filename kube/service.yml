@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: ref-data-gov-tool-service
+  name: ref-data-gov-tool-service
+spec:
+  ports:
+  - name: https
+    port: 443
+    targetPort: 10443
+  selector:
+    name: ref-data-gov-tool

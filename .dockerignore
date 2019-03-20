@@ -1,9 +1,15 @@
 .dockerignore
 Dockerfile
 
+# deployment files
+kube
+.drone.yml
+
+# dist folder
 dist
 
 .git
+.gitignore
 
 node_modules
 npm-debug.log
