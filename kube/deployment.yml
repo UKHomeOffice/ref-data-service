@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: quay.io/ukhomeofficedigital/ref-data-gov-tool:latest
+        image: quay.io/ukhomeofficedigital/ref-data-gov-tool:{{.DRONE_COMMIT_SHA}}
         imagePullPolicy: Always
         securityContext:
           runAsNonRoot: true
