@@ -9,88 +9,53 @@ import config from '../../config/core';
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      obj: [],
-      data: [],
-      params: props.match.params
-    };
+    this.state = { data: [] };
   }
 
   componentDidMount() {
-    const entitiesUrl = util.format(config.apiEntitiesUrl, this.state.params.name);
-    fetch(entitiesUrl)
+    const dataEntitiesUrl = config.apiDataEntitiesUrl;
+    fetch(dataEntitiesUrl)
       .then(res => res.json())
       .then(obj => {
-        this.setState({ obj: obj, data: obj.data })
+        this.setState({ data: obj.data })
       });
   }
 
   render() {
-    let countries = this.state.data.map((country) => {
+    let dataEntities = this.state.data.map((dataEntity) => {
       return (
-        <React.Fragment key={country.id}>
-          <tr className="govuk-table__row">
-            <td className="govuk-table__cell"><Link to={`/entities/${country.name}/items/${country.id}`}>{country.iso31661alpha2}</Link></td>
-            <td className="govuk-table__cell">{country.iso31661alpha3}</td>
-            <td className="govuk-table__cell">{country.name}</td>
-            <td className="govuk-table__cell">{country.continent}</td>
-            <td className="govuk-table__cell">{country.dial}</td>
-          </tr>
-          <tr className="govuk-table__row">
-            <td className="govuk-table__cell" colSpan="6">
-              <div>
-                <details role="group">
-                  <summary className="govuk-details__summary" role="button" aria-controls="details-content-2" aria-expanded="false" title="Further information for Taiwan">
-                    <span className="summary">Further information</span>
-                  </summary>
-                  <div className="panel panel-border-narrow" id="details-content-2" aria-hidden="true">
-                    <table className="govuk-table" width="100%">
-                      <tbody className="govuk-table__body">
-                        <tr className="govuk-table__row">
-                          <td className="govuk-table__cell">ISO 3166-1 Numeric</td>
-                          <td className="govuk-table__cell" width="75%">{country.iso31661numeric}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </details>
-              </div>
-            </td>
-          </tr>
-        </React.Fragment>
+        <tr className="govuk-table__row" key={dataEntity.id}>
+          <th className="govuk-table__header" scope="row">{dataEntity.label}</th>
+          <td className="govuk-table__cell">{dataEntity.description}</td>
+          <td className="govuk-table__cell"><Link to={`/entities/${dataEntity.tablename}`}>View data</Link></td>
+          <td className="govuk-table__cell"><Link to={`#`}>View definition</Link></td>
+        </tr>
       )
     });
+
     return (
       <div className="govuk-width-container">
         <Banner/>
-        <Link className="govuk-back-link" to="/">Back</Link>
-        <main className="govuk-main-wrapper " id="main-content" role="main">
+        <main id="main-content" className="govuk-main-wrapper " role="main">
           <div className="govuk-grid-row">
-            <div className="govuk-grid-column-two-thirds-from-desktop">
-              <h1 className="govuk-heading-xl">Countries</h1>
-              <p>A list of countries and the associated names, descriptions, dial and ISO31661 alpha and numeric codes.</p>
-              <div className="govuk-grid-row">
-                <div className="govuk-grid-column-full">
-                  <hr className="govuk-section-break govuk-section-break--visible govuk-section-break--xl govuk-!-margin-top-0" />
-                </div>
-              </div>
-              <h2 className="govuk-heading-m">Data items within this entity</h2>
-              <p>To manage a data item, click the ID.</p>
+            <div className="govuk-grid-column-two-thirds">
+              <h1 className="govuk-heading-xl">Reference Data Governance Tool</h1>
+              <p>This service allows you to view and manage reference data entities.</p>
+              <h2 className="govuk-heading-l">Data Entities</h2>
+              <span></span>
               <table className="govuk-table">
                 <thead className="govuk-table__head">
                   <tr className="govuk-table__row">
-                    <th className="govuk-table__header" scope="col">ID</th>
-                    <th className="govuk-table__header" scope="col">ISO 3166-1 Alpha</th>
                     <th className="govuk-table__header" scope="col">Name</th>
-                    <th className="govuk-table__header" scope="col">Continent</th>
-                    <th className="govuk-table__header" scope="col">Dial</th>
+                    <th className="govuk-table__header" scope="col">Description</th>
+                    <th className="govuk-table__header" scope="col">Data Items</th>
+                    <th className="govuk-table__header" scope="col">Entity Definition</th>
                   </tr>
                 </thead>
                 <tbody className="govuk-table__body">
-                  {countries}
+                  {dataEntities}
                 </tbody>
               </table>
-              <a className="govuk-button" href="/version3/new_data_item.html" role="button" draggable="false">Add a new data item</a>
             </div>
           </div>
         </main>
