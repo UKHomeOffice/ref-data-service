@@ -22,13 +22,13 @@ export default class Home extends React.Component {
   }
 
   render() {
-    let dataEntities = this.state.data.map((dataEntity) => {
+    let dataEntities = this.state.data.map((entities) => {
       return (
-        <tr className="govuk-table__row" key={dataEntity.id}>
-          <th className="govuk-table__header" scope="row">{dataEntity.label}</th>
-          <td className="govuk-table__cell">{dataEntity.description}</td>
-          <td className="govuk-table__cell"><Link to={`/entities/${dataEntity.tablename}`}>View data</Link></td>
-          <td className="govuk-table__cell"><Link to={`#`}>View definition</Link></td>
+        <tr className="govuk-table__row" key={entities.id}>
+          <th className="govuk-table__header" scope="row">{entities.label}</th>
+          <td className="govuk-table__cell">{entities.description}</td>
+          <td className="govuk-table__cell"><Link to={`/entities/${entities.tablename}`}>View data</Link></td>
+          <td className="govuk-table__cell"><Link to={`/entities/${entities.tablename}/schema`}>View definition</Link></td>
         </tr>
       )
     });
