@@ -60,6 +60,7 @@ export default class Home extends React.Component {
         </React.Fragment>
       )
     });
+
     return (
       <div className="govuk-width-container">
         <Banner/>
