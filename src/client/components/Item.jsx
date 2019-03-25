@@ -15,7 +15,7 @@ export default class Home extends React.Component {
       params: props.match.params
     };
   }
-  // this.state.params.name}/items/${this.state.params.id}`, 
+
   componentDidMount() {
     const entityDetailUrl = util.format(config.apiEntityDetailUrl, this.state.params.name, this.state.params.id);
     fetch(entityDetailUrl)
@@ -26,7 +26,6 @@ export default class Home extends React.Component {
   }
 
   render() {
-    console.log('data -> ', this.state);
     let metadata = (
       <dl className="govuk-summary-list govuk-!-margin-bottom-9">
         <div className="govuk-summary-list__row">
