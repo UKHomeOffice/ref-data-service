@@ -8,19 +8,6 @@
         <div className="govuk-width-container ">
           <div className="govuk-footer__meta">
             <div className="govuk-footer__meta-item govuk-footer__meta-item--grow">
-              <h2 className="govuk-visually-hidden">Support links</h2>
-              <ul className="govuk-footer__inline-list">
-                <li className="govuk-footer__inline-list-item">
-                  <Link className="govuk-footer__link" to="https://govuk-prototype-kit.herokuapp.com/">
-                    GOV.UK Prototype Kit v8.3.0
-                  </Link>
-                </li>
-                <li className="govuk-footer__inline-list-item">
-                  <Link className="govuk-footer__link" to="#">
-                    Clear data
-                  </Link>
-                </li>
-              </ul>
               <svg className="govuk-footer__licence-logo"
                    role="presentation"
                    focusable="false"
