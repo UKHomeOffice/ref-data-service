@@ -10,9 +10,6 @@ export default class Nav extends React.Component {
             <Link className="govuk-header__link" to="/">Home</Link>
           </li>
           <li className="govuk-header__navigation-item">
-            <Link className="govuk-header__link" to="/search">Search</Link>
-          </li>
-          <li className="govuk-header__navigation-item">
             <Link className="govuk-header__link" to="#">Signout</Link>
           </li>
         </ul>
