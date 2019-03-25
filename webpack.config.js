@@ -45,9 +45,9 @@ module.exports = {
     alias: {
       // Components
       Banner: path.resolve(__dirname, 'src/client/components/Banner.jsx'),
+      DataEntities: path.resolve(__dirname, 'src/client/components/DataEntities.jsx'),
       Footer: path.resolve(__dirname, 'src/client/components/Footer.jsx'),
       Header: path.resolve(__dirname, 'src/client/components/Header.jsx'),
-      Home: path.resolve(__dirname, 'src/client/components/Home.jsx'),
       Main: path.resolve(__dirname, 'src/client/components/Main.jsx'),
       Nav: path.resolve(__dirname, 'src/client/components/Nav.jsx'),
       Search: path.resolve(__dirname, 'src/client/components/Search.jsx')
