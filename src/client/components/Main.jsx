@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 // local imports
 import DataEntities from 'DataEntities';
-import Entities from 'Entities';
+import Items from 'Items';
 import EntityDetail from 'EntityDetail';
 import Footer from 'Footer';
 import Header from 'Header';
@@ -18,7 +18,7 @@ export default class Main extends React.Component {
           <Header/>
           <Route exact path='/' component={DataEntities}/>
           <Route path='/search' component={Search}/>
-          <Route exact path='/entities/:name' component={Entities}/>
+          <Route exact path='/entities/:name' component={Items}/>
           <Route path='/entities/:name/items/:id' component={EntityDetail}/>
           <Footer/>
         </div>

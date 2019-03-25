@@ -46,7 +46,7 @@ module.exports = {
       // Components
       Banner: path.resolve(__dirname, 'src/client/components/Banner.jsx'),
       DataEntities: path.resolve(__dirname, 'src/client/components/DataEntities.jsx'),
-      Entities: path.resolve(__dirname, 'src/client/components/Entities.jsx'),
+      Items: path.resolve(__dirname, 'src/client/components/Items.jsx'),
       EntityDetail: path.resolve(__dirname, 'src/client/components/EntityDetail.jsx'),
       Footer: path.resolve(__dirname, 'src/client/components/Footer.jsx'),
       Header: path.resolve(__dirname, 'src/client/components/Header.jsx'),
