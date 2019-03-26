@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 
 // local imports
 import Banner from 'Banner';
-import config from '../../config/core';
 
 export default class Entity extends React.Component {
-
   render() {
     return (
       <div className="govuk-width-container">
