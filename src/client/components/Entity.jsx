@@ -26,7 +26,7 @@ export default class Entity extends React.Component {
                   <dt className="govuk-summary-list__key">Entity description</dt>
                   <dd className="govuk-summary-list__value"> A list of countries and the associated names, descriptions, dial and ISO31661 alpha and numeric codes.</dd>
                   <dd className="govuk-summary-list__actions">
-                    <a className="govuk-link" href="/version3/edit_entity.html">Change<span className="govuk-visually-hidden"> Entity description</span></a>
+                    <a className="govuk-link" href="#">Change<span className="govuk-visually-hidden"> Entity description</span></a>
                   </dd>
                 </div>
                 <div className="govuk-summary-list__row">
@@ -42,7 +42,7 @@ export default class Entity extends React.Component {
               </dl>
             </div>
           </div>
-          <a href="/version3/entity_delete.html" role="button" draggable="false" className="govuk-button">Delete this entity</a>
+          <a href="#" role="button" draggable="false" className="govuk-button">Delete this entity</a>
         </main>
       </div>
     );

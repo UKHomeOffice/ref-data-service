@@ -95,7 +95,9 @@ export default class Items extends React.Component {
                   {countries}
                 </tbody>
               </table>
-              <Link className="govuk-button" to={`/entities/${this.state.params.name}/new`} role="button" draggable="false">Add a new data item</Link>
+              <h2 class="govuk-heading-m">Add new data items to this entity</h2>
+              <p>To add a data item, click the button below and complete the change request on the subsequent page.</p>
+              <Link className="govuk-button" to={`/entities/${this.state.params.name}/new`} role="button" draggable="false">Add data item</Link>
             </div>
           </div>
         </main>
