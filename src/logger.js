@@ -16,4 +16,4 @@ const logger = createLogger({
   transports: [new transports.Console()]
 })
 
-module.exports = logger
+export default logger
