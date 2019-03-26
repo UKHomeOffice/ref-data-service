@@ -8,6 +8,8 @@ import Footer from 'Footer';
 import Header from 'Header';
 import Item from 'Item';
 import Items from 'Items';
+import ItemCreated from 'ItemCreated';
+import ItemNew from 'ItemNew';
 import Search from 'Search';
 
 export default class Main extends React.Component {
@@ -21,6 +23,8 @@ export default class Main extends React.Component {
           <Route path='/search' component={Search}/>
           <Route exact path='/entities/:name' component={Items}/>
           <Route path='/entities/:name/schema' component={Entity}/>
+          <Route path='/entities/:name/created' component={ItemCreated}/>
+          <Route path='/entities/:name/new' component={ItemNew}/>
           <Route path='/entities/:name/items/:id' component={Item}/>
           <Footer/>
         </div>

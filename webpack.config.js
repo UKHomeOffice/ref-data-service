@@ -51,12 +51,15 @@ module.exports = {
       Header: path.resolve(__dirname, 'src/client/components/Header.jsx'),
       Item: path.resolve(__dirname, 'src/client/components/Item.jsx'),
       Items: path.resolve(__dirname, 'src/client/components/Items.jsx'),
+      ItemCreated: path.resolve(__dirname, 'src/client/components/ItemCreated.jsx'),
+      ItemNew: path.resolve(__dirname, 'src/client/components/ItemNew.jsx'),
       Main: path.resolve(__dirname, 'src/client/components/Main.jsx'),
       Nav: path.resolve(__dirname, 'src/client/components/Nav.jsx'),
       Search: path.resolve(__dirname, 'src/client/components/Search.jsx')
     },
     extensions: ['.js', '.jsx']
   },
+  node: { fs: 'empty' },
   devServer: {
     // in order to use `<Router>`, historyApiFallback needs to be enabled
     historyApiFallback: true,
