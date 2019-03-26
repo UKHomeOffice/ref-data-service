@@ -10,8 +10,9 @@ export default class Item extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      obj: [],
-      data: {},
+      itemObject: {
+        data: {}
+      },
       params: props.match.params
     };
   }
@@ -21,7 +22,7 @@ export default class Item extends React.Component {
     fetch(entityDetailUrl)
       .then(res => res.json())
       .then(obj => {
-        this.setState({ obj: obj, data: obj.data })
+        this.setState({ itemObject: obj })
       });
   }
 
@@ -30,16 +31,16 @@ export default class Item extends React.Component {
       <dl className="govuk-summary-list govuk-!-margin-bottom-9">
         <div className="govuk-summary-list__row">
           <dt className="govuk-summary-list__key">Valid From</dt>
-          <dd className="govuk-summary-list__value">{this.state.data.validfrom}</dd>
+          <dd className="govuk-summary-list__value">{this.state.itemObject.data.validfrom}</dd>
           <dd className="govuk-summary-list__actions">
-            <a className="govuk-link" href="/version3/edit_di_valid_dates.html">Change<span className="govuk-visually-hidden"> Valid From</span></a>
+            <a className="govuk-link" href="#">Change<span className="govuk-visually-hidden"> Valid From</span></a>
           </dd>
         </div>
         <div className="govuk-summary-list__row">
           <dt className="govuk-summary-list__key">Valid To</dt>
-          <dd className="govuk-summary-list__value">{this.state.data.validto}</dd>
+          <dd className="govuk-summary-list__value">{this.state.itemObject.data.validto}</dd>
           <dd className="govuk-summary-list__actions">
-            <a className="govuk-link" href="/version3/edit_di_valid_dates.html">Change<span className="govuk-visually-hidden"> Valid To</span></a>
+            <a className="govuk-link" href="#">Change<span className="govuk-visually-hidden"> Valid To</span></a>
           </dd>
         </div>
       </dl>
@@ -49,44 +50,44 @@ export default class Item extends React.Component {
       <dl className="govuk-summary-list govuk-!-margin-bottom-9">
         <div className="govuk-summary-list__row">
           <dt className="govuk-summary-list__key">ID</dt>
-          <dd className="govuk-summary-list__value">{this.state.data.id}</dd>
+          <dd className="govuk-summary-list__value">{this.state.itemObject.data.id}</dd>
           <dd className="govuk-summary-list__actions">
-            <a className="govuk-link" href="/version3/edit_data_item.html">Change<span className="govuk-visually-hidden"> ID</span></a>
+            <a className="govuk-link" href="#">Change<span className="govuk-visually-hidden"> ID</span></a>
           </dd>
         </div>
         <div className="govuk-summary-list__row">
           <dt className="govuk-summary-list__key">ISO 3166-1 Alpha Code</dt>
-          <dd className="govuk-summary-list__value">{this.state.data.iso31661alpha3}</dd>
+          <dd className="govuk-summary-list__value">{this.state.itemObject.data.iso31661alpha3}</dd>
           <dd className="govuk-summary-list__actions">
-            <a className="govuk-link" href="#.html">Change<span className="govuk-visually-hidden"> iso31661alpha3</span></a>
+            <a className="govuk-link" href="#">Change<span className="govuk-visually-hidden"> iso31661alpha3</span></a>
           </dd>
         </div>
         <div className="govuk-summary-list__row">
           <dt className="govuk-summary-list__key">Name</dt>
-          <dd className="govuk-summary-list__value">{this.state.data.name}</dd>
+          <dd className="govuk-summary-list__value">{this.state.itemObject.data.name}</dd>
           <dd className="govuk-summary-list__actions">
-            <a className="govuk-link" href="#.html">Change<span className="govuk-visually-hidden"> Name</span></a>
+            <a className="govuk-link" href="#">Change<span className="govuk-visually-hidden"> Name</span></a>
           </dd>
         </div>
         <div className="govuk-summary-list__row">
           <dt className="govuk-summary-list__key">Continent</dt>
-          <dd className="govuk-summary-list__value">{this.state.data.continent}</dd>
+          <dd className="govuk-summary-list__value">{this.state.itemObject.data.continent}</dd>
           <dd className="govuk-summary-list__actions">
-            <a className="govuk-link" href="#.html">Change<span className="govuk-visually-hidden"> Continent</span></a>
+            <a className="govuk-link" href="#">Change<span className="govuk-visually-hidden"> Continent</span></a>
           </dd>
         </div>
         <div className="govuk-summary-list__row">
           <dt className="govuk-summary-list__key">Dialling Code</dt>
-          <dd className="govuk-summary-list__value">{this.state.data.dial}</dd>
+          <dd className="govuk-summary-list__value">{this.state.itemObject.data.dial}</dd>
           <dd className="govuk-summary-list__actions">
-            <a className="govuk-link" href="#.html">Change<span className="govuk-visually-hidden"> Dial</span></a>
+            <a className="govuk-link" href="#">Change<span className="govuk-visually-hidden"> Dial</span></a>
           </dd>
         </div>
         <div className="govuk-summary-list__row">
           <dt className="govuk-summary-list__key">ISO 3166-1 Numeric Code</dt>
-          <dd className="govuk-summary-list__value">{this.state.data.iso31661numeric}</dd>
+          <dd className="govuk-summary-list__value">{this.state.itemObject.data.iso31661numeric}</dd>
           <dd className="govuk-summary-list__actions">
-            <a className="govuk-link" href="#.html">Change<span className="govuk-visually-hidden"> iso31661numeric</span></a>
+            <a className="govuk-link" href="#">Change<span className="govuk-visually-hidden"> iso31661numeric</span></a>
           </dd>
         </div>
       </dl>
@@ -95,7 +96,7 @@ export default class Item extends React.Component {
     return (
       <div className="govuk-width-container">
         <Banner/>
-        <Link className="govuk-back-link" to="/">Back</Link>
+        <Link className="govuk-back-link" to={`/entities/${this.state.itemObject.entity}`}>Back</Link>
         <main className="govuk-main-wrapper " id="main-content" role="main">
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds-from-desktop">

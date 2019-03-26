@@ -10,8 +10,12 @@ export default class Items extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      obj: [],
-      data: [],
+      itemsObject: {
+        entitySchema: {
+          description: {}
+        },
+        data: []
+      },
       params: props.match.params
     };
   }
@@ -21,12 +25,12 @@ export default class Items extends React.Component {
     fetch(entitiesUrl)
       .then(res => res.json())
       .then(obj => {
-        this.setState({ obj: obj, data: obj.data })
+        this.setState({ itemsObject: obj })
       });
   }
 
   render() {
-    let countries = this.state.data.map((country) => {
+    let countries = this.state.itemsObject.data.map((country) => {
       return (
         <React.Fragment key={country.id}>
           <tr className="govuk-table__row">
@@ -68,8 +72,8 @@ export default class Items extends React.Component {
         <main className="govuk-main-wrapper " id="main-content" role="main">
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds-from-desktop">
-              <h1 className="govuk-heading-xl">Countries</h1>
-              <p>A list of countries and the associated names, descriptions, dial and ISO31661 alpha and numeric codes.</p>
+              <h1 className="govuk-heading-xl">{this.state.itemsObject.entityLabel}</h1>
+              <p>{this.state.itemsObject.entitySchema.description.description}</p>
               <div className="govuk-grid-row">
                 <div className="govuk-grid-column-full">
                   <hr className="govuk-section-break govuk-section-break--visible govuk-section-break--xl govuk-!-margin-top-0" />

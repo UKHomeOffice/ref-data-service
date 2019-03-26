@@ -8,7 +8,11 @@ import config from '../../config/core';
 export default class Entities extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { data: [] };
+    this.state = {
+      entitiesObject: {
+        data: []
+      }
+    };
   }
 
   componentDidMount() {
@@ -16,12 +20,12 @@ export default class Entities extends React.Component {
     fetch(dataEntitiesUrl)
       .then(res => res.json())
       .then(obj => {
-        this.setState({ data: obj.data })
+        this.setState({ entitiesObject: obj })
       });
   }
 
   render() {
-    let dataEntities = this.state.data.map((entities) => {
+    let dataEntities = this.state.entitiesObject.data.map((entities) => {
       return (
         <tr className="govuk-table__row" key={entities.id}>
           <th className="govuk-table__header" scope="row">{entities.label}</th>
