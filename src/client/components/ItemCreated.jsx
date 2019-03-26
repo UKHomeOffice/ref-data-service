@@ -11,7 +11,6 @@ export default class ItemCreated extends React.Component {
     return (
       <div className="govuk-width-container">
         <Banner/>
-        <Link className="govuk-back-link" to="/">Back</Link>
         <main className="govuk-main-wrapper govuk-main-wrapper--l" id="main-content" role="main">
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds">

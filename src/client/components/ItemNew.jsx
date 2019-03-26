@@ -52,7 +52,7 @@ export default class ItemNew extends React.Component {
     return (
       <div className="govuk-width-container">
         <Banner/>
-        <Link className="govuk-back-link" to="/">Back</Link>
+        <Link className="govuk-back-link" to={`/entities/${this.state.params.name}`}>Back</Link>
         <main className="govuk-main-wrapper " id="main-content" role="main">
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds">
