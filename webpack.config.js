@@ -52,6 +52,7 @@ module.exports = {
       Item: path.resolve(__dirname, 'src/client/components/Item.jsx'),
       Items: path.resolve(__dirname, 'src/client/components/Items.jsx'),
       ItemCreated: path.resolve(__dirname, 'src/client/components/ItemCreated.jsx'),
+      ItemDeleted: path.resolve(__dirname, 'src/client/components/ItemDeleted.jsx'),
       ItemNew: path.resolve(__dirname, 'src/client/components/ItemNew.jsx'),
       Main: path.resolve(__dirname, 'src/client/components/Main.jsx'),
       Nav: path.resolve(__dirname, 'src/client/components/Nav.jsx'),

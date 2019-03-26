@@ -9,6 +9,7 @@ import Header from 'Header';
 import Item from 'Item';
 import Items from 'Items';
 import ItemCreated from 'ItemCreated';
+import ItemDeleted from 'ItemDeleted';
 import ItemNew from 'ItemNew';
 import Search from 'Search';
 
@@ -24,8 +25,9 @@ export default class Main extends React.Component {
           <Route exact path='/entities/:name' component={Items}/>
           <Route path='/entities/:name/schema' component={Entity}/>
           <Route path='/entities/:name/created' component={ItemCreated}/>
+          <Route exact path='/entities/:name/items/:id/delete' component={ItemDeleted}/>
           <Route path='/entities/:name/new' component={ItemNew}/>
-          <Route path='/entities/:name/items/:id' component={Item}/>
+          <Route exact path='/entities/:name/items/:id' component={Item}/>
           <Footer/>
         </div>
       </Router>
