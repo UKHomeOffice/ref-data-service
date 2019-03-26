@@ -25,7 +25,7 @@ export default class ItemCreated extends React.Component {
               <p className="govuk-body">We’ve sent your change request to the data owner for approval.</p>
               <p className="govuk-body">Usually they will not not need to contact you during the approval process, however occasionally they may need to contact you to ask for more information if it is required to support the change request.</p>
               <p className="govuk-body">
-                <Link to="#" className="govuk-link">What did you think of this service?</Link> (Survey - takes 30 seconds)
+                <a href="#">What did you think of this service?</a> (Survey - takes 30 seconds)
               </p>
             </div>
           </div>
