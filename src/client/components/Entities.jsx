@@ -1,12 +1,11 @@
 import React from 'react';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
-import util from 'util';
+import { Link } from 'react-router-dom';
 
 // local imports
 import Banner from 'Banner';
 import config from '../../config/core';
 
-export default class Home extends React.Component {
+export default class Entities extends React.Component {
   constructor(props) {
     super(props);
     this.state = { data: [] };

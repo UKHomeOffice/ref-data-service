@@ -1,12 +1,12 @@
 import React from 'react';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import util from 'util';
 
 // local imports
 import Banner from 'Banner';
 import config from '../../config/core';
 
-export default class Home extends React.Component {
+export default class Items extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -91,7 +91,7 @@ export default class Home extends React.Component {
                   {countries}
                 </tbody>
               </table>
-              <a className="govuk-button" href="/version3/new_data_item.html" role="button" draggable="false">Add a new data item</a>
+              <Link className="govuk-button" to={`/entities/${this.state.params.name}/new`} role="button" draggable="false">Add a new data item</Link>
             </div>
           </div>
         </main>
