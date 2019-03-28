@@ -57,7 +57,7 @@ export default class ItemNew extends React.Component {
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds">
               <h1 className="govuk-heading-xl">Add a new data item to the entity</h1>
-              <p className="govuk-body-l">Please provide the following information. Once this form has been submitted, it will be sent to the data owner selected for approval.</p>
+              <p className="govuk-body-m">Please provide the following information. Once this form has been submitted, it will be sent to the data owner selected for approval.</p>
               <Form
                 onSubmit={this.handleSubmit}
                 validate={values => {
@@ -86,23 +86,23 @@ export default class ItemNew extends React.Component {
                 render={({ handleSubmit, submitting, values, reset}) => (
                   <form onSubmit={handleSubmit}>
                     <div className="govuk-form-group">
-                      <label className="govuk-label" htmlFor="id">ID</label>
-                      <span id="id-hint" className="govuk-hint">An identifier for the data item, for example TW</span>
+                      <label className="govuk-label" htmlFor="id">2 digit alpha code</label>
+                      <span id="id-hint" className="govuk-hint">The 2 digit ISO alpha code for the country, for example TW</span>
                       <span id="id-error" className="govuk-error-message">
                         <Error className="govuk-visually-hidden" name="id" />
                       </span>
-                      <Field className="govuk-input" name="id" component="input"/>
+                      <Field className="govuk-input govuk-input--width-2" name="id" component="input"/>
                     </div>
                     <div className="govuk-form-group">
-                      <label className="govuk-label" htmlFor="iso31661alpha3">ISO 3166-1 Alpha</label>
+                      <label className="govuk-label" htmlFor="iso31661alpha3">3 digit alpha code</label>
                       <span id="iso31661alpha3-hint" className="govuk-hint">The 3 digit ISO alpha code for the country, for example TWN</span>
                       <span id="iso31661alpha3-error" className="govuk-error-message">
                         <Error className="govuk-visually-hidden" name="iso31661alpha3" />
                       </span>
-                      <Field className="govuk-input" name="iso31661alpha3" component="input"/>
+                      <Field className="govuk-input govuk-input--width-3" name="iso31661alpha3" component="input"/>
                     </div>
                     <div className="govuk-form-group">
-                      <label className="govuk-label" htmlFor="name">Name</label>
+                      <label className="govuk-label" htmlFor="name">Country name</label>
                       <span id="name-hint" className="govuk-hint">The name of the country</span>
                       <span id="name-error" className="govuk-error-message">
                         <Error className="govuk-visually-hidden" name="name" />
@@ -115,23 +115,23 @@ export default class ItemNew extends React.Component {
                       <span id="continent-error" className="govuk-error-message">
                         <Error className="govuk-visually-hidden" name="continent" />
                       </span>
-                      <Field className="govuk-input" name="continent" component="input"/>
+                      <Field className="govuk-input govuk-input--width-2" name="continent" component="input"/>
                     </div>
                     <div className="govuk-form-group">
-                      <label className="govuk-label" htmlFor="dial">Dialling Code</label>
+                      <label className="govuk-label" htmlFor="dial">Phone dial code</label>
                       <span id="dial-hint" className="govuk-hint">The international dialling code for the country, for example 886</span>
                       <span id="dial-error" className="govuk-error-message">
                         <Error className="govuk-visually-hidden" name="dial" />
                       </span>
-                      <Field className="govuk-input" name="dial" component="input"/>
+                      <Field className="govuk-input govuk-input--width-20" name="dial" component="input"/>
                     </div>
                     <div className="govuk-form-group">
-                      <label className="govuk-label" htmlFor="iso31661numeric">ISO 3166-1 Numeric</label>
+                      <label className="govuk-label" htmlFor="iso31661numeric">3 digit numeric code</label>
                       <span id="iso31661numeric-hint" className="govuk-hint">The 3 digit ISO numeric code for the country, for example 158</span>
                       <span id="iso31661numeric-error" className="govuk-error-message">
                         <Error className="govuk-visually-hidden" name="iso31661numeric" />
                       </span>
-                      <Field className="govuk-input" name="iso31661numeric" component="input"/>
+                      <Field className="govuk-input govuk-input--width-3" name="iso31661numeric" component="input"/>
                     </div>
                     <button className="govuk-button" type="submit">Submit change for approval</button>
                   </form>
