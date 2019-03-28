@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Banner from 'Banner';
 import config from '../../config/core';
 
-export default class ItemCreated extends React.Component {
+export default class ChangeRequestSubmission extends React.Component {
 
   render() {
     return (
