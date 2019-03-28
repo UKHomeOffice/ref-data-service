@@ -68,14 +68,14 @@ export default class Items extends React.Component {
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds-from-desktop">
               <h1 className="govuk-heading-xl">{this.state.itemsObject.entityLabel}</h1>
-              <p>{this.state.itemsObject.entitySchema.description.description}</p>
+              <p className="govuk-body-l">{this.state.itemsObject.entitySchema.description.description}</p>
               <div className="govuk-grid-row">
                 <div className="govuk-grid-column-full">
                   <hr className="govuk-section-break govuk-section-break--visible govuk-section-break--xl govuk-!-margin-top-0" />
                 </div>
               </div>
               <h2 className="govuk-heading-m">Data items within this entity</h2>
-              <p>To manage a data item, click the ID.</p>
+              <p className="govuk-body-l">To manage a data item, click the ID.</p>
               <table className="govuk-table">
                 <thead className="govuk-table__head">
                   <tr className="govuk-table__row">
@@ -91,7 +91,7 @@ export default class Items extends React.Component {
                 </tbody>
               </table>
               <h2 className="govuk-heading-m">Add new data items to this entity</h2>
-              <p>To add a data item, click the button below and complete the change request on the subsequent page.</p>
+              <p className="govuk-body-l">To add a data item, click the button below and complete the change request on the subsequent page.</p>
               <Link className="govuk-button" to={`/entities/${this.state.params.name}/new`} role="button" draggable="false">Add data item</Link>
             </div>
           </div>
