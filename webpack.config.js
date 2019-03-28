@@ -45,13 +45,13 @@ module.exports = {
     alias: {
       // Components
       Banner: path.resolve(__dirname, 'src/client/components/Banner.jsx'),
+      ChangeRequestSubmission: path.resolve(__dirname, 'src/client/components/ChangeRequestSubmission.jsx'),
       Entities: path.resolve(__dirname, 'src/client/components/Entities.jsx'),
       Entity: path.resolve(__dirname, 'src/client/components/Entity.jsx'),
       Footer: path.resolve(__dirname, 'src/client/components/Footer.jsx'),
       Header: path.resolve(__dirname, 'src/client/components/Header.jsx'),
       Item: path.resolve(__dirname, 'src/client/components/Item.jsx'),
       Items: path.resolve(__dirname, 'src/client/components/Items.jsx'),
-      ItemCreated: path.resolve(__dirname, 'src/client/components/ItemCreated.jsx'),
       ItemDeleted: path.resolve(__dirname, 'src/client/components/ItemDeleted.jsx'),
       ItemFieldUpdate: path.resolve(__dirname, 'src/client/components/ItemFieldUpdate.jsx'),
       ItemNew: path.resolve(__dirname, 'src/client/components/ItemNew.jsx'),
