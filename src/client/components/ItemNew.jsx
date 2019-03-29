@@ -38,7 +38,7 @@ export default class ItemNew extends React.Component {
     .then(res => res.json())
     .then(data => {
       this.props.history.push({
-        pathname: `/entities/${this.state.params.name}/created`
+        pathname: '/change_request_submitted'
         // state: will carry the 'reference number'
       });
     })
