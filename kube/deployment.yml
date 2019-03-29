@@ -28,6 +28,22 @@ spec:
         ports:
           - name: frontend
             containerPort: 8080
+        env:
+          - name: KEYCLOAK_AUTH_URL
+            valueFrom:
+              secretKeyRef:
+                name: ref-data-keycloak
+                key: KEYCLOAK_AUTH_URL
+          - name: KEYCLOAK_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: ref-data-keycloak
+                key: KEYCLOAK_CLIENT_ID
+          - name: KEYCLOAK_REALM
+            valueFrom:
+              secretKeyRef:
+                name: ref-data-keycloak
+                key: KEYCLOAK_REALM
 
       - name: proxy
         image: quay.io/ukhomeofficedigital/nginx-proxy
