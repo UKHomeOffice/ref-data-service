@@ -15,5 +15,6 @@ module.exports = {
   title: process.env.TITLE || 'Reference Data Governance Tool',
   apiDataEntitiesUrl: apiBaseUrl + 'entities',
   apiEntitiesUrl: apiBaseUrl + 'entities/%s',
+  apiEntitiesSchemaUrl: apiBaseUrl + 'entities/%s%s',
   apiEntityDetailUrl: apiBaseUrl + 'entities/%s/items/%s',
 }

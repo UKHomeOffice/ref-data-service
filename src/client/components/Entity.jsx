@@ -1,10 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import util from 'util';
 
 // local imports
 import Banner from 'Banner';
+import config from '../../config/core';
 
 export default class Entity extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      entityObject: {},
+      params: props.match.params,
+    };
+  }
+  componentDidMount() {
+    const apiEntitiesSchemaUrl = util.format(config.apiEntitiesSchemaUrl, this.state.params.name, '?schemaOnly=true');
+    fetch(apiEntitiesSchemaUrl)
+      .then(res => res.json())
+      .then(obj => {
+        this.setState({ entityObject: obj })
+      });
+  }
+
   render() {
     return (
       <div className="govuk-width-container">
