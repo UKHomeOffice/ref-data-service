@@ -45,7 +45,7 @@ export default class Item extends React.Component {
     return (
       <div className="govuk-width-container">
         <Banner/>
-        <Link className="govuk-back-link" to={`/entities/${this.state.itemObject.entity}`}>Back</Link>
+        <Link className="govuk-back-link" to={`/entities/${this.state.itemObject.entityName}`}>Back</Link>
         <main className="govuk-main-wrapper " id="main-content" role="main">
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds-from-desktop">
