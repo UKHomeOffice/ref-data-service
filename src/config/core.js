@@ -14,7 +14,7 @@ module.exports = {
   sessionSecret: process.env.SESSION_SECRET || 'anotverysecretsecretthing',
   title: process.env.TITLE || 'Reference Data Governance Tool',
   keycloakAuthUrl: process.env.KEYCLOAK_AUTH_URL,
-  clientId: process.env.KEYCLOAK_CLIENT_ID,
+  clientId: process.env.DEV_KEYCLOAK_CLIENT_ID,
   realm: process.env.KEYCLOAK_REALM,
   apiDataEntitiesUrl: apiBaseUrl + 'entities',
   apiEntitiesUrl: apiBaseUrl + 'entities/%s',
