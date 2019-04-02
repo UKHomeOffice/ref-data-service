@@ -2,9 +2,21 @@ import Keycloak from "keycloak-js";
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// local imports
-import Main from 'Main';
+import { applyMiddleware, createStore } from "redux";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from "react-redux";
+import { routerMiddleware } from "react-router-redux";
+
+// relative imports
 import config from '../config/core';
+import rootReducer from './reducers';
+
+// component imports
+import Main from 'Main';
+
+const store = createStore(
+  rootReducer
+);
 
 const kc = Keycloak({
   "realm": config.realm,
@@ -12,11 +24,23 @@ const kc = Keycloak({
   "clientId": config.clientId
 });
 
+kc.onTokenExpired = () => {
+  kc.updateToken().success((refreshed) => {
+    if (refreshed) {
+      store.getState().keycloak = kc;
+    }
+  }).error(function () {
+    kc.logout();
+  });
+};
+
 kc.init({onLoad: 'login-required', checkLoginIframe: false}).success(authenticated => {
   if (authenticated) {
     store.getState().keycloak = kc;
     ReactDOM.render(
-      <Main/>,
+      <Provider store={store}>
+        <Main/>
+      </Provider>,
       document.getElementById('main')
     );
   }

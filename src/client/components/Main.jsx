@@ -2,13 +2,13 @@ import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 // local imports
+import ChangeRequestSubmission from 'ChangeRequestSubmission';
 import Entities from 'Entities';
 import Entity from 'Entity';
 import Footer from 'Footer';
 import Header from 'Header';
 import Item from 'Item';
 import Items from 'Items';
-import ChangeRequestSubmission from 'ChangeRequestSubmission';
 import ItemDeleted from 'ItemDeleted';
 import ItemFieldUpdate from 'ItemFieldUpdate';
 import ItemNew from 'ItemNew';
@@ -18,7 +18,7 @@ export default class Main extends React.Component {
   render() {
     return (
       <Router>
-        <div>
+        <React.Fragment>
           <a href="#main-content" className="govuk-skip-link">Skip to main content</a>
           <Header/>
           <Route exact path='/' component={Entities}/>
@@ -31,7 +31,7 @@ export default class Main extends React.Component {
           <Route exact path='/entities/:name/schema' component={Entity}/>
           <Route path='/search' component={Search}/>
           <Footer/>
-        </div>
+        </React.Fragment>
       </Router>
     );
   }

@@ -1,5 +1,6 @@
-const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   // in the `entry` property there is no need to 
@@ -39,7 +40,14 @@ module.exports = {
       { from: 'src/client/assets/javascript', to: 'javascript'},
       { from: 'node_modules/govuk-frontend/all.js', to: 'javascript/all.js'},
       { from: 'node_modules/govuk-frontend/assets', to: 'assets'}
-    ])
+    ]),
+    new webpack.DefinePlugin({
+      'process.env': {
+        KEYCLOAK_AUTH_URL: JSON.stringify(process.env.KEYCLOAK_AUTH_URL),
+        KEYCLOAK_CLIENT_ID: JSON.stringify(process.env.KEYCLOAK_CLIENT_ID),
+        KEYCLOAK_REALM: JSON.stringify(process.env.KEYCLOAK_REALM)
+      }
+    }),
   ],
   resolve: {
     alias: {

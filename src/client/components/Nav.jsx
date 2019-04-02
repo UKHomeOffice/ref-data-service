@@ -1,7 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { Link, withRouter } from 'react-router-dom';
 
-export default class Nav extends React.Component {
+class Nav extends React.Component {
+  constructor(props) {
+    super(props)
+    this.logout = this.logout.bind(this);
+  }
+
+  logout(event) {
+    event.preventDefault();
+    this.props.kc.logout();
+  }
+
   render() {
     return (
       <nav>
@@ -10,10 +22,18 @@ export default class Nav extends React.Component {
             <Link className="govuk-header__link" to="/">Home</Link>
           </li>
           <li className="govuk-header__navigation-item">
-            <Link className="govuk-header__link" to="#">Signout</Link>
+            <a className="govuk-header__link" onClick={this.logout}>Signout</a>
           </li>
         </ul>
       </nav>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+
+export default withRouter(connect((state) => {
+    return {
+        kc: state.keycloak,
+    }
+}, mapDispatchToProps)(Nav))
