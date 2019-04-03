@@ -6,6 +6,38 @@ import util from 'util';
 import Banner from 'Banner';
 import config from '../../config/core';
 
+const EntityContent = (props) => {
+  return (
+    <div className="govuk-grid-column-two-thirds-from-desktop">
+      <h1 className="govuk-heading-xl">{props.entityLabel}</h1>
+      <dl className="govuk-summary-list govuk-!-margin-bottom-9">
+        <div className="govuk-summary-list__row">
+          <dt className="govuk-summary-list__key">Entity name</dt>
+          <dd className="govuk-summary-list__value">{props.entityLabel}</dd>
+          <dd className="govuk-summary-list__actions"></dd>
+        </div>
+        <div className="govuk-summary-list__row">
+          <dt className="govuk-summary-list__key">Entity description</dt>
+          <dd className="govuk-summary-list__value">{props.schema.description}</dd>
+          <dd className="govuk-summary-list__actions">
+            <a className="govuk-link" href="#">Change<span className="govuk-visually-hidden"> Entity description</span></a>
+          </dd>
+        </div>
+        <div className="govuk-summary-list__row">
+          <dt className="govuk-summary-list__key">Last Updated</dt>
+          <dd className="govuk-summary-list__value">{props.schema.schemalastupdated}</dd>
+          <dd className="govuk-summary-list__actions"></dd>
+        </div>
+        <div className="govuk-summary-list__row">
+          <dt className="govuk-summary-list__key">Data Version</dt>
+          <dd className="govuk-summary-list__value">{props.schema.dataversion}</dd>
+          <dd className="govuk-summary-list__actions"></dd>
+        </div>
+      </dl>
+    </div>
+  );
+};
+
 export default class Entity extends React.Component {
   constructor(props) {
     super(props);
@@ -24,43 +56,23 @@ export default class Entity extends React.Component {
   }
 
   render() {
-    return (
-      <div className="govuk-width-container">
-        <Banner/>
-        <Link className="govuk-back-link" to="/">Back</Link>
-        <main className="govuk-main-wrapper " id="main-content" role="main">
-          <div className="govuk-grid-row">
-            <div className="govuk-grid-column-two-thirds-from-desktop">
-              <h1 className="govuk-heading-xl">Countries</h1>
-              <dl className="govuk-summary-list govuk-!-margin-bottom-9">
-                <div className="govuk-summary-list__row">
-                  <dt className="govuk-summary-list__key">Entity name</dt>
-                  <dd className="govuk-summary-list__value">Countries</dd>
-                  <dd className="govuk-summary-list__actions"></dd>
-                </div>
-                <div className="govuk-summary-list__row">
-                  <dt className="govuk-summary-list__key">Entity description</dt>
-                  <dd className="govuk-summary-list__value"> A list of countries and the associated names, descriptions, dial and ISO31661 alpha and numeric codes.</dd>
-                  <dd className="govuk-summary-list__actions">
-                    <a className="govuk-link" href="#">Change<span className="govuk-visually-hidden"> Entity description</span></a>
-                  </dd>
-                </div>
-                <div className="govuk-summary-list__row">
-                  <dt className="govuk-summary-list__key">Last Updated</dt>
-                  <dd className="govuk-summary-list__value">23/03/2019</dd>
-                  <dd className="govuk-summary-list__actions"></dd>
-                </div>
-                <div className="govuk-summary-list__row">
-                  <dt className="govuk-summary-list__key">Data Version</dt>
-                  <dd className="govuk-summary-list__value">1</dd>
-                  <dd className="govuk-summary-list__actions"></dd>
-                </div>
-              </dl>
+    if (this.state.entityObject && this.state.entityObject.entitySchema) {
+      const entityLabel = this.state.entityObject.entityLabel;
+      const schema = this.state.entityObject.entitySchema.description;
+
+      return (
+        <div className="govuk-width-container">
+          <Banner/>
+          <Link className="govuk-back-link" to="/">Back</Link>
+          <main className="govuk-main-wrapper " id="main-content" role="main">
+            <div className="govuk-grid-row">
+              <EntityContent entityLabel={entityLabel} schema={schema}/>
             </div>
-          </div>
-          <a href="#" role="button" draggable="false" className="govuk-button">Delete this entity</a>
-        </main>
-      </div>
-    );
+            <a href="#" role="button" draggable="false" className="govuk-button">Delete this entity</a>
+          </main>
+        </div>
+      );
+    }
+    return <div className="govuk-width-container"></div>;
   }
 }
