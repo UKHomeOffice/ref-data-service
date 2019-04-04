@@ -5,13 +5,24 @@ import { Link } from 'react-router-dom';
 import Banner from 'Banner';
 import config from '../../config/core';
 
+const EntitiesData = ({ data }) => {
+  return data.map((entities) => {
+    return (
+      <tr className="govuk-table__row" key={entities.id}>
+        <th className="govuk-table__header" scope="row">{entities.label}</th>
+        <td className="govuk-table__cell">{entities.description}</td>
+        <td className="govuk-table__cell"><Link to={`/entities/${entities.entityName}`}>View data</Link></td>
+        <td className="govuk-table__cell"><Link to={`/entities/${entities.entityName}/schema`}>View definition</Link></td>
+      </tr>
+    )
+  })
+};
+
 export default class Entities extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      entitiesObject: {
-        data: []
-      }
+      entitiesObject: {}
     };
   }
 
@@ -25,17 +36,6 @@ export default class Entities extends React.Component {
   }
 
   render() {
-    let dataEntities = this.state.entitiesObject.data.map((entities) => {
-      return (
-        <tr className="govuk-table__row" key={entities.id}>
-          <th className="govuk-table__header" scope="row">{entities.label}</th>
-          <td className="govuk-table__cell">{entities.description}</td>
-          <td className="govuk-table__cell"><Link to={`/entities/${entities.tablename}`}>View data</Link></td>
-          <td className="govuk-table__cell"><Link to={`/entities/${entities.tablename}/schema`}>View definition</Link></td>
-        </tr>
-      )
-    });
-
     return (
       <div className="govuk-width-container">
         <Banner/>
@@ -56,7 +56,9 @@ export default class Entities extends React.Component {
                   </tr>
                 </thead>
                 <tbody className="govuk-table__body">
-                  {dataEntities}
+                  {this.state.entitiesObject && this.state.entitiesObject.data &&
+                    <EntitiesData data={this.state.entitiesObject.data} />
+                  }
                 </tbody>
               </table>
             </div>
