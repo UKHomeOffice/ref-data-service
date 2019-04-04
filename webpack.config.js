@@ -56,6 +56,7 @@ module.exports = {
       ChangeRequestSubmission: path.resolve(__dirname, 'src/client/components/ChangeRequestSubmission.jsx'),
       Entities: path.resolve(__dirname, 'src/client/components/Entities.jsx'),
       Entity: path.resolve(__dirname, 'src/client/components/Entity.jsx'),
+      EntityFieldUpdate: path.resolve(__dirname, 'src/client/components/EntityFieldUpdate.jsx'),
       Footer: path.resolve(__dirname, 'src/client/components/Footer.jsx'),
       Header: path.resolve(__dirname, 'src/client/components/Header.jsx'),
       Item: path.resolve(__dirname, 'src/client/components/Item.jsx'),
