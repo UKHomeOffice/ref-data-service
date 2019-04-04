@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import ChangeRequestSubmission from 'ChangeRequestSubmission';
 import Entities from 'Entities';
 import Entity from 'Entity';
+import EntityFieldUpdate from 'EntityFieldUpdate';
 import Footer from 'Footer';
 import Header from 'Header';
 import Item from 'Item';
@@ -29,6 +30,7 @@ export default class Main extends React.Component {
           <Route exact path='/entities/:name/items/:id/delete' component={ItemDeleted}/>
           <Route exact path='/entities/:name/new' component={ItemNew}/>
           <Route exact path='/entities/:name/schema' component={Entity}/>
+          <Route exact path='/entities/:name/schema/edit/:field' component={EntityFieldUpdate}/>
           <Route path='/search' component={Search}/>
           <Footer/>
         </React.Fragment>
