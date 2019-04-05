@@ -8,13 +8,16 @@ import Banner from 'Banner';
 import config from '../../config/core';
 import logger from '../../logger';
 
-const Error = ({ name }) => (
+const {appUrls, apiUrls} = config;
+
+const ErrorField = ({ name }) => (
   <Field
     name={name}
     subscription={{ touched: true, error: true }}
     render={({ meta: { touched, error } }) =>
       touched && error ? <span>{error}</span> : null
-    }/>
+    }
+  />
 )
 
 export default class ItemFieldUpdate extends React.Component {
@@ -23,13 +26,13 @@ export default class ItemFieldUpdate extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       itemObject: {},
-      params: props.match.params,
     };
   }
 
   componentDidMount() {
-    const entityDetailUrl = util.format(config.apiEntityDetailUrl, this.state.params.name, this.state.params.id);
-    fetch(entityDetailUrl)
+    const {name, id} = this.props.match.params;
+    const item = util.format(apiUrls.item, name, id);
+    fetch(item)
       .then(res => res.json())
       .then(obj => {
         this.setState({ itemObject: obj })
@@ -41,8 +44,9 @@ export default class ItemFieldUpdate extends React.Component {
     delete values.month;
     delete values.year;
 
-    const entitiesUrl = util.format(config.apiEntityDetailUrl, this.state.params.name, this.state.params.id);
-    fetch(entitiesUrl, {
+    const {name, id} = this.props.match.params;
+    const item = util.format(apiUrls.item, name, id);
+    fetch(item, {
       method: 'PATCH',
       mode: 'cors',
       headers: {
@@ -63,8 +67,8 @@ export default class ItemFieldUpdate extends React.Component {
   }
 
   render() {
-    const previousPage = `/entities/${this.state.params.name}/items/${this.state.params.id}`;
-    const field = this.state.params.field;
+    const {field} = this.props.match.params;
+    const backLink = util.format(appUrls.item, this.props.match.params.name, this.props.match.params.id);
     const data = this.state.itemObject.data;
     const entitySchema = this.state.itemObject.entitySchema;
     let fieldLabel = null;
@@ -86,15 +90,15 @@ export default class ItemFieldUpdate extends React.Component {
     return (
       <div className="govuk-width-container">
         <Banner/>
-        <Link className="govuk-back-link" to={previousPage}>Back</Link>
+        <Link className="govuk-back-link" to={backLink}>Back</Link>
         <main id="main-content" className="govuk-main-wrapper" role="main">
           <Form
             onSubmit={this.onSubmit}
             initialValues={{
               newValue: fieldValue,
-              field: this.state.params.field,
-              name: this.state.params.name,
-              id: this.state.params.id
+              field: this.props.match.params.field,
+              name: this.props.match.params.name,
+              id: this.props.match.params.id
             }}
             validate={values => {
               const errors = {}
@@ -123,7 +127,7 @@ export default class ItemFieldUpdate extends React.Component {
                       </legend>
                       <span id="change-hint" className="govuk-hint">For example, 12 11 2019</span>
                       <span id="day-error" className="govuk-error-message">
-                        <Error className="govuk-visually-hidden" name="day" />
+                        <ErrorField className="govuk-visually-hidden" name="day" />
                       </span>
                       <div className="govuk-date-input" id="change-issued">
                         <div className="govuk-date-input__item">

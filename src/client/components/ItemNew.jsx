@@ -8,6 +8,8 @@ import Banner from 'Banner';
 import config from '../../config/core';
 import logger from '../../logger';
 
+const {appUrls, apiUrls} = config;
+
 const Error = ({ name }) => (
   <Field
     name={name}
@@ -21,12 +23,11 @@ export default class ItemNew extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {params: props.match.params};
   }
 
   handleSubmit(values, form) {
-    const entitiesUrl = util.format(config.apiEntitiesUrl, this.state.params.name);
-    fetch(entitiesUrl, {
+    const entity = util.format(apiUrls.entity, this.props.match.params.name);
+    fetch(entity, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -49,10 +50,12 @@ export default class ItemNew extends React.Component {
   }
 
   render() {
+    const backLink = util.format(appUrls.entity, this.props.match.params.name);
+
     return (
       <div className="govuk-width-container">
         <Banner/>
-        <Link className="govuk-back-link" to={`/entities/${this.state.params.name}`}>Back</Link>
+        <Link className="govuk-back-link" to={backLink}>Back</Link>
         <main className="govuk-main-wrapper " id="main-content" role="main">
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds">

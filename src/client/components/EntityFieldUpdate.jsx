@@ -8,6 +8,8 @@ import Banner from 'Banner';
 import config from '../../config/core';
 import logger from '../../logger';
 
+const {appUrls, apiUrls} = config;
+
 const ErrorField = ({ name }) => (
   <Field
     name={name}
@@ -72,8 +74,8 @@ export default class ItemFieldUpdate extends React.Component {
 
   componentDidMount() {
     const {name} = this.props.match.params;
-    const entitiesUrl = util.format(config.apiEntitiesUrl, name);
-    fetch(entitiesUrl)
+    const entity = util.format(apiUrls.entity, name);
+    fetch(entity)
       .then(res => res.json())
       .then(obj => {
         this.setState({ entityObject: obj })
@@ -87,8 +89,8 @@ export default class ItemFieldUpdate extends React.Component {
     delete values.year;
 
     const {name} = this.props.match.params;
-    const entitiesUrl = util.format(config.apiEntitiesUrl, name);
-    fetch(entitiesUrl, {
+    const entity = util.format(apiUrls.entity, name);
+    fetch(entity, {
       method: 'PATCH',
       mode: 'cors',
       headers: {
@@ -110,6 +112,7 @@ export default class ItemFieldUpdate extends React.Component {
 
   render() {
     let field, entityName, entityLabel, description;
+    const backLink = util.format(appUrls.entitySchema, this.state.entityObject.entityName);
 
     if (this.state.entityObject && this.state.entityObject.entitySchema) {
       ({field} = this.props.match.params);
@@ -120,7 +123,7 @@ export default class ItemFieldUpdate extends React.Component {
     return (
       <div className="govuk-width-container">
         <Banner/>
-        <Link className="govuk-back-link" to="">Back</Link>
+        <Link className="govuk-back-link" to={backLink}>Back</Link>
         <main id="main-content" className="govuk-main-wrapper" role="main">
           <div className="govuk-grid-row">
             {this.state.entityObject && this.state.entityObject.entitySchema &&

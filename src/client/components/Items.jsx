@@ -6,18 +6,19 @@ import util from 'util';
 import Banner from 'Banner';
 import config from '../../config/core';
 
+const {appUrls, apiUrls} = config;
+
 export default class Items extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       itemsObject: {entitySchema: {description: {} }, data: [] },
-      params: props.match.params
     };
   }
 
   componentDidMount() {
-    const entitiesUrl = util.format(config.apiEntitiesUrl, this.state.params.name);
-    fetch(entitiesUrl)
+    const entity = util.format(apiUrls.entity, this.props.match.params.name);
+    fetch(entity)
       .then(res => res.json())
       .then(obj => {
         this.setState({ itemsObject: obj })
@@ -25,11 +26,14 @@ export default class Items extends React.Component {
   }
 
   render() {
+    const itemNew = util.format(appUrls.itemNew, this.props.match.params.name);
     let countries = this.state.itemsObject.data.map((country) => {
+      let item = util.format(appUrls.item, country.name, country.id);
+
       return (
         <React.Fragment key={country.id}>
           <tr className="govuk-table__row">
-            <td className="govuk-table__cell"><Link to={`/entities/${country.name}/items/${country.id}`}>{country.iso31661alpha2}</Link></td>
+            <td className="govuk-table__cell"><Link to={item}>{country.iso31661alpha2}</Link></td>
             <td className="govuk-table__cell">{country.iso31661alpha3}</td>
             <td className="govuk-table__cell">{country.name}</td>
             <td className="govuk-table__cell">{country.continent}</td>
@@ -92,7 +96,7 @@ export default class Items extends React.Component {
               </table>
               <h2 className="govuk-heading-m">Add new data items to this entity</h2>
               <p className="govuk-body-l">To add a data item, click the button below and complete the change request on the subsequent page.</p>
-              <Link className="govuk-button" to={`/entities/${this.state.params.name}/new`} role="button" draggable="false">Add data item</Link>
+              <Link className="govuk-button" to={itemNew} role="button" draggable="false">Add data item</Link>
             </div>
           </div>
         </main>

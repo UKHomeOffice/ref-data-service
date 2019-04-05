@@ -6,6 +6,8 @@ import util from 'util';
 import Banner from 'Banner';
 import config from '../../config/core';
 
+const {appUrls, apiUrls} = config;
+
 const ItemData = ({
   name,
   id,
@@ -18,13 +20,13 @@ const ItemData = ({
 }) => {
   let itemRows = [];
   let itemFields = Object.entries(properties).forEach(([key, value]) => {
-      let itemChangeField = `/entities/${name}/items/${id}/edit/${key}`;
+      let itemUpdate = util.format(appUrls.itemUpdate, name, id, key);
       itemRows.push(
         <div className="govuk-summary-list__row" key={key}>
           <dt className="govuk-summary-list__key">{value.description.label}</dt>
           <dd className="govuk-summary-list__value">{data[key]}</dd>
           <dd className="govuk-summary-list__actions">
-            <Link className="govuk-link" to={itemChangeField}>Change</Link>
+            <Link className="govuk-link" to={itemUpdate}>Change</Link>
           </dd>
         </div>
       )
@@ -41,8 +43,8 @@ export default class Item extends React.Component {
   }
 
   componentDidMount() {
-    const entityDetailUrl = util.format(config.apiEntityDetailUrl, this.props.match.params.name, this.props.match.params.id);
-    fetch(entityDetailUrl)
+    const item = util.format(apiUrls.item, this.props.match.params.name, this.props.match.params.id);
+    fetch(item)
       .then(res => res.json())
       .then(obj => {
         this.setState({ itemObject: obj })
@@ -51,12 +53,13 @@ export default class Item extends React.Component {
 
   render() {
     const {name, id} = this.props.match.params;
-    const itemDelete = `/entities/${name}/items/${id}/delete`;
+    const itemDelete = util.format(appUrls.itemDelete, name, id);
+    const backLink = util.format(appUrls.entity, this.state.itemObject.entityName);
 
     return (
       <div className="govuk-width-container">
         <Banner/>
-        <Link className="govuk-back-link" to={`/entities/${this.state.itemObject.entityName}`}>Back</Link>
+        <Link className="govuk-back-link" to={backLink}>Back</Link>
         <main className="govuk-main-wrapper " id="main-content" role="main">
           <div className="govuk-grid-row">
             {this.state.itemObject && this.state.itemObject.entitySchema &&
