@@ -44,9 +44,6 @@ export default class ItemNew extends React.Component {
       });
     })
     .catch(error => logger.error(error))
-
-    // reseting form values
-    form.reset();
   }
 
   render() {
@@ -86,7 +83,7 @@ export default class ItemNew extends React.Component {
                   }
                   return errors
                 }}
-                render={({ handleSubmit, submitting, values, reset}) => (
+                render={({ handleSubmit, submitting, values }) => (
                   <form onSubmit={handleSubmit}>
                     <div className="govuk-form-group">
                       <label className="govuk-label" htmlFor="id">2 digit alpha code</label>
