@@ -7,6 +7,8 @@ import Banner from 'Banner';
 import config from '../../config/core';
 import getKeyByValue from '../utils';
 
+const {appUrls, apiUrls} = config;
+
 const EntityContent = ({
   entityObject: {
     entityName,
@@ -17,7 +19,7 @@ const EntityContent = ({
   }
 }) => {
   const descriptionKey = getKeyByValue(description, description.description)
-  const entityDescriptionChange = `/entities/${entityName}/schema/edit/${descriptionKey}`;
+  const entityDescriptionUpdate = util.format(appUrls.entityUpdate, entityName, descriptionKey);
 
   return (
     <div className="govuk-grid-column-two-thirds-from-desktop">
@@ -32,7 +34,7 @@ const EntityContent = ({
           <dt className="govuk-summary-list__key">Entity description</dt>
           <dd className="govuk-summary-list__value">{description.description}</dd>
           <dd className="govuk-summary-list__actions">
-            <Link className="govuk-link" to={entityDescriptionChange}>
+            <Link className="govuk-link" to={entityDescriptionUpdate}>
               Change<span className="govuk-visually-hidden"> Entity description</span>
             </Link>
           </dd>
@@ -61,8 +63,8 @@ export default class Entity extends React.Component {
   }
   componentDidMount() {
     const {name} = this.props.match.params;
-    const apiEntitiesSchemaUrl = util.format(config.apiEntitiesSchemaUrl, name, '?schemaOnly=true');
-    fetch(apiEntitiesSchemaUrl)
+    const entitySchema = util.format(apiUrls.entitySchema, name, '?schemaOnly=true');
+    fetch(entitySchema)
       .then(res => res.json())
       .then(obj => {
         this.setState({ entityObject: obj })

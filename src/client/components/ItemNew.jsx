@@ -8,6 +8,8 @@ import Banner from 'Banner';
 import config from '../../config/core';
 import logger from '../../logger';
 
+const {appUrls, apiUrls} = config;
+
 const Error = ({ name }) => (
   <Field
     name={name}
@@ -21,12 +23,11 @@ export default class ItemNew extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {params: props.match.params};
   }
 
   handleSubmit(values, form) {
-    const entitiesUrl = util.format(config.apiEntitiesUrl, this.state.params.name);
-    fetch(entitiesUrl, {
+    const entity = util.format(apiUrls.entity, this.props.match.params.name);
+    fetch(entity, {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -43,16 +44,15 @@ export default class ItemNew extends React.Component {
       });
     })
     .catch(error => logger.error(error))
-
-    // reseting form values
-    form.reset();
   }
 
   render() {
+    const backLink = util.format(appUrls.entity, this.props.match.params.name);
+
     return (
       <div className="govuk-width-container">
         <Banner/>
-        <Link className="govuk-back-link" to={`/entities/${this.state.params.name}`}>Back</Link>
+        <Link className="govuk-back-link" to={backLink}>Back</Link>
         <main className="govuk-main-wrapper " id="main-content" role="main">
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds">
@@ -83,7 +83,7 @@ export default class ItemNew extends React.Component {
                   }
                   return errors
                 }}
-                render={({ handleSubmit, submitting, values, reset}) => (
+                render={({ handleSubmit, submitting, values }) => (
                   <form onSubmit={handleSubmit}>
                     <div className="govuk-form-group">
                       <label className="govuk-label" htmlFor="id">2 digit alpha code</label>
