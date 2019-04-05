@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import Banner from 'Banner';
 import config from '../../config/core';
 
+const {apiUrls} = config;
+
 const EntitiesData = ({ data }) => {
   return data.map((entities) => {
     return (
@@ -27,8 +29,8 @@ export default class Entities extends React.Component {
   }
 
   componentDidMount() {
-    const dataEntitiesUrl = config.apiDataEntitiesUrl;
-    fetch(dataEntitiesUrl)
+    const entities = apiUrls.entities;
+    fetch(entities)
       .then(res => res.json())
       .then(obj => {
         this.setState({ entitiesObject: obj })
