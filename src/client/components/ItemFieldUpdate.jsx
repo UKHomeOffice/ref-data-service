@@ -18,7 +18,49 @@ const ErrorField = ({ name }) => (
       touched && error ? <span>{error}</span> : null
     }
   />
-)
+);
+
+const DateInput = ({ name, maxLength }) => {
+  const idStyle = `change-${name}`;
+  const classStyle = `govuk-input govuk-input--width-${maxLength}`;
+  const pattern = `\\d{${maxLength}}`;
+  const labelNames = ['Day', 'Month', 'Year'];
+  const label = labelNames.filter(day => day.toLowerCase() === name).toString();
+
+  return (
+    <div className="govuk-date-input__item">
+      <div className="govuk-form-group">
+        <label className="govuk-label govuk-date-input__label">{label}</label>
+        <Field
+          id={idStyle}
+          className={classStyle}
+          name={name}
+          component="input"
+          pattern={pattern}
+          required/>
+      </div>
+    </div>
+  )
+};
+
+const ChangeEffectiveFromContainer = () => (
+  <div className="govuk-form-group">
+    <fieldset className="govuk-fieldset" aria-describedby="change-hint" role="group">
+      <legend className="govuk-fieldset__legend govuk-fieldset__legend--xl">
+        <h1 className="govuk-heading-m">Change effective from</h1>
+      </legend>
+      <span id="change-hint" className="govuk-hint">For example, 12 11 2019</span>
+      <span id="day-error" className="govuk-error-message">
+        <ErrorField className="govuk-visually-hidden" name="day" />
+      </span>
+      <div className="govuk-date-input" id="change-issued">
+        <DateInput name="day" maxLength="2" />
+        <DateInput name="month" maxLength="2" />
+        <DateInput name="year" maxLength="4" />
+      </div>
+    </fieldset>
+  </div>
+);
 
 export default class ItemFieldUpdate extends React.Component {
   constructor(props) {
@@ -67,22 +109,15 @@ export default class ItemFieldUpdate extends React.Component {
   }
 
   render() {
-    const {field} = this.props.match.params;
+    let data, description, fieldValue, fieldMaxLength, idStyle, classStyle;
+    let {field} = this.props.match.params;
     const backLink = util.format(appUrls.item, this.props.match.params.name, this.props.match.params.id);
-    const data = this.state.itemObject.data;
-    const entitySchema = this.state.itemObject.entitySchema;
-    let fieldLabel = null;
-    let fieldDescription = null;
-    let fieldValue = null
-    let fieldMaxLength = null;
-    let idStyle = null;
-    let classStyle = null;
 
-    if (data && entitySchema.properties[field].description) {
-      fieldLabel = entitySchema.properties[field].description.label;
-      fieldDescription = entitySchema.properties[field].description.description;
+    if (this.state.itemObject && this.state.itemObject.entitySchema) {
+      ({data} = this.state.itemObject);
+      ({description} = this.state.itemObject.entitySchema.properties[field]);
       fieldValue = data[field];
-      fieldMaxLength = entitySchema.properties[field].maxLength;
+      fieldMaxLength = this.state.itemObject.entitySchema.properties[field].maxLength;
       idStyle = `width-${fieldMaxLength}`;
       classStyle = `govuk-input govuk-input--width-${fieldMaxLength}`;
     }
@@ -92,91 +127,40 @@ export default class ItemFieldUpdate extends React.Component {
         <Banner/>
         <Link className="govuk-back-link" to={backLink}>Back</Link>
         <main id="main-content" className="govuk-main-wrapper" role="main">
-          <Form
-            onSubmit={this.onSubmit}
-            initialValues={{
-              newValue: fieldValue,
-              field: this.props.match.params.field,
-              name: this.props.match.params.name,
-              id: this.props.match.params.id
-            }}
-            validate={values => {
-              const errors = {}
-              return errors
-            }}
-            render={({ handleSubmit, submitting, values, reset }) => {
-              return (
-                <form onSubmit={handleSubmit}>
-                  <div className="govuk-grid-row">
-                    <div className="govuk-grid-column-two-thirds">
-                      <h1 className="govuk-heading-xl">Change the data item</h1>
-                      <p className="govuk-body-l">Once this form has been submitted, it will be sent for approval.</p>
-
-                      <h1 className="govuk-heading-m">{fieldLabel}</h1>
-                      <div className="govuk-form-group">
-                        <label className="govuk-label">{fieldDescription}</label>
-                        <Field id={idStyle} className={classStyle} name="newValue" component="input" maxLength={fieldMaxLength}/>
+          {this.state.itemObject && this.state.itemObject.entitySchema &&
+            <Form
+              onSubmit={this.onSubmit}
+              initialValues={{
+                newValue: fieldValue,
+                field: this.props.match.params.field,
+                name: this.props.match.params.name,
+                id: this.props.match.params.id
+              }}
+              validate={values => {
+                const errors = {}
+                return errors
+              }}
+              render={({ handleSubmit, submitting, values }) => {
+                return (
+                  <form onSubmit={handleSubmit}>
+                    <div className="govuk-grid-row">
+                      <div className="govuk-grid-column-two-thirds">
+                        <h1 className="govuk-heading-xl">Change the data item</h1>
+                        <p className="govuk-body-l">Once this form has been submitted, it will be sent for approval.</p>
+                        <h1 className="govuk-heading-m">{description.label}</h1>
+                        <div className="govuk-form-group">
+                          <label className="govuk-label">{description.description}</label>
+                          <Field id={idStyle} className={classStyle} name="newValue" component="input" maxLength={fieldMaxLength}/>
+                        </div>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="govuk-form-group">
-                    <fieldset className="govuk-fieldset" aria-describedby="change-hint" role="group">
-                      <legend className="govuk-fieldset__legend govuk-fieldset__legend--xl">
-                        <h1 className="govuk-heading-m">Change effective from</h1>
-                      </legend>
-                      <span id="change-hint" className="govuk-hint">For example, 12 11 2019</span>
-                      <span id="day-error" className="govuk-error-message">
-                        <ErrorField className="govuk-visually-hidden" name="day" />
-                      </span>
-                      <div className="govuk-date-input" id="change-issued">
-                        <div className="govuk-date-input__item">
-                          <div className="govuk-form-group">
-                            <label className="govuk-label govuk-date-input__label" htmlFor="change-day">Day</label>
-                            <Field
-                              id="change-day"
-                              className="govuk-input govuk-date-input__input govuk-input--width-2"
-                              name="day"
-                              component="input"
-                              pattern="\d{2}"
-                              maxLength="2"
-                              required/>
-                          </div>
-                        </div>
-                        <div className="govuk-date-input__item">
-                          <div className="govuk-form-group">
-                            <label className="govuk-label govuk-date-input__label" htmlFor="change-month">Month</label>
-                            <Field
-                              id="change-month"
-                              className="govuk-input govuk-date-input__input govuk-input--width-2"
-                              name="month"
-                              component="input"
-                              pattern="\d{2}"
-                              maxLength="2"
-                              required/>
-                          </div>
-                        </div>
-                        <div className="govuk-date-input__item">
-                          <div className="govuk-form-group">
-                            <label className="govuk-label govuk-date-input__label" htmlFor="change-year">Year</label>
-                            <Field
-                              id="change-year"
-                              className="govuk-input govuk-date-input__input govuk-input--width-4"
-                              name="year"
-                              component="input"
-                              pattern="\d{4}"
-                              maxLength="4"
-                              required/>
-                          </div>
-                        </div>
-                      </div>
-                    </fieldset>
-                  </div>
-                  <button className="govuk-button" type="submit">Submit change for approval</button>
-                </form>
-              )
-            }}
-          />
+                    <ChangeEffectiveFromContainer />
+                    <button className="govuk-button" type="submit">Submit change for approval</button>
+                  </form>
+                )
+              }}
+            />
+          }
         </main>
       </div>
     );
