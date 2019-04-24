@@ -5,26 +5,30 @@ A frontend service for interacting with the Reference Data Service API
 * npm 6.9.0
 * node v8.10.0
 
-## Development
+## Development (option 1)
 Open your terminal and run the following commands from the project directory.
 
 ```bash
 # install dependencies
 $ npm install
 
-# build js bundle
+# build js bundle in development mode
 $ npm run build-dev
 
-# run the backend end api and front end app concurrently
-$ npm run start-dev
-```
-
-To run just the front end app execute
-```bash
+# run the application in development mode
 $ npm run client
 ```
 
-To run just the backend app execute
+## Development with Docker (option 2)
+
+To build the prototype's Docker container:
+
 ```bash
-$ npm run server
+docker build -t ref-data-gov-tool .
+```
+
+To run the resulting Docker container:
+
+```bash
+docker run -p 5000:5000 ref-data-gov-tool
 ```
