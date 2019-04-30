@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import util from 'util';
 
@@ -54,7 +55,7 @@ const EntityContent = ({
   );
 };
 
-export default class Entity extends React.Component {
+class Entity extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,11 +65,17 @@ export default class Entity extends React.Component {
   componentDidMount() {
     const {name} = this.props.match.params;
     const entitySchema = util.format(apiUrls.entitySchema, name, '?schemaOnly=true');
-    fetch(entitySchema)
-      .then(res => res.json())
-      .then(obj => {
-        this.setState({ entityObject: obj })
-      });
+    fetch(entitySchema, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${this.props.kc.token}`,
+      }
+    })
+    .then(res => res.json())
+    .then(obj => {
+      this.setState({ entityObject: obj })
+    });
   }
 
   render() {
@@ -88,3 +95,9 @@ export default class Entity extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+ 'kc': state.keycloak
+});
+
+export default connect(mapStateToProps)(Entity);

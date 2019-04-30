@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import util from 'util';
 
@@ -34,7 +35,7 @@ const ItemData = ({
   return itemRows;
 };
 
-export default class Item extends React.Component {
+class Item extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,11 +45,17 @@ export default class Item extends React.Component {
 
   componentDidMount() {
     const item = util.format(apiUrls.item, this.props.match.params.name, this.props.match.params.id);
-    fetch(item)
-      .then(res => res.json())
-      .then(obj => {
-        this.setState({ itemObject: obj })
-      });
+    fetch(item, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${this.props.kc.token}`,
+      }
+    })
+    .then(res => res.json())
+    .then(obj => {
+      this.setState({ itemObject: obj })
+    });
   }
 
   render() {
@@ -80,3 +87,8 @@ export default class Item extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+ 'kc': state.keycloak
+});
+
+export default connect(mapStateToProps)(Item);
