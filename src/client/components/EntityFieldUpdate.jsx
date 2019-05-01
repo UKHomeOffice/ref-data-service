@@ -1,5 +1,6 @@
 import { Form, Field } from "react-final-form";
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import util from 'util';
 
@@ -63,7 +64,7 @@ const ChangeEffectiveFromContainer = () => (
   </div>
 )
 
-export default class ItemFieldUpdate extends React.Component {
+class EntityFieldUpdate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,11 +76,17 @@ export default class ItemFieldUpdate extends React.Component {
   componentDidMount() {
     const {name} = this.props.match.params;
     const entity = util.format(apiUrls.entity, name);
-    fetch(entity)
-      .then(res => res.json())
-      .then(obj => {
-        this.setState({ entityObject: obj })
-      });
+    fetch(entity, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${this.props.kc.token}`,
+      }
+    })
+    .then(res => res.json())
+    .then(obj => {
+      this.setState({ entityObject: obj })
+    });
   }
 
   onSubmit(values, form) {
@@ -94,8 +101,8 @@ export default class ItemFieldUpdate extends React.Component {
       method: 'PATCH',
       mode: 'cors',
       headers: {
-        'Accept': 'application/json, text/plain',
-        'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${this.props.kc.token}`,
       },
       body: JSON.stringify(values, 0, 2)
     })
@@ -161,3 +168,9 @@ export default class ItemFieldUpdate extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+ 'kc': state.keycloak
+});
+
+export default connect(mapStateToProps)(EntityFieldUpdate);

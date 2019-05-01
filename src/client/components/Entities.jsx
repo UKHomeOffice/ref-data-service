@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 // local imports
 import Banner from 'Banner';
 import config from '../../config/core';
+import logger from '../../logger';
 
 const {apiUrls} = config;
 
@@ -20,7 +22,7 @@ const EntitiesData = ({ data }) => {
   })
 };
 
-export default class Entities extends React.Component {
+class Entities extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,11 +32,18 @@ export default class Entities extends React.Component {
 
   componentDidMount() {
     const entities = apiUrls.entities;
-    fetch(entities)
-      .then(res => res.json())
-      .then(obj => {
-        this.setState({ entitiesObject: obj })
-      });
+    fetch(entities, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${this.props.kc.token}`,
+      }
+    })
+    .then(res => res.json())
+    .then(obj => {
+      this.setState({ entitiesObject: obj })
+    });
+    logger.info(`Request made by ${this.props.kc.tokenParsed.name}, ${this.props.kc.tokenParsed.email}`);
   }
 
   render() {
@@ -71,3 +80,8 @@ export default class Entities extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+ 'kc': state.keycloak
+});
+
+export default connect(mapStateToProps)(Entities);

@@ -1,5 +1,6 @@
 import { Form, Field } from "react-final-form";
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import util from 'util';
 
@@ -19,7 +20,7 @@ const Error = ({ name }) => (
     }/>
 )
 
-export default class ItemNew extends React.Component {
+class ItemNew extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,8 +32,8 @@ export default class ItemNew extends React.Component {
       method: 'POST',
       mode: 'cors',
       headers: {
-        'Accept': 'application/json, text/plain',
-        'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${this.props.kc.token}`,
       },
       body: JSON.stringify(values, 0, 2)
     })
@@ -145,3 +146,8 @@ export default class ItemNew extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+ 'kc': state.keycloak
+});
+
+export default connect(mapStateToProps)(ItemNew);
