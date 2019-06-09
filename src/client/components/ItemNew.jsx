@@ -9,21 +9,85 @@ import Banner from 'Banner';
 import config from '../../config/core';
 import logger from '../../logger';
 
-const {appUrls, apiUrls} = config;
+const { appUrls, apiUrls } = config;
 
-const Error = ({ name }) => (
+// validation
+// TODO want to check what type of field it is and validate it accordingly
+const required = value => (value ? undefined : 'Required');
+
+const ErrorField = ({ name }) => (
   <Field
     name={name}
     subscription={{ touched: true, error: true }}
     render={({ meta: { touched, error } }) =>
       touched && error ? <span>{error}</span> : null
-    }/>
+    }
+  />
 )
+
+const ItemFields = ({ requiredFields, fieldProperties }) => {
+  let fieldElements = [];
+
+  for (const field in fieldProperties) {
+    let idHintStyle = `${field}-hint`;
+    let idErrorStyle = `${field}-error`;
+    let inputWidth = `govuk-input govuk-input--width-${fieldProperties[field].maxLength}`;
+
+    const itemFields = (
+      <div className="govuk-form-group">
+        <label className="govuk-label" htmlFor={field}>{fieldProperties[field].description.label}</label>
+        <span id={idHintStyle} className="govuk-hint">{fieldProperties[field].description.description}</span>
+        <span id={idErrorStyle} className="govuk-error-message">
+          <ErrorField className="govuk-visually-hidden" name={field} />
+        </span>
+        <Field className={inputWidth} name={field} component="input"/>
+      </div>
+    );
+
+    if (requiredFields.includes(field)) {
+      fieldElements.push(
+        <Field
+          name={field}
+          validate={required}
+          key={field}
+          render={() => itemFields}
+        />
+      );
+    } else {
+      fieldElements.push(
+        <Field
+          name={field}
+          key={field}
+          render={() => itemFields}
+        />
+      );
+    }
+  }
+  return fieldElements;
+};
 
 class ItemNew extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      data: {},
+    };
+  }
+
+  componentDidMount() {
+    const { name } = this.props.match.params;
+    const entitySchema = util.format(apiUrls.entitySchema, name);
+
+    fetch(entitySchema, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${this.props.kc.token}`,
+      }
+    })
+    .then(res => res.json())
+    .then(obj => this.setState({ data: obj }));
   }
 
   handleSubmit(values, form) {
@@ -48,7 +112,13 @@ class ItemNew extends React.Component {
   }
 
   render() {
+    let fieldProperties, requiredFields;
     const backLink = util.format(appUrls.entity, this.props.match.params.name);
+
+    if (this.state.data && this.state.data.entitySchema) {
+      (fieldProperties = this.state.data.entitySchema.properties);
+      (requiredFields = this.state.data.entitySchema.required);
+    }
 
     return (
       <div className="govuk-width-container">
@@ -61,80 +131,12 @@ class ItemNew extends React.Component {
               <p className="govuk-body-m">Please provide the following information. Once this form has been submitted, it will be sent to the data owner selected for approval.</p>
               <Form
                 onSubmit={this.handleSubmit}
-                validate={values => {
-                  const errors = {}
-                  const errorMessage = 'This field is required';
-                  if (!values.id) {
-                    errors.id = errorMessage
-                  }
-                  if (!values.iso31661alpha3) {
-                    errors.iso31661alpha3 = errorMessage
-                  }
-                  if (!values.name) {
-                    errors.name = errorMessage
-                  }
-                  if (!values.continent) {
-                    errors.continent = errorMessage
-                  }
-                  if (!values.dial) {
-                    errors.dial = errorMessage
-                  }
-                  if (!values.iso31661numeric) {
-                    errors.iso31661numeric = errorMessage
-                  }
-                  return errors
-                }}
                 render={({ handleSubmit, submitting, values }) => (
                   <form onSubmit={handleSubmit}>
-                    <div className="govuk-form-group">
-                      <label className="govuk-label" htmlFor="id">2 digit alpha code</label>
-                      <span id="id-hint" className="govuk-hint">The 2 digit ISO alpha code for the country, for example TW</span>
-                      <span id="id-error" className="govuk-error-message">
-                        <Error className="govuk-visually-hidden" name="id" />
-                      </span>
-                      <Field className="govuk-input govuk-input--width-2" name="id" component="input"/>
-                    </div>
-                    <div className="govuk-form-group">
-                      <label className="govuk-label" htmlFor="iso31661alpha3">3 digit alpha code</label>
-                      <span id="iso31661alpha3-hint" className="govuk-hint">The 3 digit ISO alpha code for the country, for example TWN</span>
-                      <span id="iso31661alpha3-error" className="govuk-error-message">
-                        <Error className="govuk-visually-hidden" name="iso31661alpha3" />
-                      </span>
-                      <Field className="govuk-input govuk-input--width-3" name="iso31661alpha3" component="input"/>
-                    </div>
-                    <div className="govuk-form-group">
-                      <label className="govuk-label" htmlFor="name">Country name</label>
-                      <span id="name-hint" className="govuk-hint">The name of the country</span>
-                      <span id="name-error" className="govuk-error-message">
-                        <Error className="govuk-visually-hidden" name="name" />
-                      </span>
-                      <Field className="govuk-input" name="name" component="input"/>
-                    </div>
-                    <div className="govuk-form-group">
-                      <label className="govuk-label" htmlFor="continent">Continent</label>
-                      <span id="continent-hint" className="govuk-hint">The 2 digit ISO alpha code for the contninet the country is in, for exmaple AS</span>
-                      <span id="continent-error" className="govuk-error-message">
-                        <Error className="govuk-visually-hidden" name="continent" />
-                      </span>
-                      <Field className="govuk-input govuk-input--width-2" name="continent" component="input"/>
-                    </div>
-                    <div className="govuk-form-group">
-                      <label className="govuk-label" htmlFor="dial">Phone dial code</label>
-                      <span id="dial-hint" className="govuk-hint">The international dialling code for the country, for example 886</span>
-                      <span id="dial-error" className="govuk-error-message">
-                        <Error className="govuk-visually-hidden" name="dial" />
-                      </span>
-                      <Field className="govuk-input govuk-input--width-20" name="dial" component="input"/>
-                    </div>
-                    <div className="govuk-form-group">
-                      <label className="govuk-label" htmlFor="iso31661numeric">3 digit numeric code</label>
-                      <span id="iso31661numeric-hint" className="govuk-hint">The 3 digit ISO numeric code for the country, for example 158</span>
-                      <span id="iso31661numeric-error" className="govuk-error-message">
-                        <Error className="govuk-visually-hidden" name="iso31661numeric" />
-                      </span>
-                      <Field className="govuk-input govuk-input--width-3" name="iso31661numeric" component="input"/>
-                    </div>
-                    <button className="govuk-button" type="submit">Submit change for approval</button>
+                    {this.state.data && this.state.data.entitySchema &&
+                      <ItemFields requiredFields={requiredFields} fieldProperties={fieldProperties} />
+                    }
+                    <button className="govuk-button" type="submit" disabled={submitting}>Submit change for approval</button>
                   </form>
                 )}
               />

@@ -1,6 +1,10 @@
 'use strict'
 
 const apiBaseUrl = 'https://virtserver.swaggerhub.com/Viable-Data/Reference-Data-Service-API/0.0.1/v1/';
+// once the entire front end application is ready to connect to the API
+// we should store the `apiBaseUrl` in a environment variable and
+// fallback to `http://localhost:5000/v1/`
+// const apiBaseUrl = 'http://localhost:5000/v1/';
 
 const internalUrls = {
     entity: '/entities/%s',
@@ -15,7 +19,7 @@ const internalUrls = {
 const apiUrls = {
   entities: apiBaseUrl + 'entities',
   entity: apiBaseUrl + 'entities/%s',
-  entitySchema: apiBaseUrl + 'entities/%s%s',
+  entitySchema: apiBaseUrl + 'entities/%s?schemaOnly=true',
   item: apiBaseUrl + 'entities/%s/items/%s',
 };
 
