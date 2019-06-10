@@ -94,11 +94,14 @@ class ItemNew extends React.Component {
 
   handleSubmit(values, form) {
     const entity = util.format(apiUrls.entity, this.props.match.params.name);
+    logger.info('Request item creation');
+    logger.info(values);
+
     fetch(entity, {
       method: 'POST',
       mode: 'cors',
       headers: {
-        'Accept': 'application/json',
+        'Content-type': 'application/json',
         'Authorization': `Bearer ${this.props.kc.token}`,
       },
       body: JSON.stringify(values, 0, 2)
