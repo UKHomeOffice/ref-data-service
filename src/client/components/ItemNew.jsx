@@ -106,14 +106,28 @@ class ItemNew extends React.Component {
       },
       body: JSON.stringify(values, 0, 2)
     })
-    .then(res => res.json())
+    .then(res => {
+      // TODO
+      // if the status returned from the API is not 200 (Camunda or API might be down)
+      // we should probably display an error to the user
+      // uncomment the following line(s)
+      // if (res.status !== 200) {
+      //   throw Error();
+      // }
+      return res.json();
+    })
     .then(data => {
       this.props.history.push({
         pathname: '/change_request_submitted'
-        // state: will carry the 'reference number'
+        // state: will carry the 'reference number' returned from
+        // Camunda response
       });
     })
-    .catch(error => logger.error(error))
+    .catch(error => {
+      // at the moment we only have the logger, but here we should redirect
+      // the user to the error page
+      logger.error(error.message)
+    })
   }
 
   render() {
