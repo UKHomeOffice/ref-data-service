@@ -29,38 +29,40 @@ const ItemFields = ({ requiredFields, fieldProperties }) => {
   let fieldElements = [];
 
   for (const field in fieldProperties) {
-    let idHintStyle = `${field}-hint`;
-    let idErrorStyle = `${field}-error`;
-    let inputWidth = `govuk-input govuk-input--width-${fieldProperties[field].maxLength}`;
+    if (field !== 'id') {
+      let idHintStyle = `${field}-hint`;
+      let idErrorStyle = `${field}-error`;
+      let inputWidth = `govuk-input govuk-input--width-${fieldProperties[field].maxLength}`;
 
-    const itemFields = (
-      <div className="govuk-form-group">
-        <label className="govuk-label" htmlFor={field}>{fieldProperties[field].description.label}</label>
-        <span id={idHintStyle} className="govuk-hint">{fieldProperties[field].description.description}</span>
-        <span id={idErrorStyle} className="govuk-error-message">
-          <ErrorField className="govuk-visually-hidden" name={field} />
-        </span>
-        <Field className={inputWidth} name={field} component="input"/>
-      </div>
-    );
+      const itemFields = (
+        <div className="govuk-form-group">
+          <label className="govuk-label" htmlFor={field}>{fieldProperties[field].description.label}</label>
+          <span id={idHintStyle} className="govuk-hint">{fieldProperties[field].description.description}</span>
+          <span id={idErrorStyle} className="govuk-error-message">
+            <ErrorField className="govuk-visually-hidden" name={field} />
+          </span>
+          <Field className={inputWidth} name={field} component="input"/>
+        </div>
+      );
 
-    if (requiredFields.includes(field)) {
-      fieldElements.push(
-        <Field
-          name={field}
-          validate={required}
-          key={field}
-          render={() => itemFields}
-        />
-      );
-    } else {
-      fieldElements.push(
-        <Field
-          name={field}
-          key={field}
-          render={() => itemFields}
-        />
-      );
+      if (requiredFields.includes(field)) {
+        fieldElements.push(
+          <Field
+            name={field}
+            validate={required}
+            key={field}
+            render={() => itemFields}
+          />
+        );
+      } else {
+        fieldElements.push(
+          <Field
+            name={field}
+            key={field}
+            render={() => itemFields}
+          />
+        );
+      }
     }
   }
   return fieldElements;
