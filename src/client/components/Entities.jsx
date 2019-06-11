@@ -10,16 +10,22 @@ import logger from '../../logger';
 const {apiUrls} = config;
 
 const EntitiesData = ({ data }) => {
-  return data.map((entities) => {
-    return (
-      <tr className="govuk-table__row" key={entities.id}>
-        <th className="govuk-table__header" scope="row">{entities.label}</th>
-        <td className="govuk-table__cell">{entities.description}</td>
-        <td className="govuk-table__cell"><Link to={`/entities/${entities.entityName}`}>View data</Link></td>
-        <td className="govuk-table__cell"><Link to={`/entities/${entities.entityName}/schema`}>View definition</Link></td>
+  const entityRows = []
+
+  data.map((entity, n) => {
+    let { description } = entity.description.description;
+    let { entityName, id } = entity;
+
+    entityRows.push(
+      <tr className="govuk-table__row" key={n}>
+        <th className="govuk-table__header" scope="row">{entityName}</th>
+        <td className="govuk-table__cell">{description}</td>
+        <td className="govuk-table__cell"><Link to={`/entities/${entityName}`}>View data</Link></td>
+        <td className="govuk-table__cell"><Link to={`/entities/${entityName}/schema`}>View definition</Link></td>
       </tr>
     )
   })
+  return entityRows;
 };
 
 class Entities extends React.Component {
