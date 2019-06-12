@@ -28,6 +28,7 @@ pipeline:
       - DEV_HOSTNAME
       - DEV_KEYCLOAK_AUTH_URL
       - DEV_KEYCLOAK_CLIENT_ID
+      - DEV_API_BASE_URL
       - DEV_KEYCLOAK_REALM
       - DEV_KUBE_NAMESPACE
       - DEV_KUBE_SERVER
@@ -36,6 +37,7 @@ pipeline:
       - export HOSTNAME=$${DEV_HOSTNAME}
       - export KEYCLOAK_AUTH_URL=$${DEV_KEYCLOAK_AUTH_URL}
       - export KEYCLOAK_CLIENT_ID=$${DEV_KEYCLOAK_CLIENT_ID}
+      - export API_BASE_URL=$${DEV_API_BASE_URL}
       - export KEYCLOAK_REALM=$${DEV_KEYCLOAK_REALM}
       - export KUBE_NAMESPACE=$${DEV_KUBE_NAMESPACE}
       - export KUBE_SERVER=$${DEV_KUBE_SERVER}
