@@ -5,7 +5,7 @@ const webpack = require('webpack');
 module.exports = {
   // in the `entry` property there is no need to 
   // specify `filename.js` at the end, its smart enough to figure out
-  entry: ['./src/client', './src/client/sass/main.scss'],
+  entry: ['./src/', './src/sass/main.scss'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -37,7 +37,7 @@ module.exports = {
   },
   plugins: [
     new CopyPlugin([
-      { from: 'src/client/assets/javascript', to: 'javascript'},
+      { from: 'src/assets/javascript', to: 'javascript'},
       { from: 'node_modules/govuk-frontend/all.js', to: 'javascript/all.js'},
       { from: 'node_modules/govuk-frontend/assets', to: 'assets'}
     ]),
@@ -52,21 +52,21 @@ module.exports = {
   resolve: {
     alias: {
       // Components
-      Banner: path.resolve(__dirname, 'src/client/components/Banner.jsx'),
-      ChangeRequestSubmission: path.resolve(__dirname, 'src/client/components/ChangeRequestSubmission.jsx'),
-      Entities: path.resolve(__dirname, 'src/client/components/Entities.jsx'),
-      Entity: path.resolve(__dirname, 'src/client/components/Entity.jsx'),
-      EntityFieldUpdate: path.resolve(__dirname, 'src/client/components/EntityFieldUpdate.jsx'),
-      Footer: path.resolve(__dirname, 'src/client/components/Footer.jsx'),
-      Header: path.resolve(__dirname, 'src/client/components/Header.jsx'),
-      Item: path.resolve(__dirname, 'src/client/components/Item.jsx'),
-      Items: path.resolve(__dirname, 'src/client/components/Items.jsx'),
-      ItemDeleted: path.resolve(__dirname, 'src/client/components/ItemDeleted.jsx'),
-      ItemFieldUpdate: path.resolve(__dirname, 'src/client/components/ItemFieldUpdate.jsx'),
-      ItemNew: path.resolve(__dirname, 'src/client/components/ItemNew.jsx'),
-      Main: path.resolve(__dirname, 'src/client/components/Main.jsx'),
-      Nav: path.resolve(__dirname, 'src/client/components/Nav.jsx'),
-      Search: path.resolve(__dirname, 'src/client/components/Search.jsx')
+      Banner: path.resolve(__dirname, 'src/components/Banner.jsx'),
+      ChangeRequestSubmission: path.resolve(__dirname, 'src/components/ChangeRequestSubmission.jsx'),
+      Entities: path.resolve(__dirname, 'src/components/Entities.jsx'),
+      Entity: path.resolve(__dirname, 'src/components/Entity.jsx'),
+      EntityFieldUpdate: path.resolve(__dirname, 'src/components/EntityFieldUpdate.jsx'),
+      Footer: path.resolve(__dirname, 'src/components/Footer.jsx'),
+      Header: path.resolve(__dirname, 'src/components/Header.jsx'),
+      Item: path.resolve(__dirname, 'src/components/Item.jsx'),
+      Items: path.resolve(__dirname, 'src/components/Items.jsx'),
+      ItemDeleted: path.resolve(__dirname, 'src/components/ItemDeleted.jsx'),
+      ItemFieldUpdate: path.resolve(__dirname, 'src/components/ItemFieldUpdate.jsx'),
+      ItemNew: path.resolve(__dirname, 'src/components/ItemNew.jsx'),
+      Main: path.resolve(__dirname, 'src/components/Main.jsx'),
+      Nav: path.resolve(__dirname, 'src/components/Nav.jsx'),
+      Search: path.resolve(__dirname, 'src/components/Search.jsx')
     },
     extensions: ['.js', '.jsx']
   },
