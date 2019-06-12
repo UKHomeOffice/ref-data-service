@@ -13,7 +13,7 @@ const EntitiesData = ({ data }) => {
   const entityRows = []
 
   data.map((entity, n) => {
-    let { description } = entity.description.description;
+    let { description } = entity.schema.description;
     let { entityName, id } = entity;
 
     entityRows.push(
