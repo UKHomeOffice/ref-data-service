@@ -44,6 +44,8 @@ spec:
               secretKeyRef:
                 name: ref-data-keycloak
                 key: KEYCLOAK_REALM
+          - name: API_BASE_URL
+            value: {{.API_BASE_URL}}
 
       - name: proxy
         image: quay.io/ukhomeofficedigital/nginx-proxy
