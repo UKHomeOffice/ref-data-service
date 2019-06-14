@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import util from 'util';
 
 // local imports
-import Banner from 'Banner';
+import Banner from './Banner';
 import config from '../../config/core';
 
 const {appUrls, apiUrls} = config;
