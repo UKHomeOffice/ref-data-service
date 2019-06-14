@@ -1,12 +1,10 @@
-import React from 'react';
 import Provider from 'react-redux';
-import sinon from 'sinon';
-import { BrowserRouter, Link } from 'react-router-dom';
+import React from 'react';
+import configureMockStore from 'redux-mock-store';
+import { Link } from 'react-router-dom';
 import { shallow, render, mount } from 'enzyme';
 
-
-import configureMockStore from 'redux-mock-store';
-
+// local imports
 import Items from './Items';
 
 const mockStore = configureMockStore();
@@ -171,9 +169,9 @@ describe('Items component', () => {
     expect(wrapper.find('.govuk-table__header').get(3).props.children).toEqual('Continent');
     expect(wrapper.find('.govuk-table__header').get(4).props.children).toEqual('Dial');
 
-    expect(wrapper.find('ItemsRows').shallow().find('.govuk-table__cell').get(0).props.children.props.children).toEqual('TW');
+    expect(wrapper.find('ItemsRows').dive().find('.govuk-table__cell').get(0).props.children.props.children).toEqual('TW');
     expect(wrapper.find('ItemsRows').dive().find('.govuk-table__cell').get(1).props.children).toEqual('TWN');
-    expect(wrapper.find('ItemsRows').shallow().find('.govuk-table__cell').get(2).props.children).toEqual('Taiwan');
+    expect(wrapper.find('ItemsRows').dive().find('.govuk-table__cell').get(2).props.children).toEqual('Taiwan');
     expect(wrapper.find('ItemsRows').dive().find('.govuk-table__cell').get(3).props.children).toEqual('AS');
     expect(wrapper.find('ItemsRows').dive().find('.govuk-table__cell').get(4).props.children).toEqual('886');
 
