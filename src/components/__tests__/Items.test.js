@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { shallow, render, mount } from 'enzyme';
 
 // local imports
-import Items from './Items';
+import Items from '../Items';
 
 const mockStore = configureMockStore();
 
