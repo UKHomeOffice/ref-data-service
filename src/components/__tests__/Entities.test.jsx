@@ -9,7 +9,7 @@ import entitiesObject from '../__fixtures__/entitiesObject';
 const mockStore = configureMockStore();
 
 describe('Entities component', () => {
-  it('Should display the entities table successfully', () => {
+  it('Should display the entities component successfully', () => {
     global.fetch = jest
       .fn()
       .mockImplementation(() => Promise.resolve({
