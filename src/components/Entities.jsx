@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 // local imports
-import Banner from 'Banner';
+import Banner from './Banner';
 import config from '../../config/core';
 import logger from '../../logger';
 
