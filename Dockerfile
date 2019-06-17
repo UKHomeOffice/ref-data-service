@@ -5,7 +5,7 @@ RUN apk update && apk upgrade
 RUN mkdir -p /src
 WORKDIR /src
 
-COPY package.json .
+COPY package*.json ./
 RUN npm install
 COPY . /src
 
