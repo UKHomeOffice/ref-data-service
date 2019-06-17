@@ -73,7 +73,8 @@
       "!**/node_modules/**",
       "!**/kube/**",
       "!**/nginx/**",
-      "!**/coverage/**"
+      "!**/coverage/**",
+      "!**/src/assets/**"
     ]
   }
 }
