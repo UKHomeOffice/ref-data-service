@@ -62,3 +62,28 @@ pipeline:
     when:
       branch: master
       event: [ push, deployment ]
+
+  deploy_to_prod:
+    image: quay.io/ukhomeofficedigital/kd
+    secrets:
+      - PROD_HOSTNAME
+      - PROD_KEYCLOAK_AUTH_URL
+      - PROD_KEYCLOAK_CLIENT_ID
+      - PROD_API_BASE_URL
+      - PROD_KEYCLOAK_REALM
+      - PROD_KUBE_NAMESPACE
+      - PROD_KUBE_SERVER
+      - PROD_KUBE_TOKEN
+    commands:
+      - export HOSTNAME=$${PROD_HOSTNAME}
+      - export KEYCLOAK_AUTH_URL=$${PROD_KEYCLOAK_AUTH_URL}
+      - export KEYCLOAK_CLIENT_ID=$${PROD_KEYCLOAK_CLIENT_ID}
+      - export API_BASE_URL=$${PROD_API_BASE_URL}
+      - export KEYCLOAK_REALM=$${PROD_KEYCLOAK_REALM}
+      - export KUBE_NAMESPACE=$${PROD_KUBE_NAMESPACE}
+      - export KUBE_SERVER=$${PROD_KUBE_SERVER}
+      - export KUBE_TOKEN=$${PROD_KUBE_TOKEN}
+      - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
+    when:
+      event: deployment
+      environment: production
