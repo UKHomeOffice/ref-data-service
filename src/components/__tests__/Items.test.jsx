@@ -32,23 +32,31 @@ describe('Items component', () => {
       'itemsObject': itemsObject
     });
 
+    const { properties } = itemsObject.entitySchema;
+
     // headers
     expect(wrapper.containsMatchingElement(<p className="govuk-body-l">Countries</p>)).toBeTruthy();
     expect(wrapper.containsMatchingElement(<h2 className="govuk-heading-m">Data items within this entity</h2>)).toBeTruthy();
 
-    // table
-    expect(wrapper.find('.govuk-table__row').children()).toHaveLength(5);
-    expect(wrapper.find('.govuk-table__header').get(0).props.children).toEqual('ID');
-    expect(wrapper.find('.govuk-table__header').get(1).props.children).toEqual('ISO 3166-1 Alpha');
-    expect(wrapper.find('.govuk-table__header').get(2).props.children).toEqual('Name');
-    expect(wrapper.find('.govuk-table__header').get(3).props.children).toEqual('Continent');
-    expect(wrapper.find('.govuk-table__header').get(4).props.children).toEqual('Dial');
+    // table header
+    let headerCol = 0;
+    const headerRows = wrapper.find('TableHeader').dive();
+    expect(headerRows).toHaveLength(9);
+    for (const headerKey in properties) {
+      expect(headerRows.get(headerCol).props.children).toEqual(properties[headerKey].description.label);
+      headerCol++;
+    }
 
-    expect(wrapper.find('ItemsRows').dive().find('.govuk-table__cell').get(0).props.children.props.children).toEqual('TW');
-    expect(wrapper.find('ItemsRows').dive().find('.govuk-table__cell').get(1).props.children).toEqual('TWN');
-    expect(wrapper.find('ItemsRows').dive().find('.govuk-table__cell').get(2).props.children).toEqual('Taiwan');
-    expect(wrapper.find('ItemsRows').dive().find('.govuk-table__cell').get(3).props.children).toEqual('AS');
-    expect(wrapper.find('ItemsRows').dive().find('.govuk-table__cell').get(4).props.children).toEqual('886');
+    // table body
+    let rowCol = 0;
+    const bodyRows = wrapper.find('TableRows').dive();
+    expect(bodyRows).toHaveLength(1);
+    for (let i = 0; i < itemsObject.data.length; i++) {
+      for (const rowKey in itemsObject.data[i]) {
+        expect(bodyRows.get(i).props.children[rowCol].props.children).toEqual(itemsObject.data[i][rowKey]);
+        rowCol++
+      }
+    }
 
     // button
     expect(wrapper.containsAllMatchingElements([

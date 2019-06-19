@@ -71,6 +71,7 @@
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
       "!**/node_modules/**",
+      "!**/dist/**",
       "!**/kube/**",
       "!**/nginx/**",
       "!**/coverage/**",
