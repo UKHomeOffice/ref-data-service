@@ -73,7 +73,7 @@ class Item extends React.Component {
               <div className="govuk-grid-column-two-thirds-from-desktop">
                 <h1 className="govuk-heading-xl">{this.state.itemObject.data.name}</h1>
                 <h2 className="govuk-heading-m">Fields</h2>
-                <p className="govuk-body-l">A list of fields that make up this data item. Click the change link to request changes to individual fields.</p>
+                <p className="govuk-body">A list of fields that make up this data item. Click the change link to request changes to individual fields.</p>
                 <dl className="govuk-summary-list govuk-!-margin-bottom-9">
                   <ItemData name={name} id={id} itemObject={this.state.itemObject} />
                 </dl>

@@ -153,7 +153,7 @@ class ItemFieldUpdate extends React.Component {
                     <div className="govuk-grid-row">
                       <div className="govuk-grid-column-two-thirds">
                         <h1 className="govuk-heading-xl">Change the data item</h1>
-                        <p className="govuk-body-l">Once this form has been submitted, it will be sent for approval.</p>
+                        <p className="govuk-body">Once this form has been submitted, it will be sent for approval.</p>
                         <h1 className="govuk-heading-m">{description.label}</h1>
                         <div className="govuk-form-group">
                           <label className="govuk-label">{description.description}</label>

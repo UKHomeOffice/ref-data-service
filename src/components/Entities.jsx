@@ -60,7 +60,7 @@ class Entities extends React.Component {
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds">
               <h1 className="govuk-heading-xl">Reference Data Governance Tool</h1>
-              <p className="govuk-body-l">This service allows you to view and manage reference data entities.</p>
+              <p className="govuk-body">This service allows you to view and manage reference data entities.</p>
               <h2 className="govuk-heading-l">Data Entities</h2>
               <span></span>
               <table className="govuk-table">

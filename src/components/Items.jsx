@@ -69,14 +69,14 @@ class Items extends React.Component {
             {this.state.itemsObject && this.state.itemsObject.data &&
               <div className='govuk-grid-column-full'>
                 <h1 className='govuk-heading-xl'>{this.state.itemsObject.entityLabel}</h1>
-                <p className='govuk-body-l'>{this.state.itemsObject.entitySchema.description.description}</p>
+                <p className='govuk-body'>{this.state.itemsObject.entitySchema.description.description}</p>
                 <div className='govuk-grid-row'>
                   <div className='govuk-grid-column-full'>
                     <hr className='govuk-section-break govuk-section-break--visible govuk-section-break--xl govuk-!-margin-top-0' />
                   </div>
                 </div>
                 <h2 className='govuk-heading-m'>Data items within this entity</h2>
-                <p className='govuk-body-l'>To manage a data item, click the ID.</p>
+                <p className='govuk-body'>To manage a data item, click the ID.</p>
                 <div className='table-container'>
                   <table className='govuk-table table-items'>
                     <thead className='govuk-table__head'>
@@ -90,7 +90,7 @@ class Items extends React.Component {
                   </table>
                 </div>
                 <h2 className='govuk-heading-m'>Add new data items to this entity</h2>
-                <p className='govuk-body-l'>To add a data item, click the button below and complete the change request on the subsequent page.</p>
+                <p className='govuk-body'>To add a data item, click the button below and complete the change request on the subsequent page.</p>
                 <Link className='govuk-button' to={itemNew} role='button' draggable='false'>Add data item</Link>
               </div>
             }
