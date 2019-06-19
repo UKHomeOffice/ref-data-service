@@ -21,18 +21,25 @@ const apiUrls = {
   item: apiUrl + 'entities/%s/items/%s',
 };
 
-const config = {
-  logLevel: process.env.LOG_LEVEL || 'info',
-  name: process.env.NAME || 'reference-data-governance-tool',
-  clientPort: process.env.CLIENT_PORT || 8080,
-  serverPort: process.env.SERVER_PORT || 5000,
-  sessionSecret: process.env.SESSION_SECRET || 'anotverysecretsecretthing',
-  title: process.env.TITLE || 'Reference Data Governance Tool',
-  keycloakAuthUrl: process.env.KEYCLOAK_AUTH_URL || 'https://sso-dev.notprod.homeoffice.gov.uk/auth',
-  clientId: process.env.KEYCLOAK_CLIENT_ID || 'refdata-ui',
-  realm: process.env.KEYCLOAK_REALM || 'cop-dev',
-  appUrls: internalUrls,
-  apiUrls: apiUrls
+let config;
+
+if (typeof window === 'undefined') {
+  config = {
+    logLevel: window.env.LOG_LEVEL || 'info',
+    keycloakAuthUrl: window.env.KEYCLOAK_AUTH_URL || 'https://sso-dev.notprod.homeoffice.gov.uk/auth',
+    clientId: window.env.KEYCLOAK_CLIENT_ID || 'refdata-ui',
+    realm: window.env.KEYCLOAK_REALM || 'cop-dev',
+  };
+} else {
+  config = {
+    logLevel: process.env.LOG_LEVEL || 'info',
+    keycloakAuthUrl: process.env.KEYCLOAK_AUTH_URL || 'https://sso-dev.notprod.homeoffice.gov.uk/auth',
+    clientId: process.env.KEYCLOAK_CLIENT_ID || 'refdata-ui',
+    realm: process.env.KEYCLOAK_REALM || 'cop-dev'
+  };  
 }
+
+config.appUrls = internalUrls;
+config.apiUrls = apiUrls;
 
 export default config;
