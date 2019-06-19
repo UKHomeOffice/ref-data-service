@@ -3,6 +3,7 @@ $govuk-compatibility-govuktemplate: true;
 $govuk-compatibility-govukelements: true;
 
 @import "~govuk-frontend/all";
+@import "_table.scss";
 
 .govuk-header__link {
   cursor: pointer;
