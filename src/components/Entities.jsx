@@ -78,6 +78,9 @@ class Entities extends React.Component {
                   }
                 </tbody>
               </table>
+              <h2 className='govuk-heading-m'>New data sets</h2>
+              <p className='govuk-body'>Requests for new data sets to be added to the service require sign off by the Data Engagement Group.</p>
+              <a href='https://support.cop.homeoffice.gov.uk/servicedesk/customer/portal' className='govuk-button'>Add a data set</a>
             </div>
           </div>
         </main>
