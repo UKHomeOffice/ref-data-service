@@ -21,7 +21,7 @@ pipeline:
     commands:
       - docker build -t ref-data-gov-tool:$${DRONE_COMMIT_SHA} .
     when:
-      event: [ push, deployment ]
+      event: push
 
   image_to_quay:
     image: quay.io/ukhomeofficedigital/drone-docker
@@ -36,7 +36,7 @@ pipeline:
       - latest
     when:
       branch: master
-      event: [ push, deployment ]
+      event: push
 
   deploy_to_dev:
     image: quay.io/ukhomeofficedigital/kd
@@ -61,7 +61,7 @@ pipeline:
       - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       branch: master
-      event: [ push, deployment ]
+      event: push
 
   deploy_to_prod:
     image: quay.io/ukhomeofficedigital/kd
