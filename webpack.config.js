@@ -3,7 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  // in the `entry` property there is no need to 
+  // in the `entry` property there is no need to
   // specify `filename.js` at the end, its smart enough to figure out
   entry: ['./src/', './src/sass/main.scss'],
   output: {
@@ -39,7 +39,6 @@ module.exports = {
     new CopyPlugin([
       { from: 'src/assets/javascript', to: 'javascript'},
       { from: 'src/assets/images', to: 'assets/images'},
-      { from: 'src/assets/envs', to: 'envs'},
       { from: 'node_modules/govuk-frontend/all.js', to: 'javascript/all.js'},
       { from: 'node_modules/govuk-frontend/assets', to: 'assets'}
     ]),
