@@ -23,20 +23,11 @@ const apiUrls = {
 
 let config;
 
-if (typeof window === 'undefined') {
-  config = {
-    logLevel: window.env.LOG_LEVEL || 'info',
-    keycloakAuthUrl: window.env.KEYCLOAK_AUTH_URL || 'https://sso-dev.notprod.homeoffice.gov.uk/auth',
-    clientId: window.env.KEYCLOAK_CLIENT_ID || 'refdata-ui',
-    realm: window.env.KEYCLOAK_REALM || 'cop-dev',
-  };
-} else {
-  config = {
+config = {
     logLevel: process.env.LOG_LEVEL || 'info',
-    keycloakAuthUrl: process.env.KEYCLOAK_AUTH_URL || 'https://sso-dev.notprod.homeoffice.gov.uk/auth',
+    keycloakAuthUrl: process.env.KEYCLOAK_AUTH_URL || 'https://not.the.right.sso-dev.notprod.homeoffice.gov.uk/auth',
     clientId: process.env.KEYCLOAK_CLIENT_ID || 'refdata-ui',
     realm: process.env.KEYCLOAK_REALM || 'cop-dev'
-  };  
 }
 
 config.appUrls = internalUrls;

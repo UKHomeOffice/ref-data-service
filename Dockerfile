@@ -1,5 +1,10 @@
 FROM node:10-alpine as builder
 
+ARG API_BASE_URL=https://api.fake.build.com
+ARG KEYCLOAK_AUTH_URL=https://sso-fake.build.com/auth
+ARG KEYCLOAK_CLIENT_ID=fake-client-id
+ARG KEYCLOAK_REALM=fake-realm
+
 RUN apk update && apk upgrade
 
 RUN mkdir -p /src
@@ -15,7 +20,11 @@ RUN npm run build
 
 FROM alpine:3.7
 
-ENV NGINX_CONFIG_FILE=/etc/nginx/nginx.conf
+ENV NGINX_CONFIG_FILE=/etc/nginx/nginx.conf \
+    API_BASE_URL=https://api.fake.build.com \
+    KEYCLOAK_AUTH_URL=https://sso-fake.build.com/auth \
+    KEYCLOAK_CLIENT_ID=fake-client-id \
+    KEYCLOAK_REALM=fake-realm
 
 RUN apk upgrade --no-cache && \
     apk add --no-cache nginx bash nginx-mod-http-lua && \
@@ -28,6 +37,7 @@ COPY /nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --chown=100 /nginx/run.sh /run.sh
 
 RUN chmod 700 /run.sh
+RUN chown nginx /usr/share/nginx/html
 
 # UID for nginx user
 USER 100

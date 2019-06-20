@@ -26,8 +26,8 @@ pipeline:
   image_to_quay:
     image: quay.io/ukhomeofficedigital/drone-docker
     secrets:
-      - DOCKER_USERNAME
       - DOCKER_PASSWORD
+      - DOCKER_USERNAME
     registry: quay.io
     repo: quay.io/ukhomeofficedigital/ref-data-gov-tool
     tags:
@@ -41,19 +41,19 @@ pipeline:
   deploy_to_dev:
     image: quay.io/ukhomeofficedigital/kd
     secrets:
+      - DEV_API_BASE_URL
       - DEV_HOSTNAME
       - DEV_KEYCLOAK_AUTH_URL
       - DEV_KEYCLOAK_CLIENT_ID
-      - DEV_API_BASE_URL
       - DEV_KEYCLOAK_REALM
       - DEV_KUBE_NAMESPACE
       - DEV_KUBE_SERVER
       - DEV_KUBE_TOKEN
     commands:
+      - export API_BASE_URL=$${DEV_API_BASE_URL}
       - export HOSTNAME=$${DEV_HOSTNAME}
       - export KEYCLOAK_AUTH_URL=$${DEV_KEYCLOAK_AUTH_URL}
       - export KEYCLOAK_CLIENT_ID=$${DEV_KEYCLOAK_CLIENT_ID}
-      - export API_BASE_URL=$${DEV_API_BASE_URL}
       - export KEYCLOAK_REALM=$${DEV_KEYCLOAK_REALM}
       - export KUBE_NAMESPACE=$${DEV_KUBE_NAMESPACE}
       - export KUBE_SERVER=$${DEV_KUBE_SERVER}
@@ -66,19 +66,19 @@ pipeline:
   deploy_to_prod:
     image: quay.io/ukhomeofficedigital/kd
     secrets:
+      - PROD_API_BASE_URL
       - PROD_HOSTNAME
       - PROD_KEYCLOAK_AUTH_URL
       - PROD_KEYCLOAK_CLIENT_ID
-      - PROD_API_BASE_URL
       - PROD_KEYCLOAK_REALM
       - PROD_KUBE_NAMESPACE
       - PROD_KUBE_SERVER
       - PROD_KUBE_TOKEN
     commands:
+      - export API_BASE_URL=$${PROD_API_BASE_URL}
       - export HOSTNAME=$${PROD_HOSTNAME}
       - export KEYCLOAK_AUTH_URL=$${PROD_KEYCLOAK_AUTH_URL}
       - export KEYCLOAK_CLIENT_ID=$${PROD_KEYCLOAK_CLIENT_ID}
-      - export API_BASE_URL=$${PROD_API_BASE_URL}
       - export KEYCLOAK_REALM=$${PROD_KEYCLOAK_REALM}
       - export KUBE_NAMESPACE=$${PROD_KUBE_NAMESPACE}
       - export KUBE_SERVER=$${PROD_KUBE_SERVER}
