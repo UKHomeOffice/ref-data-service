@@ -45,6 +45,7 @@ class Items extends React.Component {
 
   componentDidMount() {
     const entity = util.format(apiUrls.entity, this.props.match.params.name);
+
     fetch(entity, {
       method: 'GET',
       headers: {
@@ -52,9 +53,20 @@ class Items extends React.Component {
         'Authorization': `Bearer ${this.props.kc.token}`,
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) {
+        logger.error(`Error status: ${res.status}, message: ${res.statusText}`);
+        throw Error(res.statusText);
+      }
+      return res.json();
+    })
     .then(obj => {
       this.setState({ itemsObject: obj })
+    })
+    .catch(error => {
+      this.props.history.push({
+        pathname: '/service_unavailable'
+      });
     });
   }
 

@@ -35,8 +35,8 @@ describe('Items component', () => {
     const { properties } = itemsObject.entitySchema;
 
     // headers
-    expect(wrapper.containsMatchingElement(<p className="govuk-body-l">Countries</p>)).toBeTruthy();
-    expect(wrapper.containsMatchingElement(<h2 className="govuk-heading-m">Data items within this entity</h2>)).toBeTruthy();
+    expect(wrapper.containsMatchingElement(<p className="govuk-body">Countries</p>)).toBeTruthy();
+    expect(wrapper.containsMatchingElement(<h2 className="govuk-heading-m">Data items within this data set</h2>)).toBeTruthy();
 
     // table header
     let headerCol = 0;

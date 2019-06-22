@@ -45,6 +45,7 @@ class Item extends React.Component {
 
   componentDidMount() {
     const item = util.format(apiUrls.item, this.props.match.params.name, this.props.match.params.id);
+
     fetch(item, {
       method: 'GET',
       headers: {
@@ -52,17 +53,30 @@ class Item extends React.Component {
         'Authorization': `Bearer ${this.props.kc.token}`,
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) {
+        logger.error(`Error status: ${res.status}, message: ${res.statusText}`);
+        throw Error(res.statusText);
+      }
+      return res.json();
+    })
     .then(obj => {
       this.setState({ itemObject: obj })
+    })
+    .catch(error => {
+      this.props.history.push({
+        pathname: '/service_unavailable'
+      });
     });
   }
 
   render() {
-    const {name, id} = this.props.match.params;
-    const itemDelete = util.format(appUrls.itemDelete, name, id);
-    const backLink = util.format(appUrls.entity, this.state.itemObject.entityName);
+    if (this.state.itemObject && this.state.itemObject.entitySchema) {
+      const {name, id} = this.props.match.params;
+      const itemDelete = util.format(appUrls.itemDelete, name, id);
+      const backLink = util.format(appUrls.entity, this.state.itemObject.entityName);
 
+    }
     return (
       <div className="govuk-width-container">
         <Banner/>

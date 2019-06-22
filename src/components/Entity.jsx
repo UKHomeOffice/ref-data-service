@@ -7,6 +7,7 @@ import util from 'util';
 import Banner from './Banner';
 import config from '../../config/core';
 import getKeyByValue from '../utils';
+import logger from '../../logger';
 
 const {appUrls, apiUrls} = config;
 
@@ -36,7 +37,7 @@ const EntityContent = ({
           <dd className="govuk-summary-list__value">{description.description}</dd>
           <dd className="govuk-summary-list__actions">
             <Link className="govuk-link" to={entityDescriptionUpdate}>
-              Change<span className="govuk-visually-hidden"> data set description</span>
+              Change<span className="govuk-visually-hidden"> Data set description</span>
             </Link>
           </dd>
         </div>
@@ -62,9 +63,11 @@ class Entity extends React.Component {
       entityObject: {},
     };
   }
+
   componentDidMount() {
     const {name} = this.props.match.params;
-    const entitySchema = util.format(apiUrls.entitySchema, name, '?schemaOnly=true');
+    const entitySchema = util.format(apiUrls.entitySchema, name);
+
     fetch(entitySchema, {
       method: 'GET',
       headers: {
@@ -72,9 +75,20 @@ class Entity extends React.Component {
         'Authorization': `Bearer ${this.props.kc.token}`,
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) {
+        logger.error(`Error status: ${res.status}, message: ${res.statusText}`);
+        throw Error(res.statusText);
+      }
+      return res.json();
+    })
     .then(obj => {
       this.setState({ entityObject: obj })
+    })
+    .catch(error => {
+      this.props.history.push({
+        pathname: '/service_unavailable'
+      });
     });
   }
 

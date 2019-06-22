@@ -38,6 +38,7 @@ class Entities extends React.Component {
 
   componentDidMount() {
     const entities = apiUrls.entities;
+
     fetch(entities, {
       method: 'GET',
       headers: {
@@ -45,11 +46,21 @@ class Entities extends React.Component {
         'Authorization': `Bearer ${this.props.kc.token}`,
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) {
+        logger.error(`Error status: ${res.status}, message: ${res.statusText}`);
+        throw Error(res.statusText);
+      }
+      return res.json();
+    })
     .then(obj => {
       this.setState({ entitiesObject: obj })
+    })
+    .catch(error => {
+      this.props.history.push({
+        pathname: '/service_unavailable'
+      });
     });
-    logger.info(`Request made by ${this.props.kc.tokenParsed.name}, ${this.props.kc.tokenParsed.email}`);
   }
 
   render() {

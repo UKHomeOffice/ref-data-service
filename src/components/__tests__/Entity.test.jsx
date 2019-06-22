@@ -39,10 +39,10 @@ describe('Entity component', () => {
 
     // table content
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').children()).toHaveLength(4);
-    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[0].props.children[0].props.children).toEqual('Entity name');
+    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[0].props.children[0].props.children).toEqual('Data set name');
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[0].props.children[1].props.children).toEqual(entityObject.entityLabel);
 
-    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[1].props.children[0].props.children).toEqual('Entity description');
+    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[1].props.children[0].props.children).toEqual('Data set description');
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[1].props.children[1].props.children).toEqual(entityObject.entitySchema.description.description);
     // change button
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[1].props.children[2].props.children.props.children[0]).toEqual('Change');
@@ -54,7 +54,7 @@ describe('Entity component', () => {
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[3].props.children[1].props.children).toEqual(entityObject.entitySchema.description.dataversion);
 
     // delete button
-    expect(wrapper.containsMatchingElement(<a href='#' role='button' draggable='false' className='govuk-button'>Delete this entity</a>)).toBeTruthy();
+    expect(wrapper.containsMatchingElement(<a href='#' role='button' draggable='false' className='govuk-button'>Delete this data set</a>)).toBeTruthy();
   });
 
   afterEach(() => {
