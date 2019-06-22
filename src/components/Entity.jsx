@@ -27,16 +27,16 @@ const EntityContent = ({
       <h1 className="govuk-heading-xl">{entityLabel}</h1>
       <dl className="govuk-summary-list govuk-!-margin-bottom-9">
         <div className="govuk-summary-list__row">
-          <dt className="govuk-summary-list__key">Entity name</dt>
+          <dt className="govuk-summary-list__key">Data set name</dt>
           <dd className="govuk-summary-list__value">{entityLabel}</dd>
           <dd className="govuk-summary-list__actions"></dd>
         </div>
         <div className="govuk-summary-list__row">
-          <dt className="govuk-summary-list__key">Entity description</dt>
+          <dt className="govuk-summary-list__key">Data set description</dt>
           <dd className="govuk-summary-list__value">{description.description}</dd>
           <dd className="govuk-summary-list__actions">
             <Link className="govuk-link" to={entityDescriptionUpdate}>
-              Change<span className="govuk-visually-hidden"> Entity description</span>
+              Change<span className="govuk-visually-hidden"> data set description</span>
             </Link>
           </dd>
         </div>
@@ -89,7 +89,7 @@ class Entity extends React.Component {
               <EntityContent entityObject={this.state.entityObject}/>
             }
           </div>
-          <a href="#" role="button" draggable="false" className="govuk-button">Delete this entity</a>
+          <a href="#" role="button" draggable="false" className="govuk-button">Delete this data set</a>
         </main>
       </div>
     );

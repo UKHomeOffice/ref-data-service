@@ -75,7 +75,7 @@ class Items extends React.Component {
                     <hr className='govuk-section-break govuk-section-break--visible govuk-section-break--xl govuk-!-margin-top-0' />
                   </div>
                 </div>
-                <h2 className='govuk-heading-m'>Data items within this entity</h2>
+                <h2 className='govuk-heading-m'>Data items within this data set</h2>
                 <p className='govuk-body'>To manage a data item, click the ID.</p>
                 <div className='table-container'>
                   <table className='govuk-table table-items'>
@@ -89,7 +89,7 @@ class Items extends React.Component {
                     </tbody>
                   </table>
                 </div>
-                <h2 className='govuk-heading-m'>Add new data items to this entity</h2>
+                <h2 className='govuk-heading-m'>Add new data items to this data set</h2>
                 <p className='govuk-body'>To add a data item, click the button below and complete the change request on the subsequent page.</p>
                 <Link className='govuk-button' to={itemNew} role='button' draggable='false'>Add data item</Link>
               </div>

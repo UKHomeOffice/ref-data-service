@@ -146,7 +146,7 @@ class ItemNew extends React.Component {
         <main className="govuk-main-wrapper " id="main-content" role="main">
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds">
-              <h1 className="govuk-heading-xl">Add a new data item to the entity</h1>
+              <h1 className="govuk-heading-xl">Add a new data item to the data set</h1>
               <p className="govuk-body">Please provide the following information. Once this form has been submitted, it will be sent to the data owner selected for approval.</p>
               <Form
                 onSubmit={this.handleSubmit}
