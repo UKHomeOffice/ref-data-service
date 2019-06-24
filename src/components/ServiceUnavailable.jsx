@@ -23,23 +23,10 @@ export default class ServiceUnavailable extends React.Component {
                   <strong>COP Online Support</strong>
                 </a>
               </p>
-              <p className='govuk-body'>
-                Telephone:
-                <strong className='break-block'>0808 157 3900</strong>
-              </p>
-              <p className='govuk-body'>
-                Textphone:
-                <strong className='break-block'>0808 157 3909</strong>
-              </p>
               <p className="govuk-body">
-                Outside UK:
-                <strong className='break-block'>+44 0808 157 0192</strong>
-              </p>
-              <p className="govuk-body">
-                Opening times:
+                Support hours:
                 <strong className='break-block'>Monday to Friday: 8am to 8pm</strong>
               </p>
-              <p className="govuk-body">Closed Easter Sunday, Christmas Day, Boxing Day and New Year's Day.</p>
             </div>
           </div>
         </main>
