@@ -20,8 +20,8 @@ const EntitiesData = ({ data }) => {
       <tr className="govuk-table__row" key={n}>
         <th className="govuk-table__header" scope="row">{label}</th>
         <td className="govuk-table__cell">{description}</td>
-        <td className="govuk-table__cell"><Link to={`/entities/${entityName}`}>View data</Link></td>
-        <td className="govuk-table__cell"><Link to={`/entities/${entityName}/schema`}>View definition</Link></td>
+        <td className="govuk-table__cell">{schemalastupdated}</td>
+        <td className="govuk-table__cell"><Link to={`/entities/${entityName}`}>View</Link> <Link to={`/entities/${entityName}/schema`}>Edit</Link></td>
       </tr>
     )
   })
@@ -79,8 +79,8 @@ class Entities extends React.Component {
                   <tr className="govuk-table__row">
                     <th className="govuk-table__header" scope="col">Name</th>
                     <th className="govuk-table__header" scope="col">Description</th>
-                    <th className="govuk-table__header" scope="col">Data Items</th>
-                    <th className="govuk-table__header" scope="col">Data Set Definition</th>
+                    <th className="govuk-table__header" scope="col">Last Updated</th>
+                    <th className="govuk-table__header" scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody className="govuk-table__body">
