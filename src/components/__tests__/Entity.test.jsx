@@ -1,5 +1,6 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
+import { Link } from 'react-router-dom';
 import { shallow } from 'enzyme';
 
 // local imports
@@ -54,7 +55,7 @@ describe('Entity component', () => {
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[3].props.children[1].props.children).toEqual(entityObject.entitySchema.description.dataversion);
 
     // delete button
-    expect(wrapper.containsMatchingElement(<a href='#' role='button' draggable='false' className='govuk-button'>Delete this data set</a>)).toBeTruthy();
+    expect(wrapper.containsMatchingElement(<Link className="govuk-button" to="/entities/country/delete" role="button" draggable="false" replace={false}>Delete this data set</Link>)).toBeTruthy();
   });
 
   afterEach(() => {
