@@ -5,13 +5,14 @@ const apiBaseUrl = process.env.API_BASE_URL || 'https://virtserver.swaggerhub.co
 const apiUrl = `${apiBaseUrl}/${apiVersion}/`;
 
 const internalUrls = {
-    entity: '/entities/%s',
-    entitySchema: '/entities/%s/schema',
-    entityUpdate: '/entities/%s/schema/edit/%s',
-    item: '/entities/%s/items/%s',
-    itemUpdate: '/entities/%s/items/%s/edit/%s',
-    itemDelete: '/entities/%s/items/%s/delete',
-    itemNew: '/entities/%s/new',
+  deleteEntity: '/entities/%s/delete',
+  entity: '/entities/%s',
+  entitySchema: '/entities/%s/schema',
+  entityUpdate: '/entities/%s/schema/edit/%s',
+  item: '/entities/%s/items/%s',
+  itemUpdate: '/entities/%s/items/%s/edit/%s',
+  itemDelete: '/entities/%s/items/%s/delete',
+  itemNew: '/entities/%s/new',
 };
 
 const apiUrls = {
