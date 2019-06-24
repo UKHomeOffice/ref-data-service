@@ -38,6 +38,7 @@ class Entities extends React.Component {
 
   componentDidMount() {
     const entities = apiUrls.entities;
+
     fetch(entities, {
       method: 'GET',
       headers: {
@@ -45,11 +46,21 @@ class Entities extends React.Component {
         'Authorization': `Bearer ${this.props.kc.token}`,
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) {
+        logger.error(`Error status: ${res.status}, message: ${res.statusText}`);
+        throw Error(res.statusText);
+      }
+      return res.json();
+    })
     .then(obj => {
       this.setState({ entitiesObject: obj })
+    })
+    .catch(error => {
+      this.props.history.push({
+        pathname: '/service_unavailable'
+      });
     });
-    logger.info(`Request made by ${this.props.kc.tokenParsed.name}, ${this.props.kc.tokenParsed.email}`);
   }
 
   render() {
@@ -60,8 +71,8 @@ class Entities extends React.Component {
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds">
               <h1 className="govuk-heading-xl">Reference Data Governance Tool</h1>
-              <p className="govuk-body-l">This service allows you to view and manage reference data entities.</p>
-              <h2 className="govuk-heading-l">Data Entities</h2>
+              <p className="govuk-body">This service allows you to view and manage reference data sets.</p>
+              <h2 className="govuk-heading-l">Data Sets</h2>
               <span></span>
               <table className="govuk-table">
                 <thead className="govuk-table__head">
@@ -69,7 +80,7 @@ class Entities extends React.Component {
                     <th className="govuk-table__header" scope="col">Name</th>
                     <th className="govuk-table__header" scope="col">Description</th>
                     <th className="govuk-table__header" scope="col">Data Items</th>
-                    <th className="govuk-table__header" scope="col">Entity Definition</th>
+                    <th className="govuk-table__header" scope="col">Data Set Definition</th>
                   </tr>
                 </thead>
                 <tbody className="govuk-table__body">
@@ -78,6 +89,9 @@ class Entities extends React.Component {
                   }
                 </tbody>
               </table>
+              <h2 className='govuk-heading-m'>New data sets</h2>
+              <p className='govuk-body'>Requests for new data sets to be added to the service require sign off by the Data Engagement Group.</p>
+              <a href='https://support.cop.homeoffice.gov.uk/servicedesk/customer/portal' className='govuk-button'>Add a data set</a>
             </div>
           </div>
         </main>

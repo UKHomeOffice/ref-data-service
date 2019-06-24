@@ -76,6 +76,7 @@ class EntityFieldUpdate extends React.Component {
   componentDidMount() {
     const {name} = this.props.match.params;
     const entity = util.format(apiUrls.entity, name);
+
     fetch(entity, {
       method: 'GET',
       headers: {
@@ -83,9 +84,20 @@ class EntityFieldUpdate extends React.Component {
         'Authorization': `Bearer ${this.props.kc.token}`,
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) {
+        logger.error(`Error status: ${res.status}, message: ${res.statusText}`);
+        throw Error(res.statusText);
+      }
+      return res.json();
+    })
     .then(obj => {
       this.setState({ entityObject: obj })
+    })
+    .catch(error => {
+      this.props.history.push({
+        pathname: '/service_unavailable'
+      });
     });
   }
 
@@ -106,7 +118,13 @@ class EntityFieldUpdate extends React.Component {
       },
       body: JSON.stringify(values, 0, 2)
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) {
+        logger.error(`Error status: ${res.status}, message: ${res.statusText}`);
+        throw Error(res.statusText);
+      }
+      return res.json();
+    })
     .then(data => {
       logger.info(`PATCH: ${data.status}, ${data.code}`);
       this.props.history.push({
@@ -114,7 +132,11 @@ class EntityFieldUpdate extends React.Component {
         // state: will carry the 'reference number'
       });
     })
-    .catch(error => logger.error(error))
+    .catch(error => {
+      this.props.history.push({
+        pathname: '/service_unavailable'
+      });
+    });
   }
 
   render() {
@@ -165,7 +187,7 @@ class EntityFieldUpdate extends React.Component {
           </div>
         </main>
       </div>
-    )
+    );
   }
 }
 

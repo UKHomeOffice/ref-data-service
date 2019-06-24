@@ -79,3 +79,11 @@ $govuk-compatibility-govukelements: true;
     float: right;
   }
 }
+
+.govuk-footer__meta-item--grow {
+  text-align: right;
+}
+
+.break-block {
+  display: block;
+}

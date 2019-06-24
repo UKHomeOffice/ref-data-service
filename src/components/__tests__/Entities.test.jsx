@@ -34,15 +34,15 @@ describe('Entities component', () => {
 
     // headers
     expect(wrapper.containsMatchingElement(<h1 className="govuk-heading-xl">Reference Data Governance Tool</h1>)).toBeTruthy();
-    expect(wrapper.containsMatchingElement(<p className="govuk-body-l">This service allows you to view and manage reference data entities.</p>)).toBeTruthy();
-    expect(wrapper.containsMatchingElement(<h2 className="govuk-heading-l">Data Entities</h2>)).toBeTruthy();
+    expect(wrapper.containsMatchingElement(<p className="govuk-body">This service allows you to view and manage reference data sets.</p>)).toBeTruthy();
+    expect(wrapper.containsMatchingElement(<h2 className="govuk-heading-l">Data Sets</h2>)).toBeTruthy();
 
     // table headers
     expect(wrapper.find('.govuk-table__row').children()).toHaveLength(4);
     expect(wrapper.find('.govuk-table__header').get(0).props.children).toEqual('Name');
     expect(wrapper.find('.govuk-table__header').get(1).props.children).toEqual('Description');
     expect(wrapper.find('.govuk-table__header').get(2).props.children).toEqual('Data Items');
-    expect(wrapper.find('.govuk-table__header').get(3).props.children).toEqual('Entity Definition');
+    expect(wrapper.find('.govuk-table__header').get(3).props.children).toEqual('Data Set Definition');
 
     // table content
     expect(wrapper.find('EntitiesData').dive().find('.govuk-table__row').children()).toHaveLength(8);

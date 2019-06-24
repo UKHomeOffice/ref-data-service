@@ -15,7 +15,7 @@ export default class Search extends React.Component {
             <div className="govuk-grid-column-two-thirds">
               <form action="">
                 <h1 className="govuk-heading-xl">Reference data search</h1>
-                <p className="govuk-body-m">Select a specific dataset to manage from the list below</p>
+                <p className="govuk-body">Select a specific dataset to manage from the list below</p>
                 <div className="govuk-form-group">
                   <select className="govuk-select" id="dataset" name="dataset">
                     <option value="null" defaultValue="">Countries</option>
@@ -26,7 +26,7 @@ export default class Search extends React.Component {
                     <option value="port_codes">Port Codes</option>
                   </select>
                 </div>
-                <p className="govuk-body-m">Or build a search query to search for specific values in reference datasets</p>
+                <p className="govuk-body">Or build a search query to search for specific values in reference datasets</p>
                 <div className="govuk-form-group">
                   <label className="govuk-label" htmlFor="search">Search value</label>
                   <input className="govuk-input" id="search" name="name" type="text"/>

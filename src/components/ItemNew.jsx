@@ -80,6 +80,7 @@ class ItemNew extends React.Component {
   componentDidMount() {
     const { name } = this.props.match.params;
     const entitySchema = util.format(apiUrls.entitySchema, name);
+    logger.info(`${entitySchema} requested by - ${this.props.kc.tokenParsed.name}, ${this.props.kc.tokenParsed.email}`);
 
     fetch(entitySchema, {
       method: 'GET',
@@ -88,13 +89,26 @@ class ItemNew extends React.Component {
         'Authorization': `Bearer ${this.props.kc.token}`,
       }
     })
-    .then(res => res.json())
-    .then(obj => this.setState({ data: obj }));
+    .then(res => {
+      if (res.status !== 200) {
+        logger.error(`Error status: ${res.status}, message: ${res.statusText}`);
+        throw Error(res.statusText);
+      }
+      return res.json();
+    })
+    .then(obj => {
+      this.setState({ data: obj })
+    })
+    .catch(error => {
+      this.props.history.push({
+        pathname: '/service_unavailable'
+      });
+    });
   }
 
   handleSubmit(values, form) {
     const entity = util.format(apiUrls.entity, this.props.match.params.name);
-    logger.info('Request item creation');
+    logger.info(`${this.props.kc.tokenParsed.name} - ${this.props.kc.tokenParsed.email}, requested item creation`);
     logger.info(values);
 
     fetch(entity, {
@@ -107,13 +121,10 @@ class ItemNew extends React.Component {
       body: JSON.stringify(values, 0, 2)
     })
     .then(res => {
-      // TODO
-      // if the status returned from the API is not 200 (Camunda or API might be down)
-      // we should probably display an error to the user
-      // uncomment the following line(s)
-      // if (res.status !== 200) {
-      //   throw Error();
-      // }
+      if (res.status !== 200) {
+        logger.error(`Error status: ${res.status}, message: ${res.statusText}`);
+        throw Error(res.statusText);
+      }
       return res.json();
     })
     .then(data => {
@@ -124,10 +135,10 @@ class ItemNew extends React.Component {
       });
     })
     .catch(error => {
-      // at the moment we only have the logger, but here we should redirect
-      // the user to the error page
-      logger.error(error.message)
-    })
+      this.props.history.push({
+        pathname: '/service_unavailable'
+      });
+    });
   }
 
   render() {
@@ -146,8 +157,8 @@ class ItemNew extends React.Component {
         <main className="govuk-main-wrapper " id="main-content" role="main">
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds">
-              <h1 className="govuk-heading-xl">Add a new data item to the entity</h1>
-              <p className="govuk-body-m">Please provide the following information. Once this form has been submitted, it will be sent to the data owner selected for approval.</p>
+              <h1 className="govuk-heading-xl">Add a new data item to the data set</h1>
+              <p className="govuk-body">Please provide the following information. Once this form has been submitted, it will be sent to the data owner selected for approval.</p>
               <Form
                 onSubmit={this.handleSubmit}
                 render={({ handleSubmit, submitting, values }) => (

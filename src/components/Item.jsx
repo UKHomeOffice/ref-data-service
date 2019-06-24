@@ -45,6 +45,7 @@ class Item extends React.Component {
 
   componentDidMount() {
     const item = util.format(apiUrls.item, this.props.match.params.name, this.props.match.params.id);
+
     fetch(item, {
       method: 'GET',
       headers: {
@@ -52,17 +53,30 @@ class Item extends React.Component {
         'Authorization': `Bearer ${this.props.kc.token}`,
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) {
+        logger.error(`Error status: ${res.status}, message: ${res.statusText}`);
+        throw Error(res.statusText);
+      }
+      return res.json();
+    })
     .then(obj => {
       this.setState({ itemObject: obj })
+    })
+    .catch(error => {
+      this.props.history.push({
+        pathname: '/service_unavailable'
+      });
     });
   }
 
   render() {
-    const {name, id} = this.props.match.params;
-    const itemDelete = util.format(appUrls.itemDelete, name, id);
-    const backLink = util.format(appUrls.entity, this.state.itemObject.entityName);
+    if (this.state.itemObject && this.state.itemObject.entitySchema) {
+      const {name, id} = this.props.match.params;
+      const itemDelete = util.format(appUrls.itemDelete, name, id);
+      const backLink = util.format(appUrls.entity, this.state.itemObject.entityName);
 
+    }
     return (
       <div className="govuk-width-container">
         <Banner/>
@@ -73,7 +87,7 @@ class Item extends React.Component {
               <div className="govuk-grid-column-two-thirds-from-desktop">
                 <h1 className="govuk-heading-xl">{this.state.itemObject.data.name}</h1>
                 <h2 className="govuk-heading-m">Fields</h2>
-                <p className="govuk-body-l">A list of fields that make up this data item. Click the change link to request changes to individual fields.</p>
+                <p className="govuk-body">A list of fields that make up this data item. Click the change link to request changes to individual fields.</p>
                 <dl className="govuk-summary-list govuk-!-margin-bottom-9">
                   <ItemData name={name} id={id} itemObject={this.state.itemObject} />
                 </dl>

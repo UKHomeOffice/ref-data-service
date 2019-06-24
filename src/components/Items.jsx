@@ -45,6 +45,7 @@ class Items extends React.Component {
 
   componentDidMount() {
     const entity = util.format(apiUrls.entity, this.props.match.params.name);
+
     fetch(entity, {
       method: 'GET',
       headers: {
@@ -52,9 +53,20 @@ class Items extends React.Component {
         'Authorization': `Bearer ${this.props.kc.token}`,
       }
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.status !== 200) {
+        logger.error(`Error status: ${res.status}, message: ${res.statusText}`);
+        throw Error(res.statusText);
+      }
+      return res.json();
+    })
     .then(obj => {
       this.setState({ itemsObject: obj })
+    })
+    .catch(error => {
+      this.props.history.push({
+        pathname: '/service_unavailable'
+      });
     });
   }
 
@@ -69,14 +81,14 @@ class Items extends React.Component {
             {this.state.itemsObject && this.state.itemsObject.data &&
               <div className='govuk-grid-column-full'>
                 <h1 className='govuk-heading-xl'>{this.state.itemsObject.entityLabel}</h1>
-                <p className='govuk-body-l'>{this.state.itemsObject.entitySchema.description.description}</p>
+                <p className='govuk-body'>{this.state.itemsObject.entitySchema.description.description}</p>
                 <div className='govuk-grid-row'>
                   <div className='govuk-grid-column-full'>
                     <hr className='govuk-section-break govuk-section-break--visible govuk-section-break--xl govuk-!-margin-top-0' />
                   </div>
                 </div>
-                <h2 className='govuk-heading-m'>Data items within this entity</h2>
-                <p className='govuk-body-l'>To manage a data item, click the ID.</p>
+                <h2 className='govuk-heading-m'>Data items within this data set</h2>
+                <p className='govuk-body'>To manage a data item, click the ID.</p>
                 <div className='table-container'>
                   <table className='govuk-table table-items'>
                     <thead className='govuk-table__head'>
@@ -89,8 +101,8 @@ class Items extends React.Component {
                     </tbody>
                   </table>
                 </div>
-                <h2 className='govuk-heading-m'>Add new data items to this entity</h2>
-                <p className='govuk-body-l'>To add a data item, click the button below and complete the change request on the subsequent page.</p>
+                <h2 className='govuk-heading-m'>Add new data items to this data set</h2>
+                <p className='govuk-body'>To add a data item, click the button below and complete the change request on the subsequent page.</p>
                 <Link className='govuk-button' to={itemNew} role='button' draggable='false'>Add data item</Link>
               </div>
             }

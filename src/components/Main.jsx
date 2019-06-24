@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 // local imports
 import ChangeRequestSubmission from 'ChangeRequestSubmission';
 import Entities from 'Entities';
-import Entity from 'Entity';
+import Entity from './Entity';
 import EntityFieldUpdate from 'EntityFieldUpdate';
 import Footer from 'Footer';
 import Header from 'Header';
@@ -14,6 +14,7 @@ import ItemDeleted from 'ItemDeleted';
 import ItemFieldUpdate from 'ItemFieldUpdate';
 import ItemNew from 'ItemNew';
 import Search from 'Search';
+import ServiceUnavailable from './ServiceUnavailable';
 
 export default class Main extends React.Component {
   render() {
@@ -31,6 +32,7 @@ export default class Main extends React.Component {
           <Route exact path='/entities/:name/new' component={ItemNew}/>
           <Route exact path='/entities/:name/schema' component={Entity}/>
           <Route exact path='/entities/:name/schema/edit/:field' component={EntityFieldUpdate}/>
+          <Route exact path='/service_unavailable' component={ServiceUnavailable}/>
           <Route path='/search' component={Search}/>
           <Footer/>
         </React.Fragment>
