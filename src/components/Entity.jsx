@@ -93,6 +93,7 @@ class Entity extends React.Component {
   }
 
   render() {
+    const deleteEntity = util.format(appUrls.deleteEntity, this.props.match.params.name);
     return (
       <div className="govuk-width-container">
         <Banner/>
@@ -103,7 +104,7 @@ class Entity extends React.Component {
               <EntityContent entityObject={this.state.entityObject}/>
             }
           </div>
-          <a href="#" role="button" draggable="false" className="govuk-button">Delete this data set</a>
+          <Link className="govuk-button" to={deleteEntity} role="button" draggable="false">Delete this data set</Link>
         </main>
       </div>
     );
