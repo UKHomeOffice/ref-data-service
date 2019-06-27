@@ -47,8 +47,8 @@ describe('Entities component', () => {
     // table content
     expect(wrapper.find('EntitiesData').dive().find('.govuk-table__row').children()).toHaveLength(8);
     for (let i = 0; i < entitiesObject.data.length; i++) {
-      expect(wrapper.find('EntitiesData').dive().get(i).props.children[0].props.children).toEqual(entitiesObject.data[i].entityName);
-      expect(wrapper.find('EntitiesData').dive().get(i).props.children[1].props.children).toEqual(entitiesObject.data[i].schema.description.description);
+      expect(wrapper.find('EntitiesData').dive().get(i).props.children[0].props.children).toEqual(entitiesObject.data[i].schema.label);
+      expect(wrapper.find('EntitiesData').dive().get(i).props.children[1].props.children).toEqual(entitiesObject.data[i].schema.description);
       expect(wrapper.find('EntitiesData').dive().get(i).props.children[2].props.children.props.to).toEqual(`/entities/${entitiesObject.data[i].entityName}`);
       expect(wrapper.find('EntitiesData').dive().get(i).props.children[2].props.children.props.children).toEqual('View data');
       expect(wrapper.find('EntitiesData').dive().get(i).props.children[3].props.children.props.to).toEqual(`/entities/${entitiesObject.data[i].entityName}/schema`);

@@ -13,6 +13,7 @@ do
   sed -i 's,https://sso-fake.build.com/auth,'${KEYCLOAK_AUTH_URL}',g' $file
   sed -i 's,fake-client-id,'${KEYCLOAK_CLIENT_ID}',g' $file
   sed -i 's,fake-realm,'${KEYCLOAK_REALM}',g' $file
+  sed -i 's,"fake-read-only-mode",'${READ_ONLY_MODE}',g' $file
 done
 echo "== Finished ENV sub =="
 # --- End Insert ENV to JS bundle ---

@@ -192,7 +192,14 @@ class ItemNew extends React.Component {
                       <h1 className='govuk-heading-xl'>Add a new data item to the data set</h1>
                       <p className='govuk-body'>Please provide the following information. Once this form has been submitted, it will be sent to the data owner selected for approval.</p>
                       <ItemFields requiredFields={requiredFields} fieldProperties={fieldProperties} />
-                      <button className='govuk-button' type='submit' disabled={submitting}>Submit change for approval</button>
+
+                      { config.readOnly ?
+                        <React.Fragment></React.Fragment>
+                      :
+                        <React.Fragment>
+                          <button className='govuk-button' type='submit' disabled={submitting}>Submit change for approval</button>
+                        </React.Fragment>
+                      }
                     </form>
                   )
                 }}

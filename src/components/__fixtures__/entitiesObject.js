@@ -5,11 +5,10 @@ const entitiesObject = {
     {
       'entityName': 'country',
       'schema': {
-        'description': {
-          'description': 'Countries',
-          'schemalastupdated': '10/03/2019',
-          'dataversion': 1
-        },
+        'label': 'Countries',
+        'description': 'Countries',
+        'schemalastupdated': '10/03/2019',
+        'dataversion': 1,
         'required': [
           'id',
           'iso31661alpha2',

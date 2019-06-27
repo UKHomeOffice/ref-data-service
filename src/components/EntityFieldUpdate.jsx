@@ -140,13 +140,13 @@ class EntityFieldUpdate extends React.Component {
   }
 
   render() {
-    let field, entityName, entityLabel, description;
+    let field, entityName, label, description;
     const backLink = util.format(appUrls.entitySchema, this.state.entityObject.entityName);
 
     if (this.state.entityObject && this.state.entityObject.entitySchema) {
-      ({field} = this.props.match.params);
-      ({entityName, entityLabel} = this.state.entityObject);
-      ({description} = this.state.entityObject.entitySchema);
+      ({ field } = this.props.match.params);
+      ({ entityName} = this.state.entityObject);
+      ({ description, label } = this.state.entityObject.entitySchema);
     }
 
     return (
@@ -157,13 +157,13 @@ class EntityFieldUpdate extends React.Component {
           <div className="govuk-grid-row">
             {this.state.entityObject && this.state.entityObject.entitySchema &&
               <div className="govuk-grid-column-two-thirds">
-                <h1 className="govuk-heading-xl">{entityLabel}</h1>
+                <h1 className="govuk-heading-xl">{label}</h1>
                 <Form
                   onSubmit={this.onSubmit}
                   initialValues={{
                     name: entityName,
                     field: field,
-                    newValue: description[field],
+                    newValue: description,
                   }}
                   validate={values => {
                     const errors = {};
@@ -177,7 +177,14 @@ class EntityFieldUpdate extends React.Component {
                           <Field className="govuk-textarea" name="newValue" rows="5" aria-describedby="description" component="textarea" />
                         </div>
                         <ChangeEffectiveFromContainer />
-                        <button className="govuk-button" type="submit">Submit change for approval</button>
+
+                        { config.readOnly ?
+                          <React.Fragment></React.Fragment>
+                        :
+                          <React.Fragment>
+                            <button className="govuk-button" type="submit">Submit change for approval</button>
+                          </React.Fragment>
+                        }
                       </form>
                     )
                   }}

@@ -2,13 +2,11 @@ const entityObject = {
   'status': 'success',
   'code': 200,
   'entityName': 'country',
-  'entityLabel': 'Countries',
   'entitySchema': {
-    'description': {
-      'description': 'Countries',
-      'schemalastupdated': '10/03/2019',
-      'dataversion': 1
-    },
+    'label': 'Countries',
+    'description': 'Countries',
+    'schemalastupdated': '10/03/2019',
+    'dataversion': 1,
     'required': [
       'id',
       'iso31661alpha2',

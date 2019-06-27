@@ -30,10 +30,11 @@ docker build -t ref-data-gov-tool .
 To run the resulting Docker container:
 
 ```bash
-docker run -p 5000:5000 \
+docker run -p 8080:8080 \
   --env API_BASE_URL=https://your.api.com \
   --env KEYCLOAK_AUTH_URL=https://your.sso.com/auth \
   --env KEYCLOAK_CLIENT_ID=your-client-id \
   --env KEYCLOAK_REALM=your-realm \
+  --env READ_ONLY_MODE=true \
   ref-data-gov-tool
 ```

@@ -18,7 +18,10 @@ pipeline:
 
   build:
     image: quay.io/ukhomeofficedigital/drone-docker
+    secrets:
+      - BUILD_READ_ONLY
     commands:
+      - export READ_ONLY=$${BUILD_READ_ONLY}
       - docker build -t ref-data-gov-tool:$${DRONE_COMMIT_SHA} .
     when:
       event: push
@@ -49,6 +52,7 @@ pipeline:
       - DEV_KUBE_NAMESPACE
       - DEV_KUBE_SERVER
       - DEV_KUBE_TOKEN
+      - DEV_READ_ONLY_MODE
     commands:
       - export API_BASE_URL=$${DEV_API_BASE_URL}
       - export HOSTNAME=$${DEV_HOSTNAME}
@@ -58,6 +62,7 @@ pipeline:
       - export KUBE_NAMESPACE=$${DEV_KUBE_NAMESPACE}
       - export KUBE_SERVER=$${DEV_KUBE_SERVER}
       - export KUBE_TOKEN=$${DEV_KUBE_TOKEN}
+      - export READ_ONLY_MODE=$${DEV_READ_ONLY_MODE}
       - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       branch: master
@@ -74,6 +79,7 @@ pipeline:
       - PROD_KUBE_NAMESPACE
       - PROD_KUBE_SERVER
       - PROD_KUBE_TOKEN
+      - PROD_READ_ONLY_MODE
     commands:
       - export API_BASE_URL=$${PROD_API_BASE_URL}
       - export HOSTNAME=$${PROD_HOSTNAME}
@@ -83,6 +89,7 @@ pipeline:
       - export KUBE_NAMESPACE=$${PROD_KUBE_NAMESPACE}
       - export KUBE_SERVER=$${PROD_KUBE_SERVER}
       - export KUBE_TOKEN=$${PROD_KUBE_TOKEN}
+      - export READ_ONLY_MODE=$${PROD_READ_ONLY_MODE}
       - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       event: deployment
