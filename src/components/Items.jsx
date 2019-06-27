@@ -39,7 +39,7 @@ class Items extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemsObject: {entitySchema: {description: {} }, data: [] },
+      itemsObject: {},
     };
   }
 
@@ -80,8 +80,8 @@ class Items extends React.Component {
           <div className='govuk-grid-row'>
             {this.state.itemsObject && this.state.itemsObject.data &&
               <div className='govuk-grid-column-full'>
-                <h1 className='govuk-heading-xl'>{this.state.itemsObject.entityLabel}</h1>
-                <p className='govuk-body'>{this.state.itemsObject.entitySchema.description.description}</p>
+                <h1 className='govuk-heading-xl'>{this.state.itemsObject.entitySchema.label}</h1>
+                <p className='govuk-body'>{this.state.itemsObject.entitySchema.description}</p>
                 <div className='govuk-grid-row'>
                   <div className='govuk-grid-column-full'>
                     <hr className='govuk-section-break govuk-section-break--visible govuk-section-break--xl govuk-!-margin-top-0' />
@@ -101,9 +101,17 @@ class Items extends React.Component {
                     </tbody>
                   </table>
                 </div>
-                <h2 className='govuk-heading-m'>Add new data items to this data set</h2>
-                <p className='govuk-body'>To add a data item, click the button below and complete the change request on the subsequent page.</p>
-                <Link className='govuk-button' to={itemNew} role='button' draggable='false'>Add data item</Link>
+
+                { config.readOnly ?
+                  <React.Fragment></React.Fragment>
+                :
+                  <React.Fragment>
+                    <h2 className='govuk-heading-m'>Add new data items to this data set</h2>
+                    <p className='govuk-body'>To add a data item, click the button below and complete the change request on the subsequent page.</p>
+                    <Link className='govuk-button' to={itemNew} role='button' draggable='false'>Add data item</Link>
+                  </React.Fragment>
+                }
+
               </div>
             }
           </div>

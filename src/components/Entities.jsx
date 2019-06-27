@@ -13,12 +13,12 @@ const EntitiesData = ({ data }) => {
   const entityRows = []
 
   data.map((entity, n) => {
-    let { description } = entity.schema.description;
-    let { entityName, id } = entity;
+    let { entityName } = entity;
+    let { description, label } = entity.schema;
 
     entityRows.push(
       <tr className="govuk-table__row" key={n}>
-        <th className="govuk-table__header" scope="row">{entityName}</th>
+        <th className="govuk-table__header" scope="row">{label}</th>
         <td className="govuk-table__cell">{description}</td>
         <td className="govuk-table__cell"><Link to={`/entities/${entityName}`}>View data</Link></td>
         <td className="govuk-table__cell"><Link to={`/entities/${entityName}/schema`}>View definition</Link></td>
@@ -89,9 +89,16 @@ class Entities extends React.Component {
                   }
                 </tbody>
               </table>
-              <h2 className='govuk-heading-m'>New data sets</h2>
-              <p className='govuk-body'>Requests for new data sets to be added to the service require sign off by the Data Engagement Group.</p>
-              <a href='https://support.cop.homeoffice.gov.uk/servicedesk/customer/portal' className='govuk-button'>Add a data set</a>
+
+              { config.readOnly ?
+                <React.Fragment></React.Fragment>
+              :
+                <React.Fragment>
+                  <h2 className='govuk-heading-m'>New data sets</h2>
+                  <p className='govuk-body'>Requests for new data sets to be added to the service require sign off by the Data Engagement Group.</p>
+                  <a href='https://support.cop.homeoffice.gov.uk/servicedesk/customer/portal' className='govuk-button'>Add a data set</a>
+                </React.Fragment>
+              }
             </div>
           </div>
         </main>

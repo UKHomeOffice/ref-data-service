@@ -19,7 +19,7 @@ export default class ServiceUnavailable extends React.Component {
               <p className="govuk-body">Contact the COP Service Support Desk if you have any questions:</p>
               <p className="govuk-body">
                 Online:
-                <a href='#' className='govuk-link break-block'>
+                <a href='https://support.cop.homeoffice.gov.uk/servicedesk/customer/portal/3' className='govuk-link break-block'>
                   <strong>COP Online Support</strong>
                 </a>
               </p>
