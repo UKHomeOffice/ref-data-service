@@ -2,14 +2,16 @@ const getKeyByValue = (obj, value) => {
   return Object.keys(obj).find(key => obj[key] === value);
 }
 
-// takes an object of required fields and
-// returns an array with all `touched` fields
-const getTouchedFields = touchedFieldsObject => {
+// takes an array with the required fields and
+// an object with all the form fields and
+// returns an array with all fields that
+// have been `touched` and are required
+const getRequiredTouchedFieldKeys = (requiredFields, touchedFields) => {
   let fields = [];
 
-  if (Object.keys(touchedFieldsObject).length > 0) {
-    for (const key in touchedFieldsObject) {
-      if (touchedFieldsObject[key] === true) {
+  if (Object.keys(touchedFields).length > 0) {
+    for (const key in touchedFields) {
+      if (requiredFields.includes(key) && touchedFields[key] === true) {
         fields.push(key);
       }
     }
@@ -34,6 +36,6 @@ const touchedFieldHasValue = (fields, valuesObject) => {
 
 export {
   getKeyByValue,
-  getTouchedFields,
+  getRequiredTouchedFieldKeys,
   touchedFieldHasValue,
 }

@@ -9,7 +9,10 @@ import Banner from './Banner';
 import ErrorSummary from './ErrorSummary';
 import config from '../../config/core';
 import logger from '../../logger';
-import { getTouchedFields, touchedFieldHasValue } from '../utils';
+import {
+  getRequiredTouchedFieldKeys,
+  touchedFieldHasValue
+} from '../utils';
 
 const { appUrls, apiUrls } = config;
 
@@ -169,8 +172,9 @@ class ItemNew extends React.Component {
               <Form
                 onSubmit={this.handleSubmit}
                 render={({ handleSubmit, submitting, values, form }) => {
-                  const touchedFields = getTouchedFields(form.getState().touched);
+                  const touchedFields = getRequiredTouchedFieldKeys(requiredFields, form.getState().touched);
                   const hasErrors = touchedFieldHasValue(touchedFields, form.getState().values);
+
                   return(
                     <form onSubmit={handleSubmit}>
 
