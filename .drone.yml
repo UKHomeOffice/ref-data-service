@@ -18,10 +18,7 @@ pipeline:
 
   build:
     image: quay.io/ukhomeofficedigital/drone-docker
-    secrets:
-      - BUILD_READ_ONLY
     commands:
-      - export READ_ONLY=$${BUILD_READ_ONLY}
       - docker build -t ref-data-gov-tool:$${DRONE_COMMIT_SHA} .
     when:
       event: push
