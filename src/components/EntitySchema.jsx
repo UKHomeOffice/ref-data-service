@@ -1,13 +1,13 @@
 import React from 'react';
-import util from 'util';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import util from 'util';
 
 // local imports
 import Banner from './Banner';
 import config from '../../config/core';
+import getKeyByValue from '../utils';
 import logger from '../../logger';
-import { getKeyByValue } from '../utils';
 
 const {appUrls, apiUrls} = config;
 
@@ -37,7 +37,7 @@ const EntityContent = ({
           <dd className="govuk-summary-list__value">{description.description}</dd>
           <dd className="govuk-summary-list__actions">
             <Link className="govuk-link" to={entityDescriptionUpdate}>
-              Change<span className="govuk-visually-hidden"> Data set description</span>
+              Change<span className="govuk-visually-hidden"> data set description</span>
             </Link>
           </dd>
         </div>
@@ -56,7 +56,7 @@ const EntityContent = ({
   );
 };
 
-class Entity extends React.Component {
+class EntitySchema extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,8 +66,7 @@ class Entity extends React.Component {
 
   componentDidMount() {
     const {name} = this.props.match.params;
-    const entitySchema = util.format(apiUrls.entitySchema, name);
-
+    const entitySchema = util.format(apiUrls.entitySchema, name, '?schemaOnly=true');
     fetch(entitySchema, {
       method: 'GET',
       headers: {
@@ -93,7 +92,7 @@ class Entity extends React.Component {
   }
 
   render() {
-    const deleteEntity = util.format(appUrls.deleteEntity, this.props.match.params.name);
+    const entityDelete = util.format(appUrls.entityDelete, this.props.match.params.name);
     return (
       <div className="govuk-width-container">
         <Banner/>
@@ -104,7 +103,7 @@ class Entity extends React.Component {
               <EntityContent entityObject={this.state.entityObject}/>
             }
           </div>
-          <Link className="govuk-button" to={deleteEntity} role="button" draggable="false">Delete this data set</Link>
+          <Link className='govuk-button' to={entityDelete} role='button' draggable='false'>Delete this data set</Link>
         </main>
       </div>
     );
@@ -115,4 +114,4 @@ const mapStateToProps = state => ({
  'kc': state.keycloak
 });
 
-export default connect(mapStateToProps)(Entity);
+export default connect(mapStateToProps)(EntitySchema);
