@@ -22,13 +22,12 @@ const apiUrls = {
   item: apiUrl + 'entities/%s/items/%s',
 };
 
-
 const config = {
     logLevel: process.env.LOG_LEVEL || 'info',
     keycloakAuthUrl: process.env.KEYCLOAK_AUTH_URL || 'https://sso-dev.notprod.homeoffice.gov.uk/auth',
     clientId: process.env.KEYCLOAK_CLIENT_ID || 'refdata-ui',
     realm: process.env.KEYCLOAK_REALM || 'cop-dev',
-    readOnly: process.env.READ_ONLY || false,
+    readOnly: process.env.READ_ONLY_MODE || false,
 }
 
 config.appUrls = internalUrls;

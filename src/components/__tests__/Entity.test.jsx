@@ -41,18 +41,18 @@ describe('Entity component', () => {
     // table content
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').children()).toHaveLength(4);
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[0].props.children[0].props.children).toEqual('Data set name');
-    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[0].props.children[1].props.children).toEqual(entityObject.entityLabel);
+    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[0].props.children[1].props.children).toEqual(entityObject.entitySchema.label);
 
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[1].props.children[0].props.children).toEqual('Data set description');
-    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[1].props.children[1].props.children).toEqual(entityObject.entitySchema.description.description);
+    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[1].props.children[1].props.children).toEqual(entityObject.entitySchema.description);
     // change button
-    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[1].props.children[2].props.children.props.children[0]).toEqual('Change');
+    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[1].props.children[2].props.children.props.children.props.children[0]).toEqual('Change');
 
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[2].props.children[0].props.children).toEqual('Last Updated');
-    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[2].props.children[1].props.children).toEqual(entityObject.entitySchema.description.schemalastupdated);
+    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[2].props.children[1].props.children).toEqual(entityObject.entitySchema.schemalastupdated);
 
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[3].props.children[0].props.children).toEqual('Data Version');
-    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[3].props.children[1].props.children).toEqual(entityObject.entitySchema.description.dataversion);
+    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[3].props.children[1].props.children).toEqual(entityObject.entitySchema.dataversion);
 
     // delete button
     expect(wrapper.containsMatchingElement(<Link className="govuk-button" to="/entities/country/delete" role="button" draggable="false" replace={false}>Delete this data set</Link>)).toBeTruthy();
