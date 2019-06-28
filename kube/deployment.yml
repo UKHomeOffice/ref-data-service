@@ -47,7 +47,7 @@ spec:
           - name: API_BASE_URL
             value: {{.API_BASE_URL}}
           - name: READ_ONLY_MODE
-            value: {{.READ_ONLY_MODE}}
+            value: '{{.READ_ONLY_MODE}}'
 
       - name: proxy
         image: quay.io/ukhomeofficedigital/nginx-proxy
