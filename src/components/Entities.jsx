@@ -21,7 +21,18 @@ const EntitiesData = ({ data }) => {
         <th className="govuk-table__header" scope="row">{label}</th>
         <td className="govuk-table__cell">{description}</td>
         <td className="govuk-table__cell">{schemalastupdated}</td>
-        <td className="govuk-table__cell"><Link to={`/entities/${entityName}`}>View</Link> <Link to={`/entities/${entityName}/schema`}>Edit</Link></td>
+        <td className="govuk-table__cell">
+          <Link to={`/entities/${entityName}`}>View</Link>
+
+          { config.readOnly ?
+            <React.Fragment></React.Fragment>
+          :
+            <React.Fragment>
+              <Link to={`/entities/${entityName}/schema/edit/description`}>Edit</Link>
+              <Link to={`/entities/${entityName}/delete`}>Delete</Link>
+            </React.Fragment>
+          }
+        </td>
       </tr>
     )
   })
@@ -74,7 +85,7 @@ class Entities extends React.Component {
               <p className="govuk-body">This service allows you to view and manage reference data sets. To add a new data set to the repository, use the <a className='govuk-anchor-click' href={`${serviceDesk.addDataSet}`}>Add a data set</a> link at the top of the page.</p>
               <h2 className="govuk-heading-l">Data Sets</h2>
               <span></span>
-              <table className="govuk-table">
+              <table className="govuk-table entities-table">
                 <thead className="govuk-table__head">
                   <tr className="govuk-table__row">
                     <th className="govuk-table__header" scope="col">Name</th>
@@ -89,16 +100,6 @@ class Entities extends React.Component {
                   }
                 </tbody>
               </table>
-
-              { config.readOnly ?
-                <React.Fragment></React.Fragment>
-              :
-                <React.Fragment>
-                  <h2 className='govuk-heading-m'>New data sets</h2>
-                  <p className='govuk-body'>Requests for new data sets to be added to the service require sign off by the Data Engagement Group.</p>
-                  <a href='https://support.cop.homeoffice.gov.uk/servicedesk/customer/portal' className='govuk-button'>Add a data set</a>
-                </React.Fragment>
-              }
             </div>
           </div>
         </main>
