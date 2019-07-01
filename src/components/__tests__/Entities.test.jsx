@@ -33,26 +33,26 @@ describe('Entities component', () => {
     });
 
     // headers
-    expect(wrapper.containsMatchingElement(<h1 className="govuk-heading-xl">Reference Data Governance Tool</h1>)).toBeTruthy();
-    expect(wrapper.containsMatchingElement(<p className="govuk-body">This service allows you to view and manage reference data sets.</p>)).toBeTruthy();
+    expect(wrapper.containsMatchingElement(<h1 className="govuk-heading-xl">Reference Data Service</h1>)).toBeTruthy();
     expect(wrapper.containsMatchingElement(<h2 className="govuk-heading-l">Data Sets</h2>)).toBeTruthy();
 
     // table headers
     expect(wrapper.find('.govuk-table__row').children()).toHaveLength(4);
     expect(wrapper.find('.govuk-table__header').get(0).props.children).toEqual('Name');
     expect(wrapper.find('.govuk-table__header').get(1).props.children).toEqual('Description');
-    expect(wrapper.find('.govuk-table__header').get(2).props.children).toEqual('Data Items');
-    expect(wrapper.find('.govuk-table__header').get(3).props.children).toEqual('Data Set Definition');
+    expect(wrapper.find('.govuk-table__header').get(2).props.children).toEqual('Last Updated');
+    expect(wrapper.find('.govuk-table__header').get(3).props.children).toEqual('Action');
 
     // table content
     expect(wrapper.find('EntitiesData').dive().find('.govuk-table__row').children()).toHaveLength(8);
     for (let i = 0; i < entitiesObject.data.length; i++) {
       expect(wrapper.find('EntitiesData').dive().get(i).props.children[0].props.children).toEqual(entitiesObject.data[i].schema.label);
       expect(wrapper.find('EntitiesData').dive().get(i).props.children[1].props.children).toEqual(entitiesObject.data[i].schema.description);
-      expect(wrapper.find('EntitiesData').dive().get(i).props.children[2].props.children.props.to).toEqual(`/entities/${entitiesObject.data[i].entityName}`);
-      expect(wrapper.find('EntitiesData').dive().get(i).props.children[2].props.children.props.children).toEqual('View data');
-      expect(wrapper.find('EntitiesData').dive().get(i).props.children[3].props.children.props.to).toEqual(`/entities/${entitiesObject.data[i].entityName}/schema`);
-      expect(wrapper.find('EntitiesData').dive().get(i).props.children[3].props.children.props.children).toEqual('View definition');
+      // debugger;
+      expect(wrapper.find('EntitiesData').dive().get(i).props.children[2].props.children).toEqual(entitiesObject.data[i].schema.schemalastupdated);
+      expect(wrapper.find('EntitiesData').dive().get(i).props.children[3].props.children[0].props.children).toEqual('View');
+      expect(wrapper.find('EntitiesData').dive().get(i).props.children[3].props.children[1].props.children[0].props.children).toEqual('Edit');
+      expect(wrapper.find('EntitiesData').dive().get(i).props.children[3].props.children[1].props.children[1].props.children).toEqual('Delete');
     };
   });
 
