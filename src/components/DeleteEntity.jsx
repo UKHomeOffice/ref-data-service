@@ -53,7 +53,7 @@ class DeleteEntity extends React.Component {
   }
 
   render() {
-    const backLink = util.format(appUrls.entitySchema, this.props.match.params.name);
+    const backLink = appUrls.entities;
     return (
       <div className='govuk-width-container'>
         <Banner/>

@@ -6,6 +6,7 @@ const apiUrl = `${apiBaseUrl}/${apiVersion}/`;
 const serviceDeskBaseUrl = 'https://support.cop.homeoffice.gov.uk/servicedesk';
 
 const internalUrls = {
+  entities: '/',
   deleteEntity: '/entities/%s/delete',
   entity: '/entities/%s',
   entitySchema: '/entities/%s/schema',
