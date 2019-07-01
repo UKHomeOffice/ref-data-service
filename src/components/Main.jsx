@@ -6,7 +6,6 @@ import ChangeRequestSubmission from 'ChangeRequestSubmission';
 import DeleteEntity from './DeleteEntity';
 import DeleteRequestSubmitted from './DeleteRequestSubmitted';
 import Entities from 'Entities';
-import Entity from './Entity';
 import EntityFieldUpdate from 'EntityFieldUpdate';
 import Footer from 'Footer';
 import Header from 'Header';
@@ -33,7 +32,6 @@ export default class Main extends React.Component {
           <Route exact path='/entities/:name/items/:id/edit/:field' component={ItemFieldUpdate}/>
           <Route exact path='/entities/:name/items/:id/delete' component={ItemDeleted}/>
           <Route exact path='/entities/:name/new' component={ItemNew}/>
-          <Route exact path='/entities/:name/schema' component={Entity}/>
           <Route exact path='/entities/:name/schema/edit/:field' component={EntityFieldUpdate}/>
           <Route exact path='/delete_request_submitted' component={DeleteRequestSubmitted}/>
           <Route exact path='/service_unavailable' component={ServiceUnavailable}/>
