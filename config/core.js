@@ -3,6 +3,7 @@
 const apiVersion = 'v1';
 const apiBaseUrl = process.env.API_BASE_URL || 'https://virtserver.swaggerhub.com/Viable-Data/Reference-Data-Service-API/0.0.1';
 const apiUrl = `${apiBaseUrl}/${apiVersion}/`;
+const serviceDeskBaseUrl = 'https://support.cop.homeoffice.gov.uk/servicedesk';
 
 const internalUrls = {
   deleteEntity: '/entities/%s/delete',
@@ -22,6 +23,12 @@ const apiUrls = {
   item: apiUrl + 'entities/%s/items/%s',
 };
 
+const serviceDeskUrls = {
+  addDataSet: `${serviceDeskBaseUrl}/customer/portal/3/create/51`,
+  feedback: `${serviceDeskBaseUrl}/customer/portal/3/create/50`,
+  help: `${serviceDeskBaseUrl}/customer/portal/3/group/18`,
+};
+
 const config = {
     logLevel: process.env.LOG_LEVEL || 'info',
     keycloakAuthUrl: process.env.KEYCLOAK_AUTH_URL || 'https://sso-dev.notprod.homeoffice.gov.uk/auth',
@@ -32,5 +39,6 @@ const config = {
 
 config.appUrls = internalUrls;
 config.apiUrls = apiUrls;
+config.serviceDesk = serviceDeskUrls;
 
 export default config;

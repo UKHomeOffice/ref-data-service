@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import Banner from 'Banner';
 import config from '../../config/core';
 
+const {serviceDesk} = config;
+
 export default class ServiceUnavailable extends React.Component {
   render() {
     return (
@@ -19,7 +21,7 @@ export default class ServiceUnavailable extends React.Component {
               <p className="govuk-body">Contact the COP Service Support Desk if you have any questions:</p>
               <p className="govuk-body">
                 Online:
-                <a href='https://support.cop.homeoffice.gov.uk/servicedesk/customer/portal/3' className='govuk-link break-block'>
+                <a href={`${serviceDesk.help}`} className='govuk-link break-block'>
                   <strong>COP Online Support</strong>
                 </a>
               </p>

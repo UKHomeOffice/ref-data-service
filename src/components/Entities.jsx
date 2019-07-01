@@ -7,14 +7,14 @@ import Banner from './Banner';
 import config from '../../config/core';
 import logger from '../../logger';
 
-const {apiUrls} = config;
+const {apiUrls, serviceDesk} = config;
 
 const EntitiesData = ({ data }) => {
   const entityRows = []
 
   data.map((entity, n) => {
     let { entityName } = entity;
-    let { description, label } = entity.schema;
+    let { description, label, schemalastupdated } = entity.schema;
 
     entityRows.push(
       <tr className="govuk-table__row" key={n}>
@@ -70,8 +70,8 @@ class Entities extends React.Component {
         <main id="main-content" className="govuk-main-wrapper " role="main">
           <div className="govuk-grid-row">
             <div className="govuk-grid-column-two-thirds">
-              <h1 className="govuk-heading-xl">Reference Data Governance Tool</h1>
-              <p className="govuk-body">This service allows you to view and manage reference data sets.</p>
+              <h1 className="govuk-heading-xl">Reference Data Service</h1>
+              <p className="govuk-body">This service allows you to view and manage reference data sets. To add a new data set to the repository, use the <a className='govuk-anchor-click' href={`${serviceDesk.addDataSet}`}>Add a data set</a> link at the top of the page.</p>
               <h2 className="govuk-heading-l">Data Sets</h2>
               <span></span>
               <table className="govuk-table">
