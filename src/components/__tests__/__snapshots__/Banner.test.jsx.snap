@@ -18,7 +18,7 @@ exports[`Banner Should render banner successfully 1`] = `
       This is a new service – your 
       <a
         className="govuk-link"
-        href="#"
+        href="https://support.cop.homeoffice.gov.uk/servicedesk/customer/portal/3/create/50"
       >
         feedback
       </a>

@@ -5,9 +5,41 @@ $govuk-compatibility-govukelements: true;
 @import "~govuk-frontend/all";
 @import "_table.scss";
 
+
+// Header
 .govuk-header__link {
   cursor: pointer;
+
+  &.govuk-header__link--homepage:hover,
+  &.govuk-header__link--homepage:active {
+    border-bottom: 2px solid;
+  }
 }
+
+// Header menu
+.govuk-header__menu {
+  display: inline-block;
+  float: right;
+
+  ul {
+    margin: 5px 0px 0px 0px;
+
+    li {
+      list-style: none;
+
+      a {
+        cursor: pointer;
+        font-weight: bold;
+
+        &:hover {
+          border-bottom: 2px solid;
+          padding-bottom: 2px;
+        }
+      }
+    }
+  }
+}
+
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
 .pagination .pagination_list-items {
@@ -77,6 +109,16 @@ $govuk-compatibility-govukelements: true;
 
   @media (min-width: 642px) {
     float: right;
+  }
+}
+
+// Entities
+.entities-table {
+  .govuk-table__cell {
+    a {
+      display: block;
+      line-height: 1.5;
+    }
   }
 }
 
