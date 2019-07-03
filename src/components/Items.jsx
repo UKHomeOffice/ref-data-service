@@ -82,10 +82,8 @@ class Items extends React.Component {
               <div className='govuk-grid-column-full'>
                 <h1 className='govuk-heading-xl'>{this.state.itemsObject.entitySchema.label}</h1>
                 <p className='govuk-body'>{this.state.itemsObject.entitySchema.description}</p>
-                <div className='govuk-grid-row'>
-                  <div className='govuk-grid-column-full'>
-                    <hr className='govuk-section-break govuk-section-break--visible govuk-section-break--xl govuk-!-margin-top-0' />
-                  </div>
+                <div className='govuk-inset-text'>
+                  <p>To manage a data item, click the Identifier.</p>
                 </div>
                 <h2 className='govuk-heading-m'>Data items within this data set</h2>
                 <p className='govuk-body'>To manage a data item, click the ID.</p>
