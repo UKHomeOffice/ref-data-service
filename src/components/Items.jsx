@@ -85,8 +85,6 @@ class Items extends React.Component {
                 <div className='govuk-inset-text'>
                   <p>To manage a data item, click the Identifier.</p>
                 </div>
-                <h2 className='govuk-heading-m'>Data items within this data set</h2>
-                <p className='govuk-body'>To manage a data item, click the ID.</p>
                 <div className='table-container'>
                   <table className='govuk-table table-items'>
                     <thead className='govuk-table__head'>
