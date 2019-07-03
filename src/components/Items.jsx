@@ -82,13 +82,9 @@ class Items extends React.Component {
               <div className='govuk-grid-column-full'>
                 <h1 className='govuk-heading-xl'>{this.state.itemsObject.entitySchema.label}</h1>
                 <p className='govuk-body'>{this.state.itemsObject.entitySchema.description}</p>
-                <div className='govuk-grid-row'>
-                  <div className='govuk-grid-column-full'>
-                    <hr className='govuk-section-break govuk-section-break--visible govuk-section-break--xl govuk-!-margin-top-0' />
-                  </div>
+                <div className='govuk-inset-text'>
+                  <p>To manage a data item, click the Identifier.</p>
                 </div>
-                <h2 className='govuk-heading-m'>Data items within this data set</h2>
-                <p className='govuk-body'>To manage a data item, click the ID.</p>
                 <div className='table-container'>
                   <table className='govuk-table table-items'>
                     <thead className='govuk-table__head'>
@@ -107,7 +103,7 @@ class Items extends React.Component {
                 :
                   <React.Fragment>
                     <h2 className='govuk-heading-m'>Add new data items to this data set</h2>
-                    <p className='govuk-body'>To add a data item, click the button below and complete the change request on the subsequent page.</p>
+                    <p className='govuk-body'>To add a new item to this data set, click the button below and complete the change request on the subsequent page.</p>
                     <Link className='govuk-button' to={itemNew} role='button' draggable='false'>Add data item</Link>
                   </React.Fragment>
                 }
