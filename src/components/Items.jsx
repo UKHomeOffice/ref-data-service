@@ -103,7 +103,7 @@ class Items extends React.Component {
                 :
                   <React.Fragment>
                     <h2 className='govuk-heading-m'>Add new data items to this data set</h2>
-                    <p className='govuk-body'>To add a data item, click the button below and complete the change request on the subsequent page.</p>
+                    <p className='govuk-body'>To add a new item to this data set, click the button below and complete the change request on the subsequent page.</p>
                     <Link className='govuk-button' to={itemNew} role='button' draggable='false'>Add data item</Link>
                   </React.Fragment>
                 }
