@@ -1,10 +1,15 @@
 $govuk-compatibility-govukfrontendtoolkit: true;
 $govuk-compatibility-govuktemplate: true;
 $govuk-compatibility-govukelements: true;
+$govuk-global-styles: true;
 
-@import "~govuk-frontend/all";
-@import "_table.scss";
+@import '../fonts/Inter-3.7/inter.css';
 
+// Override the govuk-frontend font stack
+$govuk-font-family: 'Inter', sans-serif;
+
+@import '~govuk-frontend/all';
+@import '_table.scss';
 
 // Header
 .govuk-header__link {
@@ -22,7 +27,7 @@ $govuk-compatibility-govukelements: true;
   float: right;
 
   ul {
-    margin: 5px 0px 0px 0px;
+    mrgin: 5px 0px 0px 0px;
 
     li {
       list-style: none;
@@ -37,78 +42,6 @@ $govuk-compatibility-govukelements: true;
         }
       }
     }
-  }
-}
-
-
-// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
-.pagination .pagination_list-items {
-
-  li {
-    display: inline-block;
-    a {
-      color: #005EA5;
-      display: inline-block;
-      padding: 15px 5px 10px 5px;
-      margin-right: 15px;
-      text-decoration: none;
-
-      &:focus {
-        outline: 0;
-      }
-    }
-    &.active a,
-    &.active a:hover {
-      color: #005EA5;
-      -webkit-box-shadow: inset 0px -5px 0px 0px #005EA5;
-      -moz-box-shadow: inset 0px -5px 0px 0px #005EA5;
-      box-shadow: inset 0px -5px 0px 0px #005EA5;
-    }
-  }
-}
-
-.padding {
-  padding-left: 15px;
-}
-
-.pagination {
-  padding: 0;
-}
-.pagination__item {
-  display: inline-block;
-  list-style: none;
-}
-.pagination__link {
-  display: block;
-  padding: 5px 10px;
-  text-decoration: none;
-
-  &:hover, &:focus {
-    background: #F8F8F8;
-    outline: 3px solid #FFBF47;
-  }
-
-  &.current {
-    color: #0B0C0C;
-    font-weight: 700;
-    border: none;
-    pointer-events: none;
-    cursor: default;
-
-    &:hover, &:focus {
-      color: #0B0C0C;
-      background: none;
-    }
-  }
-}
-
-.pagination__summary {
-  font-family: 'Inter UI', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  padding: 8px 0  ;
-
-  @media (min-width: 642px) {
-    float: right;
   }
 }
 
