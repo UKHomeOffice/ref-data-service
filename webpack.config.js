@@ -39,6 +39,7 @@ module.exports = {
     new CopyPlugin([
       { from: 'src/assets/javascript', to: 'javascript'},
       { from: 'src/assets/images', to: 'assets/images'},
+      { from: 'src/assets/fonts', to: 'assets/fonts'},
       { from: 'node_modules/govuk-frontend/all.js', to: 'javascript/all.js'},
       { from: 'node_modules/govuk-frontend/assets', to: 'assets'}
     ]),
