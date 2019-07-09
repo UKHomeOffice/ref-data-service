@@ -12,7 +12,8 @@ import config from '../config/core';
 import rootReducer from './reducers';
 
 // component imports
-import Main from 'Main';
+import Healthcheck from './components/Healthcheck';
+import Main from './components/Main';
 
 const store = createStore(
   rootReducer
@@ -34,16 +35,23 @@ kc.onTokenExpired = () => {
   });
 };
 
-kc.init({onLoad: 'login-required', checkLoginIframe: false}).success(authenticated => {
-  if (authenticated) {
-    store.getState().keycloak = kc;
-    ReactDOM.render(
-      <Provider store={store}>
-        <Main/>
-      </Provider>,
-      document.getElementById('main')
-    );
-  }
-}).error(function () {
-  kc.logout();
-});
+if (window.location.pathname !== '/_health') {
+  kc.init({onLoad: 'login-required', checkLoginIframe: false}).success(authenticated => {
+    if (authenticated) {
+      store.getState().keycloak = kc;
+      ReactDOM.render(
+        <Provider store={store}>
+          <Main/>
+        </Provider>,
+        document.getElementById('main')
+      );
+    }
+  }).error(function () {
+    kc.logout();
+  });
+} else {
+  ReactDOM.render(
+    <Healthcheck/>,
+    document.getElementById('main')
+  );
+}
