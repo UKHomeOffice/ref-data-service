@@ -4,7 +4,12 @@ kind: Deployment
 metadata:
   name: ref-data-gov-tool
 spec:
-  replicas: 1
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 33%
+      maxSurge: 1
   revisionHistoryLimit: 3
   template:
     metadata:
@@ -48,6 +53,19 @@ spec:
             value: {{.API_BASE_URL}}
           - name: READ_ONLY_MODE
             value: '{{.READ_ONLY_MODE}}'
+        livenessProbe:
+          httpGet:
+            path: /_health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /_health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
 
       - name: proxy
         image: quay.io/ukhomeofficedigital/nginx-proxy
