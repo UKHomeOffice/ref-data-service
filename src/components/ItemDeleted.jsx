@@ -50,7 +50,7 @@ export default class ItemDeleted extends React.Component {
                   </div>
                 </fieldset>
               </div>
-              <a href="#" role="button" draggable="false" className="govuk-button">Confirm deletion</a>
+              <a href="#" role="button" draggable="false" className="govuk-button govuk-button--warning">Confirm deletion</a>
             </div>
           </div>
         </main>
