@@ -141,7 +141,7 @@ class EntityFieldUpdate extends React.Component {
 
   render() {
     let field, entityName, label, description;
-    const backLink = util.format(appUrls.entitySchema, this.state.entityObject.entityName);
+    const backLink = appUrls.entities;
 
     if (this.state.entityObject && this.state.entityObject.entitySchema) {
       ({ field } = this.props.match.params);
