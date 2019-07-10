@@ -71,17 +71,15 @@ class Item extends React.Component {
   }
 
   render() {
-    if (this.state.itemObject && this.state.itemObject.entitySchema) {
-      const {name, id} = this.props.match.params;
-      const itemDelete = util.format(appUrls.itemDelete, name, id);
-      const backLink = util.format(appUrls.entity, this.state.itemObject.entityName);
+    const {name, id} = this.props.match.params;
+    const itemDelete = util.format(appUrls.itemDelete, name, id);
+    const backLink = util.format(appUrls.entity, this.state.itemObject.entityName);
 
-    }
     return (
       <div className="govuk-width-container">
         <Banner/>
         <Link className="govuk-back-link" to={backLink}>Back</Link>
-        <main className="govuk-main-wrapper " id="main-content" role="main">
+        <main className="govuk-main-wrapper" id="main-content" role="main">
           <div className="govuk-grid-row">
             {this.state.itemObject && this.state.itemObject.entitySchema &&
               <div className="govuk-grid-column-two-thirds-from-desktop">
