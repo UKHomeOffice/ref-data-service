@@ -68,7 +68,7 @@ class DeleteEntity extends React.Component {
                 onSubmit={this.handleSubmit}
                 render={({ handleSubmit, submitting, values }) => (
                   <form onSubmit={handleSubmit}>
-                    <button className='govuk-button' type='submit' disabled={submitting}>Confirm deletion</button>
+                    <button className='govuk-button govuk-button--warning' type='submit' disabled={submitting}>Confirm deletion</button>
                   </form>
                 )}
               />
