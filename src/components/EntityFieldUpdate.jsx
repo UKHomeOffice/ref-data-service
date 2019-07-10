@@ -1,4 +1,4 @@
-import { Form, Field } from "react-final-form";
+import { Form, Field } from 'react-final-form';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -29,14 +29,14 @@ const DateInput = ({ name, maxLength }) => {
   const label = labelNames.filter(day => day.toLowerCase() === name).toString();
 
   return (
-    <div className="govuk-date-input__item">
-      <div className="govuk-form-group">
-        <label className="govuk-label govuk-date-input__label">{label}</label>
+    <div className='govuk-date-input__item'>
+      <div className='govuk-form-group'>
+        <label className='govuk-label govuk-date-input__label'>{label}</label>
         <Field
           id={idStyle}
           className={classStyle}
           name={name}
-          component="input"
+          component='input'
           pattern={pattern}
           required
         />
@@ -46,19 +46,19 @@ const DateInput = ({ name, maxLength }) => {
 }
 
 const ChangeEffectiveFromContainer = () => (
-  <div className="govuk-form-group">
-    <fieldset className="govuk-fieldset" aria-describedby="change-hint" role="group">
-      <legend className="govuk-fieldset__legend govuk-fieldset__legend--xl">
-        <h1 className="govuk-heading-m">Change effective from</h1>
+  <div className='govuk-form-group'>
+    <fieldset className='govuk-fieldset' aria-describedby='change-hint' role='group'>
+      <legend className='govuk-fieldset__legend govuk-fieldset__legend--xl'>
+        <h1 className='govuk-heading-m'>Change effective from</h1>
       </legend>
-      <span id="change-hint" className="govuk-hint">For example, 12 11 2019</span>
-      <span id="day-error" className="govuk-error-message">
-        <ErrorField className="govuk-visually-hidden" name="day" />
+      <span id='change-hint' className='govuk-hint'>For example, 12 11 2019</span>
+      <span id='day-error' className='govuk-error-message'>
+        <ErrorField className='govuk-visually-hidden' name='day' />
       </span>
-      <div className="govuk-date-input" id="change-issued">
-        <DateInput name="day" maxLength="2" />
-        <DateInput name="month" maxLength="2" />
-        <DateInput name="year" maxLength="4" />
+      <div className='govuk-date-input' id='change-issued'>
+        <DateInput name='day' maxLength='2' />
+        <DateInput name='month' maxLength='2' />
+        <DateInput name='year' maxLength='4' />
       </div>
     </fieldset>
   </div>
@@ -141,7 +141,7 @@ class EntityFieldUpdate extends React.Component {
 
   render() {
     let field, entityName, label, description;
-    const backLink = util.format(appUrls.entitySchema, this.state.entityObject.entityName);
+    const backLink = appUrls.entities;
 
     if (this.state.entityObject && this.state.entityObject.entitySchema) {
       ({ field } = this.props.match.params);
@@ -150,14 +150,14 @@ class EntityFieldUpdate extends React.Component {
     }
 
     return (
-      <div className="govuk-width-container">
+      <div className='govuk-width-container'>
         <Banner/>
-        <Link className="govuk-back-link" to={backLink}>Back</Link>
-        <main id="main-content" className="govuk-main-wrapper" role="main">
-          <div className="govuk-grid-row">
+        <Link className='govuk-back-link' to={backLink}>Back</Link>
+        <main id='main-content' className='govuk-main-wrapper' role='main'>
+          <div className='govuk-grid-row'>
             {this.state.entityObject && this.state.entityObject.entitySchema &&
-              <div className="govuk-grid-column-two-thirds">
-                <h1 className="govuk-heading-xl">{label}</h1>
+              <div className='govuk-grid-column-two-thirds'>
+                <h1 className='govuk-heading-xl'>{label}</h1>
                 <Form
                   onSubmit={this.onSubmit}
                   initialValues={{
@@ -172,9 +172,9 @@ class EntityFieldUpdate extends React.Component {
                   render={({ handleSubmit, submitting, values }) => {
                     return (
                       <form onSubmit={handleSubmit}>
-                        <div className="govuk-form-group">
-                          <label className="govuk-label govuk-label--m" htmlFor="description">Description</label>
-                          <Field className="govuk-textarea" name="newValue" rows="5" aria-describedby="description" component="textarea" />
+                        <div className='govuk-form-group'>
+                          <label className='govuk-label govuk-label--m' htmlFor='description'>Description</label>
+                          <Field className='govuk-textarea' name='newValue' rows='5' aria-describedby='description' component='textarea' />
                         </div>
                         <ChangeEffectiveFromContainer />
 
@@ -182,7 +182,7 @@ class EntityFieldUpdate extends React.Component {
                           <React.Fragment></React.Fragment>
                         :
                           <React.Fragment>
-                            <button className="govuk-button" type="submit">Submit change for approval</button>
+                            <button className='govuk-button' type='submit'>Submit change for approval</button>
                           </React.Fragment>
                         }
                       </form>
