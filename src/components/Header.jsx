@@ -36,7 +36,7 @@ class Header extends React.Component {
             <div className='govuk-header__menu'>
               <ul>
                 <li>
-                  <a className='govuk-header-menu__link' onClick={this.logout}>Signout</a>
+                  <a className='govuk-header-menu__link' onClick={this.logout}>Sign out</a>
                 </li>
               </ul>
             </div>
