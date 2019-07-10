@@ -92,7 +92,7 @@ class Item extends React.Component {
               </div>
             }
           </div>
-          <Link className='govuk-button' to={itemDelete} role='button' draggable='false'>Delete data item</Link>
+          <Link className='govuk-button govuk-button--warning' to={itemDelete} role='button' draggable='false'>Delete data item</Link>
         </main>
       </div>
     );
