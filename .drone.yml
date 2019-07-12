@@ -65,6 +65,33 @@ pipeline:
       branch: master
       event: push
 
+  deploy_to_staging:
+    image: quay.io/ukhomeofficedigital/kd
+    secrets:
+      - STAGING_API_BASE_URL
+      - STAGING_HOSTNAME
+      - STAGING_KEYCLOAK_AUTH_URL
+      - STAGING_KEYCLOAK_CLIENT_ID
+      - STAGING_KEYCLOAK_REALM
+      - STAGING_KUBE_NAMESPACE
+      - STAGING_KUBE_SERVER
+      - STAGING_KUBE_TOKEN
+      - STAGING_READ_ONLY_MODE
+    commands:
+      - export API_BASE_URL=$${STAGING_API_BASE_URL}
+      - export HOSTNAME=$${STAGING_HOSTNAME}
+      - export KEYCLOAK_AUTH_URL=$${STAGING_KEYCLOAK_AUTH_URL}
+      - export KEYCLOAK_CLIENT_ID=$${STAGING_KEYCLOAK_CLIENT_ID}
+      - export KEYCLOAK_REALM=$${STAGING_KEYCLOAK_REALM}
+      - export KUBE_NAMESPACE=$${STAGING_KUBE_NAMESPACE}
+      - export KUBE_SERVER=$${STAGING_KUBE_SERVER}
+      - export KUBE_TOKEN=$${STAGING_KUBE_TOKEN}
+      - export READ_ONLY_MODE=$${STAGING_READ_ONLY_MODE}
+      - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
+    when:
+      event: deployment
+      environment: staging
+
   deploy_to_prod:
     image: quay.io/ukhomeofficedigital/kd
     secrets:
