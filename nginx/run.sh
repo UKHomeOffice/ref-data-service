@@ -1,4 +1,4 @@
-#!/bin/bash -
+:#!/bin/bash -
 
 set -o errexit
 
@@ -10,7 +10,7 @@ for file in /usr/share/nginx/html/*.js
 do
   echo "== ENV sub for $file =="
   sed -i 's,https://api.fake.build.com,'${API_BASE_URL}',g' $file
-  sed -i 's,"fake-environment",'${ENVIRONMENT}',g' $file
+  sed -i 's,fake-environment,'${ENVIRONMENT}',g' $file
   sed -i 's,https://sso-fake.build.com/auth,'${KEYCLOAK_AUTH_URL}',g' $file
   sed -i 's,fake-client-id,'${KEYCLOAK_CLIENT_ID}',g' $file
   sed -i 's,fake-realm,'${KEYCLOAK_REALM}',g' $file
