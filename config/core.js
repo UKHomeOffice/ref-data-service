@@ -36,6 +36,7 @@ const config = {
     clientId: process.env.KEYCLOAK_CLIENT_ID || 'refdata-ui',
     realm: process.env.KEYCLOAK_REALM || 'cop-dev',
     readOnly: process.env.READ_ONLY_MODE || false,
+    environment: process.env.ENVIRONMENT || 'development',
 }
 
 config.appUrls = internalUrls;

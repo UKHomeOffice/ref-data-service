@@ -12,13 +12,18 @@ exports[`Banner Should render banner successfully 1`] = `
     >
       beta
     </strong>
+    <strong
+      className="govuk-tag govuk-phase-banner__content__tag "
+    >
+      development
+    </strong>
     <span
       className="govuk-phase-banner__text"
     >
       This is a new service – your 
       <a
         className="govuk-link"
-        href="https://support.cop.homeoffice.gov.uk/servicedesk/customer/portal/3/create/50"
+        href="https://servicedesk.com/customer/portal/3/create/50"
       >
         feedback
       </a>
