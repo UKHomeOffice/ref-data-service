@@ -42,6 +42,7 @@ pipeline:
     image: quay.io/ukhomeofficedigital/kd
     secrets:
       - DEV_API_BASE_URL
+      - DEV_ENVIRONMENT
       - DEV_HOSTNAME
       - DEV_KEYCLOAK_AUTH_URL
       - DEV_KEYCLOAK_CLIENT_ID
@@ -52,6 +53,7 @@ pipeline:
       - DEV_READ_ONLY_MODE
     commands:
       - export API_BASE_URL=$${DEV_API_BASE_URL}
+      - export ENVIRONMENT=$${DEV_ENVIRONMENT}
       - export HOSTNAME=$${DEV_HOSTNAME}
       - export KEYCLOAK_AUTH_URL=$${DEV_KEYCLOAK_AUTH_URL}
       - export KEYCLOAK_CLIENT_ID=$${DEV_KEYCLOAK_CLIENT_ID}
@@ -69,6 +71,7 @@ pipeline:
     image: quay.io/ukhomeofficedigital/kd
     secrets:
       - STAGING_API_BASE_URL
+      - STAGING_ENVIRONMENT
       - STAGING_HOSTNAME
       - STAGING_KEYCLOAK_AUTH_URL
       - STAGING_KEYCLOAK_CLIENT_ID
@@ -79,6 +82,7 @@ pipeline:
       - STAGING_READ_ONLY_MODE
     commands:
       - export API_BASE_URL=$${STAGING_API_BASE_URL}
+      - export ENVIRONMENT=$${STAGING_ENVIRONMENT}
       - export HOSTNAME=$${STAGING_HOSTNAME}
       - export KEYCLOAK_AUTH_URL=$${STAGING_KEYCLOAK_AUTH_URL}
       - export KEYCLOAK_CLIENT_ID=$${STAGING_KEYCLOAK_CLIENT_ID}
@@ -96,6 +100,7 @@ pipeline:
     image: quay.io/ukhomeofficedigital/kd
     secrets:
       - PROD_API_BASE_URL
+      - PROD_ENVIRONMENT
       - PROD_HOSTNAME
       - PROD_KEYCLOAK_AUTH_URL
       - PROD_KEYCLOAK_CLIENT_ID
@@ -106,6 +111,7 @@ pipeline:
       - PROD_READ_ONLY_MODE
     commands:
       - export API_BASE_URL=$${PROD_API_BASE_URL}
+      - export ENVIRONMENT=$${PROD_ENVIRONMENT}
       - export HOSTNAME=$${PROD_HOSTNAME}
       - export KEYCLOAK_AUTH_URL=$${PROD_KEYCLOAK_AUTH_URL}
       - export KEYCLOAK_CLIENT_ID=$${PROD_KEYCLOAK_CLIENT_ID}
