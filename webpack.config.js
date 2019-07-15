@@ -46,10 +46,11 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         API_BASE_URL: JSON.stringify(process.env.API_BASE_URL),
+        ENVIRONMENT: JSON.stringify(process.env.ENVIRONMENT),
         KEYCLOAK_AUTH_URL: JSON.stringify(process.env.KEYCLOAK_AUTH_URL),
         KEYCLOAK_CLIENT_ID: JSON.stringify(process.env.KEYCLOAK_CLIENT_ID),
         KEYCLOAK_REALM: JSON.stringify(process.env.KEYCLOAK_REALM),
-        READ_ONLY_MODE: JSON.stringify(process.env.READ_ONLY_MODE),
+        READ_ONLY_MODE: JSON.stringify(process.env.READ_ONLY_MODE)
       }
     }),
   ],

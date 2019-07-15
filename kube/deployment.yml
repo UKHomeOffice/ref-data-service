@@ -53,6 +53,8 @@ spec:
             value: {{.API_BASE_URL}}
           - name: READ_ONLY_MODE
             value: '{{.READ_ONLY_MODE}}'
+          - name: ENVIRONMENT
+            value: '{{.ENVIRONMENT}}'
         livenessProbe:
           httpGet:
             path: /_health
