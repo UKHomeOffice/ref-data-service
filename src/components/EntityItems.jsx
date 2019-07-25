@@ -25,11 +25,19 @@ const TableRows = ({ data }) => {
   return data.map((properties, n) => {
     let rows = [];
     for (const key in properties) {
-      rows.push(
-        <td className='govuk-table__cell table__cell' key={key}>
-          { properties[key] }
-        </td>
-      );
+      if (typeof properties[key] === 'boolean') {
+        rows.push(
+          <td className='govuk-table__cell table__cell title-case' key={key}>
+            { String(properties[key]) }
+          </td>
+        );
+      } else {
+        rows.push(
+          <td className='govuk-table__cell table__cell' key={key}>
+            { properties[key] }
+          </td>
+        );
+      }
     }
     return <tr className='govuk-table__row' key={n}>{rows}</tr>
   });
