@@ -2,11 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // local imports
-import Banner from 'Banner';
+import Banner from './Banner';
 import config from '../../config/core';
 
 export default class ChangeRequestSubmission extends React.Component {
-
   render() {
     return (
       <div className="govuk-width-container">
