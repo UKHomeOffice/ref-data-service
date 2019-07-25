@@ -1,10 +1,10 @@
-const entityObject = {
+const entitySchemaObject = {
   'status': 'success',
   'code': 200,
   'entityName': 'country',
   'entitySchema': {
     'label': 'Countries',
-    'description': 'Countries',
+    'description': 'The list of recognised Countries, with additional information (including ISO codes and continent).',
     'schemalastupdated': '10/03/2019',
     'dataversion': 1,
     'required': [
@@ -106,4 +106,4 @@ const entityObject = {
   }
 };
 
-export default entityObject;
+export default entitySchemaObject;
