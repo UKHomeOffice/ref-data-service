@@ -5,17 +5,17 @@ import { Link } from 'react-router-dom';
 import { shallow, render, mount } from 'enzyme';
 
 // local imports
-import Items from '../Items';
-import itemsObject from '../__fixtures__/itemsObject';
+import EntityItems from '../EntityItems';
+import entityItemsObject from '../__fixtures__/entityItemsObject';
 
 const mockStore = configureMockStore();
 
-describe('Items component', () => {
-  it('Should display entity items successfully', () => {
+describe('Entity items component', () => {
+  it('Should display entity items component successfully', () => {
     global.fetch = jest
       .fn()
       .mockImplementation(() => Promise.resolve({
-        'json': () => itemsObject
+        'json': () => entityItemsObject
       }));
 
     const keycloakToken = { 'keycloak': '1234' };
@@ -26,13 +26,13 @@ describe('Items component', () => {
       },
     };
 
-    const wrapper = shallow(<Items match={ match } store={ store } />).dive();
+    const wrapper = shallow(<EntityItems match={ match } store={ store } />).dive();
 
     wrapper.setState({
-      'itemsObject': itemsObject
+      'itemsObject': entityItemsObject
     });
 
-    const { properties } = itemsObject.entitySchema;
+    const { properties } = entityItemsObject.entitySchema;
 
     // headers
     expect(wrapper.containsMatchingElement(<p className="govuk-body">Countries</p>)).toBeTruthy();
@@ -50,9 +50,9 @@ describe('Items component', () => {
     let rowCol = 0;
     const bodyRows = wrapper.find('TableRows').dive();
     expect(bodyRows).toHaveLength(1);
-    for (let i = 0; i < itemsObject.data.length; i++) {
-      for (const rowKey in itemsObject.data[i]) {
-        expect(bodyRows.get(i).props.children[rowCol].props.children).toEqual(itemsObject.data[i][rowKey]);
+    for (let i = 0; i < entityItemsObject.data.length; i++) {
+      for (const rowKey in entityItemsObject.data[i]) {
+        expect(bodyRows.get(i).props.children[rowCol].props.children).toEqual(entityItemsObject.data[i][rowKey]);
         rowCol++
       }
     }
