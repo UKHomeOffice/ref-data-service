@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // local imports
-import Nav from 'Nav';
+import Nav from './Nav';
 
 class Header extends React.Component {
   constructor(props) {

@@ -1,4 +1,4 @@
-const itemsObject = {
+const entityItemsObject = {
   "status": "success",
   "code": 200,
   "entitySchema": {
@@ -122,4 +122,4 @@ const itemsObject = {
   ]
 };
 
-export default itemsObject;
+export default entityItemsObject;

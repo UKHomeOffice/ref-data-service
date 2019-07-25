@@ -35,7 +35,7 @@ const TableRows = ({ data }) => {
   });
 };
 
-class Items extends React.Component {
+class EntityItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -121,4 +121,4 @@ const mapStateToProps = state => ({
  'kc': state.keycloak
 });
 
-export default connect(mapStateToProps)(Items);
+export default connect(mapStateToProps)(EntityItems);

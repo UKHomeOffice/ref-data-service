@@ -7,7 +7,7 @@ const serviceDeskBaseUrl = 'https://support.cop.homeoffice.gov.uk/servicedesk';
 
 const internalUrls = {
   entities: '/',
-  deleteEntity: '/entities/%s/delete',
+  entityDelete: '/entities/%s/delete',
   entity: '/entities/%s',
   entitySchema: '/entities/%s/schema',
   entityUpdate: '/entities/%s/schema/edit/%s',

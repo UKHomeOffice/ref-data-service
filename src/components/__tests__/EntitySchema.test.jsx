@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 import { shallow } from 'enzyme';
 
 // local imports
-import Entity from '../Entity';
-import entityObject from '../__fixtures__/entityObject';
+import EntitySchema from '../EntitySchema';
+import entitySchemaObject from '../__fixtures__/entitySchemaObject';
 
 const mockStore = configureMockStore();
 
-describe('Entity component', () => {
-  it('Should display the entity component successfully', () => {
+describe('Entity schema component', () => {
+  it('Should display the entity schema component successfully', () => {
     global.fetch = jest
       .fn()
       .mockImplementation(() => Promise.resolve({
-        'json': () => entityObject
+        'json': () => entitySchemaObject
       }));
 
     const keycloakToken = {
@@ -32,27 +32,28 @@ describe('Entity component', () => {
         'name': 'country',
       },
     };
-    const wrapper = shallow(<Entity match={ match } store={ store }/>).dive();
+    const wrapper = shallow(<EntitySchema match={ match } store={ store }/>).dive();
 
     wrapper.setState({
-      'entityObject': entityObject
+      'entityObject': entitySchemaObject
+
     });
 
     // table content
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').children()).toHaveLength(4);
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[0].props.children[0].props.children).toEqual('Data set name');
-    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[0].props.children[1].props.children).toEqual(entityObject.entitySchema.label);
+    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[0].props.children[1].props.children).toEqual(entitySchemaObject.entitySchema.label);
 
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[1].props.children[0].props.children).toEqual('Data set description');
-    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[1].props.children[1].props.children).toEqual(entityObject.entitySchema.description);
+    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[1].props.children[1].props.children).toEqual(entitySchemaObject.entitySchema.description);
     // change button
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[1].props.children[2].props.children.props.children.props.children[0]).toEqual('Change');
 
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[2].props.children[0].props.children).toEqual('Last Updated');
-    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[2].props.children[1].props.children).toEqual(entityObject.entitySchema.schemalastupdated);
+    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[2].props.children[1].props.children).toEqual(entitySchemaObject.entitySchema.schemalastupdated);
 
     expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[3].props.children[0].props.children).toEqual('Data Version');
-    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[3].props.children[1].props.children).toEqual(entityObject.entitySchema.dataversion);
+    expect(wrapper.find('EntityContent').dive().find('.govuk-summary-list').get(0).props.children[3].props.children[1].props.children).toEqual(entitySchemaObject.entitySchema.dataversion);
 
     // delete button
     expect(wrapper.containsMatchingElement(<Link className="govuk-button" to="/entities/country/delete" role="button" draggable="false" replace={false}>Delete this data set</Link>)).toBeTruthy();

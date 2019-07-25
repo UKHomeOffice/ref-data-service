@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // local imports
-import Banner from 'Banner';
+import Banner from './Banner';
 
-const ItemDeleted = (props) => {
+const EntityItemDelete = (props) => {
   return (
     <div className='govuk-width-container'>
       <Banner/>
@@ -50,4 +50,4 @@ const ItemDeleted = (props) => {
   );
 }
 
-export default ItemDeleted;
+export default EntityItemDelete;

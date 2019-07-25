@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import util from 'util';
 
 // local imports
-import Banner from 'Banner';
+import Banner from './Banner';
 import config from '../../config/core';
 import logger from '../../logger';
 
@@ -63,7 +63,7 @@ const ChangeEffectiveFromContainer = () => (
   </div>
 );
 
-class ItemFieldUpdate extends React.Component {
+class EntityItemFieldUpdate extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -200,4 +200,4 @@ const mapStateToProps = state => ({
  'kc': state.keycloak
 });
 
-export default connect(mapStateToProps)(ItemFieldUpdate);
+export default connect(mapStateToProps)(EntityItemFieldUpdate);

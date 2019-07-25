@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // local imports
 import Banner from './Banner';
 
-export default class DeleteRequestSubmitted extends React.Component {
+export default class RequestSubmittedDelete extends React.Component {
   render() {
     return (
       <div className='govuk-width-container'>

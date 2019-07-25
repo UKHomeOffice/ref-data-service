@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // local imports
-import Banner from 'Banner';
+import Banner from './Banner';
 import config from '../../config/core';
 
 const {serviceDesk} = config;

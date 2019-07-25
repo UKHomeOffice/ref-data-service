@@ -11,7 +11,7 @@ import logger from '../../logger';
 
 const { appUrls, apiUrls } = config;
 
-class DeleteEntity extends React.Component {
+class EntityDelete extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -84,4 +84,4 @@ const mapStateToProps = state => ({
  'kc': state.keycloak
 });
 
-export default connect(mapStateToProps)(DeleteEntity);
+export default connect(mapStateToProps)(EntityDelete);

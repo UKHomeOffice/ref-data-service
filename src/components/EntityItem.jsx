@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import util from 'util';
 
 // local imports
-import Banner from 'Banner';
+import Banner from './Banner';
 import config from '../../config/core';
 
 const {appUrls, apiUrls} = config;
@@ -35,7 +35,7 @@ const ItemData = ({
   return itemRows;
 };
 
-class Item extends React.Component {
+class EntityItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -103,4 +103,4 @@ const mapStateToProps = state => ({
  'kc': state.keycloak
 });
 
-export default connect(mapStateToProps)(Item);
+export default connect(mapStateToProps)(EntityItem);
