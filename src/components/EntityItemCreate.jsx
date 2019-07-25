@@ -1,4 +1,6 @@
 import React from 'react';
+
+
 import util from 'util';
 import { Form, FormSpy, Field } from 'react-final-form';
 import { Link } from 'react-router-dom';
@@ -79,7 +81,7 @@ const ItemFields = ({ requiredFields, fieldProperties }) => {
   return fieldElements;
 };
 
-class ItemNew extends React.Component {
+class EntityItemCreate extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -216,4 +218,4 @@ const mapStateToProps = state => ({
  'kc': state.keycloak
 });
 
-export default connect(mapStateToProps)(ItemNew);
+export default connect(mapStateToProps)(EntityItemCreate);

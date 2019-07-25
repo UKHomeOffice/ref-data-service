@@ -1,54 +1,54 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import util from 'util';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // local imports
 import Banner from './Banner';
 import config from '../../config/core';
-import getKeyByValue from '../utils';
 import logger from '../../logger';
+import { getKeyByValue } from '../utils';
 
 const {appUrls, apiUrls} = config;
 
-const EntityContent = ({
-  entityObject: {
-    entityName,
-    entityLabel,
-    entitySchema: {
-      description
-    }
-  }
-}) => {
-  const descriptionKey = getKeyByValue(description, description.description)
+const EntityContent = ({entityObject}) => {
+  const { entityName, entitySchema } = entityObject;
+  const descriptionKey = getKeyByValue(entitySchema, entitySchema.description)
   const entityDescriptionUpdate = util.format(appUrls.entityUpdate, entityName, descriptionKey);
 
   return (
     <div className="govuk-grid-column-two-thirds-from-desktop">
-      <h1 className="govuk-heading-xl">{entityLabel}</h1>
+      <h1 className="govuk-heading-xl">{entitySchema.label}</h1>
       <dl className="govuk-summary-list govuk-!-margin-bottom-9">
         <div className="govuk-summary-list__row">
           <dt className="govuk-summary-list__key">Data set name</dt>
-          <dd className="govuk-summary-list__value">{entityLabel}</dd>
+          <dd className="govuk-summary-list__value">{entitySchema.label}</dd>
           <dd className="govuk-summary-list__actions"></dd>
         </div>
         <div className="govuk-summary-list__row">
           <dt className="govuk-summary-list__key">Data set description</dt>
-          <dd className="govuk-summary-list__value">{description.description}</dd>
+          <dd className="govuk-summary-list__value">{entitySchema.description}</dd>
           <dd className="govuk-summary-list__actions">
-            <Link className="govuk-link" to={entityDescriptionUpdate}>
-              Change<span className="govuk-visually-hidden"> data set description</span>
-            </Link>
+            { config.readOnly ?
+              <React.Fragment></React.Fragment>
+            :
+              <React.Fragment>
+                  <Link className="govuk-link" to={entityDescriptionUpdate}>
+                    Change<span className="govuk-visually-hidden"> Data set description</span>
+                  </Link>
+              </React.Fragment>
+            }
           </dd>
+
         </div>
         <div className="govuk-summary-list__row">
           <dt className="govuk-summary-list__key">Last Updated</dt>
-          <dd className="govuk-summary-list__value">{description.schemalastupdated}</dd>
+          <dd className="govuk-summary-list__value">{entitySchema.schemalastupdated}</dd>
           <dd className="govuk-summary-list__actions"></dd>
         </div>
         <div className="govuk-summary-list__row">
           <dt className="govuk-summary-list__key">Data Version</dt>
-          <dd className="govuk-summary-list__value">{description.dataversion}</dd>
+          <dd className="govuk-summary-list__value">{entitySchema.dataversion}</dd>
           <dd className="govuk-summary-list__actions"></dd>
         </div>
       </dl>
@@ -66,7 +66,8 @@ class EntitySchema extends React.Component {
 
   componentDidMount() {
     const {name} = this.props.match.params;
-    const entitySchema = util.format(apiUrls.entitySchema, name, '?schemaOnly=true');
+    const entitySchema = util.format(apiUrls.entitySchema, name);
+
     fetch(entitySchema, {
       method: 'GET',
       headers: {
@@ -103,7 +104,15 @@ class EntitySchema extends React.Component {
               <EntityContent entityObject={this.state.entityObject}/>
             }
           </div>
-          <Link className='govuk-button' to={entityDelete} role='button' draggable='false'>Delete this data set</Link>
+
+          { config.readOnly ?
+            <React.Fragment></React.Fragment>
+          :
+            <React.Fragment>
+              <Link className="govuk-button" to={entityDelete} role="button" draggable="false">Delete this data set</Link>
+            </React.Fragment>
+          }
+
         </main>
       </div>
     );
