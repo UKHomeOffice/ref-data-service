@@ -19,6 +19,16 @@ const getRequiredTouchedFieldKeys = (requiredFields, touchedFields) => {
   return fields;
 };
 
+const compareEntities = (a, b) => {
+  // ignore upper and lowercase
+  const labelA = a.schema.label.toUpperCase();
+  const labelB = b.schema.label.toUpperCase();
+  if (labelA < labelB) return -1;
+  if (labelA > labelB) return 1;
+  // names are equal
+  return 0;
+};
+
 // takes an array of `touched` fields and check
 // if there's a field missing in the values object
 const touchedFieldHasValue = (fields, valuesObject) => {
@@ -35,6 +45,7 @@ const touchedFieldHasValue = (fields, valuesObject) => {
 };
 
 export {
+  compareEntities,
   getKeyByValue,
   getRequiredTouchedFieldKeys,
   touchedFieldHasValue,
