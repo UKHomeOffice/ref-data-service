@@ -1,11 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // local imports
 import Banner from './Banner';
 import config from '../../config/core';
 import logger from '../../logger';
+import { compareEntities } from '../utils';
 
 const {apiUrls, serviceDesk} = config;
 
@@ -65,6 +66,7 @@ class Entities extends React.Component {
       return res.json();
     })
     .then(obj => {
+      obj.data = obj.data.sort(compareEntities);
       this.setState({ entitiesObject: obj })
     })
     .catch(error => {
