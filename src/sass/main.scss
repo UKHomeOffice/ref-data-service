@@ -62,3 +62,8 @@ $govuk-font-family: 'Inter', sans-serif;
 .break-block {
   display: block;
 }
+
+// Entity items
+.title-case {
+  text-transform: capitalize;
+}
