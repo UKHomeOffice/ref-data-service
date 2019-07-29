@@ -5,6 +5,7 @@ import util from 'util';
 
 // local imports
 import Banner from './Banner';
+import ServiceUnavailable from './ServiceUnavailable';
 import config from '../../config/core';
 
 const {appUrls, apiUrls} = config;
@@ -46,9 +47,7 @@ const TableRows = ({ data }) => {
 class EntityItems extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      itemsObject: {},
-    };
+    this.state = {itemsObject: {}, error: null };
   }
 
   componentDidMount() {
@@ -71,14 +70,14 @@ class EntityItems extends React.Component {
     .then(obj => {
       this.setState({ itemsObject: obj })
     })
-    .catch(error => {
-      this.props.history.push({
-        pathname: '/service_unavailable'
-      });
-    });
+    .catch(error => this.setState({ error }));
   }
 
   render() {
+    if (this.state.error) {
+      return <ServiceUnavailable />
+    }
+
     const itemNew = util.format(appUrls.itemNew, this.props.match.params.name);
     return (
       <div className='govuk-width-container'>

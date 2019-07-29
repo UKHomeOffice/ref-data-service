@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 // local imports
 import Banner from './Banner';
+import ServiceUnavailable from './ServiceUnavailable';
 import config from '../../config/core';
 import logger from '../../logger';
 import { getKeyByValue } from '../utils';
@@ -59,9 +60,7 @@ const EntityContent = ({entityObject}) => {
 class EntitySchema extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      entityObject: {},
-    };
+    this.state = {entityObject: {}, error: null };
   }
 
   componentDidMount() {
@@ -85,14 +84,14 @@ class EntitySchema extends React.Component {
     .then(obj => {
       this.setState({ entityObject: obj })
     })
-    .catch(error => {
-      this.props.history.push({
-        pathname: '/service_unavailable'
-      });
-    });
+    .catch(error => this.setState({ error }));
   }
 
   render() {
+    if (this.state.error) {
+      return <ServiceUnavailable />
+    }
+
     const entityDelete = util.format(appUrls.entityDelete, this.props.match.params.name);
     return (
       <div className="govuk-width-container">

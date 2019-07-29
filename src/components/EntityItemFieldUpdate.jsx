@@ -6,6 +6,7 @@ import util from 'util';
 
 // local imports
 import Banner from './Banner';
+import ServiceUnavailable from './ServiceUnavailable';
 import config from '../../config/core';
 import logger from '../../logger';
 
@@ -67,9 +68,7 @@ class EntityItemFieldUpdate extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
-    this.state = {
-      itemObject: {},
-    };
+    this.state = { itemObject: {}, error: null };
   }
 
   componentDidMount() {
@@ -93,11 +92,7 @@ class EntityItemFieldUpdate extends React.Component {
     .then(obj => {
       this.setState({ itemObject: obj })
     })
-    .catch(error => {
-      this.props.history.push({
-        pathname: '/service_unavailable'
-      });
-    });
+    .catch(error => this.setState({ error }));
   }
 
   onSubmit(values, form) {
@@ -130,14 +125,14 @@ class EntityItemFieldUpdate extends React.Component {
         // state: will carry the 'reference number'
       });
     })
-    .catch(error => {
-      this.props.history.push({
-        pathname: '/service_unavailable'
-      });
-    });
+    .catch(error => this.setState({ error }));
   }
 
   render() {
+    if (this.state.error) {
+      return <ServiceUnavailable />
+    }
+
     let data, description, fieldValue, fieldMaxLength, idStyle, classStyle;
     let {field} = this.props.match.params;
     const backLink = util.format(appUrls.item, this.props.match.params.name, this.props.match.params.id);

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // local imports
 import Banner from './Banner';
+import ServiceUnavailable from './ServiceUnavailable';
 import config from '../../config/core';
 import logger from '../../logger';
 import { compareEntities } from '../utils';
@@ -43,9 +44,7 @@ const EntitiesData = ({ data }) => {
 class Entities extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      entitiesObject: {}
-    };
+    this.state = { entitiesObject: {}, error: null };
   }
 
   componentDidMount() {
@@ -69,14 +68,14 @@ class Entities extends React.Component {
       obj.data = obj.data.sort(compareEntities);
       this.setState({ entitiesObject: obj })
     })
-    .catch(error => {
-      this.props.history.push({
-        pathname: '/service_unavailable'
-      });
-    });
+    .catch(error => this.setState({ error }));
   }
 
   render() {
+    if (this.state.error) {
+      return <ServiceUnavailable />
+    }
+
     return (
       <div className="govuk-width-container">
         <Banner/>
