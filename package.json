@@ -5,6 +5,7 @@
   "scripts": {
     "build": "webpack -p",
     "build-dev": "webpack --mode development",
+    "client-dev": "webpack-dev-server --mode development --watch --watch-poll",
     "client": "webpack-dev-server --mode development",
     "test": "jest",
     "test-coverage": "jest --coverage --colors"

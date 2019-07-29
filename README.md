@@ -16,7 +16,7 @@ $ npm install
 $ npm run build-dev
 
 # run the application in development mode
-$ npm run client
+$ npm run client-dev
 ```
 
 ## Development with Docker (option 2)
