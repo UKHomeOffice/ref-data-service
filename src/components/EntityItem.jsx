@@ -5,6 +5,7 @@ import util from 'util';
 
 // local imports
 import Banner from './Banner';
+import ServiceUnavailable from './ServiceUnavailable';
 import config from '../../config/core';
 
 const {appUrls, apiUrls} = config;
@@ -38,9 +39,7 @@ const ItemData = ({
 class EntityItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      itemObject: {},
-    };
+    this.state = {itemObject: {}, error: null };
   }
 
   componentDidMount() {
@@ -63,14 +62,14 @@ class EntityItem extends React.Component {
     .then(obj => {
       this.setState({ itemObject: obj })
     })
-    .catch(error => {
-      this.props.history.push({
-        pathname: '/service_unavailable'
-      });
-    });
+    .catch(error => this.setState({ error }));
   }
 
   render() {
+    if (this.state.error) {
+      return <ServiceUnavailable />
+    }
+
     const {name, id} = this.props.match.params;
     const itemDelete = util.format(appUrls.itemDelete, name, id);
     const backLink = util.format(appUrls.entity, this.state.itemObject.entityName);

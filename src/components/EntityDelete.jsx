@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 // local imports
 import Banner from './Banner';
+import ServiceUnavailable from './ServiceUnavailable';
 import config from '../../config/core';
 import logger from '../../logger';
 
@@ -15,6 +16,7 @@ class EntityDelete extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = { error: null };
   }
 
   handleSubmit(values) {
@@ -45,14 +47,14 @@ class EntityDelete extends React.Component {
         // Camunda response
       });
     })
-    .catch(error => {
-      this.props.history.push({
-        pathname: '/service_unavailable'
-      });
-    });
+    .catch(error => this.setState({ error }));
   }
 
   render() {
+    if (this.state.error) {
+      return <ServiceUnavailable />
+    }
+
     const backLink = appUrls.entities;
     return (
       <div className='govuk-width-container'>

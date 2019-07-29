@@ -6,6 +6,7 @@ import util from 'util';
 
 // local imports
 import Banner from './Banner';
+import ServiceUnavailable from './ServiceUnavailable';
 import config from '../../config/core';
 import logger from '../../logger';
 
@@ -67,14 +68,12 @@ const ChangeEffectiveFromContainer = () => (
 class EntityFieldUpdate extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      entityObject: {}
-    };
     this.onSubmit = this.onSubmit.bind(this);
+    this.state = { entityObject: {}, error: null };
   }
 
   componentDidMount() {
-    const {name} = this.props.match.params;
+    const { name } = this.props.match.params;
     const entity = util.format(apiUrls.entity, name);
 
     fetch(entity, {
@@ -94,11 +93,7 @@ class EntityFieldUpdate extends React.Component {
     .then(obj => {
       this.setState({ entityObject: obj })
     })
-    .catch(error => {
-      this.props.history.push({
-        pathname: '/service_unavailable'
-      });
-    });
+    .catch(error => this.setState({ error }));
   }
 
   onSubmit(values, form) {
@@ -132,14 +127,14 @@ class EntityFieldUpdate extends React.Component {
         // state: will carry the 'reference number'
       });
     })
-    .catch(error => {
-      this.props.history.push({
-        pathname: '/service_unavailable'
-      });
-    });
+    .catch(error => this.setState({ error }));
   }
 
   render() {
+    if (this.state.error) {
+      return <ServiceUnavailable />
+    }
+
     let field, entityName, label, description;
     const backLink = appUrls.entities;
 

@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 // local imports
 import Banner from './Banner';
 import ErrorSummary from './ErrorSummary';
+import ServiceUnavailable from './ServiceUnavailable';
 import config from '../../config/core';
 import logger from '../../logger';
 import {
@@ -85,9 +86,7 @@ class EntityItemCreate extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {
-      data: {},
-    };
+    this.state = { data: {}, error: null };
   }
 
   componentDidMount() {
@@ -112,11 +111,7 @@ class EntityItemCreate extends React.Component {
     .then(obj => {
       this.setState({ data: obj })
     })
-    .catch(error => {
-      this.props.history.push({
-        pathname: '/service_unavailable'
-      });
-    });
+    .catch(error => this.setState({ error }));
   }
 
   handleSubmit(values, form) {
@@ -147,14 +142,14 @@ class EntityItemCreate extends React.Component {
         // Camunda response
       });
     })
-    .catch(error => {
-      this.props.history.push({
-        pathname: '/service_unavailable'
-      });
-    });
+    .catch(error => this.setState({ error }));
   }
 
   render() {
+    if (this.state.error) {
+      return <ServiceUnavailable />
+    }
+
     let fieldProperties, requiredFields;
     const { data } = this.state;
     const backLink = util.format(appUrls.entity, this.props.match.params.name);
