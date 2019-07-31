@@ -40,7 +40,7 @@ const InputField = ({ field, fieldProperties, meta: { touched, error} }) => {
 
     return (
       <div className={error && touched ? 'govuk-form-group govuk-form-group--error': 'govuk-form-group'}>
-        <label className='govuk-label' htmlFor={field}>{fieldProperties[field].description.label}</label>
+        <label id={field} className='govuk-label' htmlFor={field}>{fieldProperties[field].description.label}</label>
         <span id={idHintStyle} className='govuk-hint'>{fieldProperties[field].description.description}</span>
         <span id={idErrorStyle} className='govuk-error-message'>
           <ErrorField name={field} />
@@ -58,21 +58,21 @@ const ItemFields = ({ requiredFields, fieldProperties }) => {
       if (requiredFields.includes(field)) {
         fieldElements.push(
           <Field
+            key={field}
             name={field}
             field={field}
             fieldProperties={fieldProperties}
             validate={required}
-            key={field}
             component={InputField}
           />
         );
       } else {
         fieldElements.push(
           <Field
+            key={field}
             name={field}
             field={field}
             fieldProperties={fieldProperties}
-            key={field}
             component={InputField}
           />
         );
@@ -177,7 +177,7 @@ class EntityItemCreate extends React.Component {
 
                       { hasErrors ?
                         <div className='govuk-error-summary'>
-                          <h2 class='govuk-error-summary__title' id='error-summary-title'>There is a problem</h2>
+                          <h2 className='govuk-error-summary__title' id='error-summary-title'>There is a problem</h2>
                           <ul className='govuk-list govuk-error-summary__list'>
                             <ErrorSummary fieldProperties={fieldProperties} />
                           </ul>

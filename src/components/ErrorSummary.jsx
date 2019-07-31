@@ -1,12 +1,13 @@
 import { Field } from "react-final-form";
 import React from 'react';
 
-const ErrorSummaryField = name => (
+const ErrorSummaryField = (field, label) => (
   <Field
-    name={name}
+    key={field}
+    name={field}
     subscription={{ touched: true, error: true }}
     render={({ meta: { touched, error } }) => (
-      touched && error ? <li className='error-field'><a href='#'>{name} is {error}</a></li> : null
+      touched && error ? <li className='error-field'><a href={'#' + field}>{label} is {error}</a></li> : null
     )}
   />
 );
@@ -16,7 +17,8 @@ const ErrorSummary = ({ fieldProperties }) => {
 
   for (const field in fieldProperties) {
     if (field != 'id') {
-      fieldElements.push(ErrorSummaryField(field))
+      const label = fieldProperties[field].description.label;
+      fieldElements.push(ErrorSummaryField(field, label));
     }
   }
   return fieldElements;
