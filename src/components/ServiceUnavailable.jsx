@@ -26,7 +26,7 @@ const ServiceUnavailable = (props) => {
             </p>
             <p className="govuk-body">
               Support hours:
-              <strong className='break-block'>Monday to Friday: 8am to 8pm</strong>
+              <strong className='break-block'>Monday to Friday: 9am-5pm.</strong>
             </p>
           </div>
         </div>
