@@ -1,5 +1,5 @@
 {
-  "name": "reference-data-governance-tool",
+  "name": "ref-data-service",
   "version": "0.1.0",
   "description": "A frontend service for interacting with the Reference Data Service API",
   "scripts": {
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UKHomeOffice/reference-data-governance-tool.git"
+    "url": "git+https://github.com/UKHomeOffice/ref-data-service.git"
   },
   "author": "Pedro Miguel",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/UKHomeOffice/reference-data-governance-tool/issues"
+    "url": "https://github.com/UKHomeOffice/ref-data-service/issues"
   },
-  "homepage": "https://github.com/UKHomeOffice/reference-data-governance-tool#readme",
+  "homepage": "https://github.com/UKHomeOffice/ref-data-service#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",

@@ -1,4 +1,4 @@
-# reference-data-governance-tool
+# ref-data-service
 A frontend service for interacting with the Reference Data Service API
 
 ## Requirements
