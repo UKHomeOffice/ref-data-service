@@ -15,8 +15,7 @@ const ServiceUnavailable = (props) => {
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">
             <h1 className="govuk-heading-xl">Sorry, there is a problem with the service</h1>
-            <p className="govuk-body">Try again later.</p>
-            <p className="govuk-body">We have not submitted your change request. When the service is available, you will have to start again.</p>
+            <p className="govuk-body">Please try again later.</p>
             <p className="govuk-body">Contact the COP Service Support Desk if you have any questions:</p>
             <p className="govuk-body">
               Online:
