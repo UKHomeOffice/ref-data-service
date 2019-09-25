@@ -23,17 +23,62 @@ pipeline:
     when:
       event: push
 
+  synch_dev_secrets:
+    image: quay.io/ukhomeofficedigital/cop-secrets
+    environment:
+      - DRONE_SERVER=https://drone.acp.homeoffice.gov.uk
+    secrets:
+      - source: DEV_DRONE_AWS_ACCESS_KEY_ID
+        target: AWS_ACCESS_KEY_ID
+      - source: DEV_DRONE_AWS_SECRET_ACCESS_KEY
+        target: AWS_SECRET_ACCESS_KEY
+      - source: DRONE_PUBLIC_TOKEN
+        target: DRONE_TOKEN
+    when:
+      branch: master
+      event: push
+
+  synch_staging_secrets:
+    image: quay.io/ukhomeofficedigital/cop-secrets
+    environment:
+      - DRONE_SERVER=https://drone.acp.homeoffice.gov.uk
+    secrets:
+      - source: STAGING_DRONE_AWS_ACCESS_KEY_ID
+        target: AWS_ACCESS_KEY_ID
+      - source: STAGING_DRONE_AWS_SECRET_ACCESS_KEY
+        target: AWS_SECRET_ACCESS_KEY
+      - source: DRONE_PUBLIC_TOKEN
+        target: DRONE_TOKEN
+    when:
+      event: deployment
+      environment: staging
+
+  synch_production_secrets:
+    image: quay.io/ukhomeofficedigital/cop-secrets
+    environment:
+      - DRONE_SERVER=https://drone.acp.homeoffice.gov.uk
+    secrets:
+      - source: PRODUCTION_DRONE_AWS_ACCESS_KEY_ID
+        target: AWS_ACCESS_KEY_ID
+      - source: PRODUCTION_DRONE_AWS_SECRET_ACCESS_KEY
+        target: AWS_SECRET_ACCESS_KEY
+      - source: DRONE_PUBLIC_TOKEN
+        target: DRONE_TOKEN
+    when:
+      event: deployment
+      environment: production
+
   image_to_quay:
     image: quay.io/ukhomeofficedigital/drone-docker
     secrets:
-      - DOCKER_PASSWORD
-      - DOCKER_USERNAME
+      - source: QUAY_PASSWORD
+        target: DOCKER_PASSWORD
+      - source: QUAY_USERNAME
+        target: DOCKER_USERNAME
     registry: quay.io
     repo: quay.io/ukhomeofficedigital/ref-data-gov-tool
     tags:
-      - ${DRONE_BUILD_NUMBER}
       - ${DRONE_COMMIT_SHA}
-      - latest
     when:
       branch: master
       event: push
@@ -41,28 +86,45 @@ pipeline:
   deploy_to_dev:
     image: quay.io/ukhomeofficedigital/kd
     secrets:
-      - DEV_API_BASE_URL
-      - DEV_ENVIRONMENT
-      - DEV_HOSTNAME
-      - DEV_KEYCLOAK_AUTH_URL
-      - DEV_KEYCLOAK_CLIENT_ID
-      - DEV_KEYCLOAK_REALM
-      - DEV_KUBE_NAMESPACE
-      - DEV_KUBE_SERVER
-      - DEV_KUBE_TOKEN
-      - DEV_READ_ONLY_MODE
+      - source: DEV_API_REF_PROTOCOL
+        target: API_REF_PROTOCOL
+      - source: DEV_API_REF_URL
+        target: API_REF_URL
+      - source: DEV_ENVIRONMENT
+        target: ENVIRONMENT
+      - source: DEV_KEYCLOAK_PROTOCOL
+        target: KEYCLOAK_PROTOCOL
+      - source: DEV_KEYCLOAK_REALM
+        target: KEYCLOAK_REALM
+      - source: DEV_KEYCLOAK_URL
+        target: KEYCLOAK_URL
+      - source: DEV_KUBE_SERVER
+        target: KUBE_SERVER
+      - source: DEV_KUBE_TOKEN
+        target: KUBE_TOKEN
+      - source: DEV_WWW_REF_IMAGE
+        target: WWW_REF_IMAGE
+      - source: DEV_WWW_REF_KEYCLOAK_CLIENT_ID
+        target: WWW_REF_KEYCLOAK_CLIENT_ID
+      - source: DEV_WWW_REF_KUBE_NAMESPACE
+        target: WWW_REF_KUBE_NAMESPACE
+      - source: DEV_WWW_REF_NAME
+        target: WWW_REF_NAME
+      - source: DEV_WWW_REF_PORT
+        target: WWW_REF_PORT
+      - source: DEV_WWW_REF_PROTOCOL
+        target: WWW_REF_PROTOCOL
+      - source: DEV_WWW_REF_READ_ONLY_MODE
+        target: WWW_REF_READ_ONLY_MODE
+      - source: DEV_WWW_REF_URL
+        target: WWW_REF_URL
+      - source: NGINX_IMAGE
+        target: NGINX_IMAGE
+      - source: NGINX_TAG
+        target: NGINX_TAG
     commands:
-      - export API_BASE_URL=$${DEV_API_BASE_URL}
-      - export ENVIRONMENT=$${DEV_ENVIRONMENT}
-      - export HOSTNAME=$${DEV_HOSTNAME}
-      - export KEYCLOAK_AUTH_URL=$${DEV_KEYCLOAK_AUTH_URL}
-      - export KEYCLOAK_CLIENT_ID=$${DEV_KEYCLOAK_CLIENT_ID}
-      - export KEYCLOAK_REALM=$${DEV_KEYCLOAK_REALM}
-      - export KUBE_NAMESPACE=$${DEV_KUBE_NAMESPACE}
-      - export KUBE_SERVER=$${DEV_KUBE_SERVER}
-      - export KUBE_TOKEN=$${DEV_KUBE_TOKEN}
-      - export READ_ONLY_MODE=$${DEV_READ_ONLY_MODE}
-      - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
+      - WWW_REF_TAG=$${DRONE_COMMIT_SHA}
+      - kd --insecure-skip-tls-verify -f kube/cert.yml -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       branch: master
       event: push
@@ -70,28 +132,45 @@ pipeline:
   deploy_to_staging:
     image: quay.io/ukhomeofficedigital/kd
     secrets:
-      - STAGING_API_BASE_URL
-      - STAGING_ENVIRONMENT
-      - STAGING_HOSTNAME
-      - STAGING_KEYCLOAK_AUTH_URL
-      - STAGING_KEYCLOAK_CLIENT_ID
-      - STAGING_KEYCLOAK_REALM
-      - STAGING_KUBE_NAMESPACE
-      - STAGING_KUBE_SERVER
-      - STAGING_KUBE_TOKEN
-      - STAGING_READ_ONLY_MODE
+      - source: STAGING_API_REF_PROTOCOL
+        target: API_REF_PROTOCOL
+      - source: STAGING_API_REF_URL
+        target: API_REF_URL
+      - source: STAGING_ENVIRONMENT
+        target: ENVIRONMENT
+      - source: STAGING_KEYCLOAK_PROTOCOL
+        target: KEYCLOAK_PROTOCOL
+      - source: STAGING_KEYCLOAK_REALM
+        target: KEYCLOAK_REALM
+      - source: STAGING_KEYCLOAK_URL
+        target: KEYCLOAK_URL
+      - source: STAGING_KUBE_SERVER
+        target: KUBE_SERVER
+      - source: STAGING_KUBE_TOKEN
+        target: KUBE_TOKEN
+      - source: STAGING_WWW_REF_IMAGE
+        target: WWW_REF_IMAGE
+      - source: STAGING_WWW_REF_KEYCLOAK_CLIENT_ID
+        target: WWW_REF_KEYCLOAK_CLIENT_ID
+      - source: STAGING_WWW_REF_KUBE_NAMESPACE
+        target: WWW_REF_KUBE_NAMESPACE
+      - source: STAGING_WWW_REF_NAME
+        target: WWW_REF_NAME
+      - source: STAGING_WWW_REF_PORT
+        target: WWW_REF_PORT
+      - source: STAGING_WWW_REF_PROTOCOL
+        target: WWW_REF_PROTOCOL
+      - source: STAGING_WWW_REF_READ_ONLY_MODE
+        target: WWW_REF_READ_ONLY_MODE
+      - source: STAGING_WWW_REF_URL
+        target: WWW_REF_URL
+      - source: NGINX_IMAGE
+        target: NGINX_IMAGE
+      - source: NGINX_TAG
+        target: NGINX_TAG
     commands:
-      - export API_BASE_URL=$${STAGING_API_BASE_URL}
-      - export ENVIRONMENT=$${STAGING_ENVIRONMENT}
-      - export HOSTNAME=$${STAGING_HOSTNAME}
-      - export KEYCLOAK_AUTH_URL=$${STAGING_KEYCLOAK_AUTH_URL}
-      - export KEYCLOAK_CLIENT_ID=$${STAGING_KEYCLOAK_CLIENT_ID}
-      - export KEYCLOAK_REALM=$${STAGING_KEYCLOAK_REALM}
-      - export KUBE_NAMESPACE=$${STAGING_KUBE_NAMESPACE}
-      - export KUBE_SERVER=$${STAGING_KUBE_SERVER}
-      - export KUBE_TOKEN=$${STAGING_KUBE_TOKEN}
-      - export READ_ONLY_MODE=$${STAGING_READ_ONLY_MODE}
-      - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
+      - WWW_REF_TAG=$${DRONE_COMMIT_SHA}
+      - kd --insecure-skip-tls-verify -f kube/cert.yml -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       event: deployment
       environment: staging
@@ -99,28 +178,45 @@ pipeline:
   deploy_to_prod:
     image: quay.io/ukhomeofficedigital/kd
     secrets:
-      - PROD_API_BASE_URL
-      - PROD_ENVIRONMENT
-      - PROD_HOSTNAME
-      - PROD_KEYCLOAK_AUTH_URL
-      - PROD_KEYCLOAK_CLIENT_ID
-      - PROD_KEYCLOAK_REALM
-      - PROD_KUBE_NAMESPACE
-      - PROD_KUBE_SERVER
-      - PROD_KUBE_TOKEN
-      - PROD_READ_ONLY_MODE
+      - source: PRODUCTION_API_REF_PROTOCOL
+        target: API_REF_PROTOCOL
+      - source: PRODUCTION_API_REF_URL
+        target: API_REF_URL
+      - source: PRODUCTION_ENVIRONMENT
+        target: ENVIRONMENT
+      - source: PRODUCTION_KEYCLOAK_PROTOCOL
+        target: KEYCLOAK_PROTOCOL
+      - source: PRODUCTION_KEYCLOAK_REALM
+        target: KEYCLOAK_REALM
+      - source: PRODUCTION_KEYCLOAK_URL
+        target: KEYCLOAK_URL
+      - source: PRODUCTION_KUBE_SERVER
+        target: KUBE_SERVER
+      - source: PRODUCTION_KUBE_TOKEN
+        target: KUBE_TOKEN
+      - source: PRODUCTION_WWW_REF_IMAGE
+        target: WWW_REF_IMAGE
+      - source: PRODUCTION_WWW_REF_KEYCLOAK_CLIENT_ID
+        target: WWW_REF_KEYCLOAK_CLIENT_ID
+      - source: PRODUCTION_WWW_REF_KUBE_NAMESPACE
+        target: WWW_REF_KUBE_NAMESPACE
+      - source: PRODUCTION_WWW_REF_NAME
+        target: WWW_REF_NAME
+      - source: PRODUCTION_WWW_REF_PORT
+        target: WWW_REF_PORT
+      - source: PRODUCTION_WWW_REF_PROTOCOL
+        target: WWW_REF_PROTOCOL
+      - source: PRODUCTION_WWW_REF_READ_ONLY_MODE
+        target: WWW_REF_READ_ONLY_MODE
+      - source: PRODUCTION_WWW_REF_URL
+        target: WWW_REF_URL
+      - source: NGINX_IMAGE
+        target: NGINX_IMAGE
+      - source: NGINX_TAG
+        target: NGINX_TAG
     commands:
-      - export API_BASE_URL=$${PROD_API_BASE_URL}
-      - export ENVIRONMENT=$${PROD_ENVIRONMENT}
-      - export HOSTNAME=$${PROD_HOSTNAME}
-      - export KEYCLOAK_AUTH_URL=$${PROD_KEYCLOAK_AUTH_URL}
-      - export KEYCLOAK_CLIENT_ID=$${PROD_KEYCLOAK_CLIENT_ID}
-      - export KEYCLOAK_REALM=$${PROD_KEYCLOAK_REALM}
-      - export KUBE_NAMESPACE=$${PROD_KUBE_NAMESPACE}
-      - export KUBE_SERVER=$${PROD_KUBE_SERVER}
-      - export KUBE_TOKEN=$${PROD_KUBE_TOKEN}
-      - export READ_ONLY_MODE=$${PROD_READ_ONLY_MODE}
-      - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
+      - WWW_REF_TAG=$${DRONE_COMMIT_SHA}
+      - kd --insecure-skip-tls-verify -f kube/cert.yml -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       event: deployment
       environment: production
