@@ -105,7 +105,7 @@ pipeline:
       - source: WWW_REF_IMAGE
         target: WWW_REF_IMAGE
       - source: WWW_REF_KEYCLOAK_CLIENT_ID
-        target: WWW_REF_KEYCLOAK_CLIENT_ID
+        target: KEYCLOAK_CLIENT_ID
       - source: DEV_WWW_REF_KUBE_NAMESPACE
         target: KUBE_NAMESPACE
       - source: WWW_REF_NAME
@@ -151,7 +151,7 @@ pipeline:
       - source: WWW_REF_IMAGE
         target: WWW_REF_IMAGE
       - source: WWW_REF_KEYCLOAK_CLIENT_ID
-        target: WWW_REF_KEYCLOAK_CLIENT_ID
+        target: KEYCLOAK_CLIENT_ID
       - source: STAGING_WWW_REF_KUBE_NAMESPACE
         target: KUBE_NAMESPACE
       - source: WWW_REF_NAME
@@ -197,7 +197,7 @@ pipeline:
       - source: WWW_REF_IMAGE
         target: WWW_REF_IMAGE
       - source: WWW_REF_KEYCLOAK_CLIENT_ID
-        target: WWW_REF_KEYCLOAK_CLIENT_ID
+        target: KEYCLOAK_CLIENT_ID
       - source: PRODUCTION_WWW_REF_KUBE_NAMESPACE
         target: KUBE_NAMESPACE
       - source: WWW_REF_NAME
