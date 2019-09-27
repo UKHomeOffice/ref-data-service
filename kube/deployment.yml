@@ -17,7 +17,7 @@ spec:
         name: {{.WWW_REF_NAME}}
     spec:
       containers:
-      - name: {{.WWW_REF_NAME}}
+      - name: frontend
         image: {{.WWW_REF_IMAGE}}:{{.WWW_REF_TAG}}
         imagePullPolicy: Always
         securityContext:
@@ -31,7 +31,7 @@ spec:
             cpu: 200m
             memory: 500Mi
         ports:
-          - name: {{.WWW_REF_NAME}}
+          - name: frontend
             containerPort: {{.WWW_REF_PORT}}
         env:
           - name: KEYCLOAK_AUTH_URL
