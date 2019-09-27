@@ -124,7 +124,7 @@ pipeline:
         target: NGINX_TAG
     commands:
       - export WWW_REF_TAG=$${DRONE_COMMIT_SHA}
-      - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
+      - kd --insecure-skip-tls-verify -f kube/cert.yml -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       branch: master
       event: push
@@ -170,7 +170,7 @@ pipeline:
         target: NGINX_TAG
     commands:
       - export WWW_REF_TAG=$${DRONE_COMMIT_SHA}
-      - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
+      - kd --insecure-skip-tls-verify -f kube/cert.yml -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       event: deployment
       environment: staging
@@ -216,7 +216,7 @@ pipeline:
         target: NGINX_TAG
     commands:
       - export WWW_REF_TAG=$${DRONE_COMMIT_SHA}
-      - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
+      - kd --insecure-skip-tls-verify -f kube/cert.yml -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       event: deployment
       environment: production
