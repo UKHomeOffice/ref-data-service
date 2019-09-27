@@ -123,7 +123,7 @@ pipeline:
       - source: NGINX_TAG
         target: NGINX_TAG
     commands:
-      - WWW_REF_TAG=$${DRONE_COMMIT_SHA}
+      - export WWW_REF_TAG=$${DRONE_COMMIT_SHA}
       - kd --insecure-skip-tls-verify -f kube/cert.yml -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       branch: master
@@ -169,7 +169,7 @@ pipeline:
       - source: NGINX_TAG
         target: NGINX_TAG
     commands:
-      - WWW_REF_TAG=$${DRONE_COMMIT_SHA}
+      - export WWW_REF_TAG=$${DRONE_COMMIT_SHA}
       - kd --insecure-skip-tls-verify -f kube/cert.yml -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       event: deployment
@@ -215,7 +215,7 @@ pipeline:
       - source: NGINX_TAG
         target: NGINX_TAG
     commands:
-      - WWW_REF_TAG=$${DRONE_COMMIT_SHA}
+      - export WWW_REF_TAG=$${DRONE_COMMIT_SHA}
       - kd --insecure-skip-tls-verify -f kube/cert.yml -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       event: deployment
