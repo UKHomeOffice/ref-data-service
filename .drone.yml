@@ -100,7 +100,7 @@ pipeline:
         target: KEYCLOAK_URL
       - source: DEV_KUBE_SERVER
         target: KUBE_SERVER
-      - source: DEV_KUBE_TOKEN
+      - source: DEV_API_REF_KUBE_TOKEN
         target: KUBE_TOKEN
       - source: WWW_REF_IMAGE
         target: WWW_REF_IMAGE
@@ -124,7 +124,7 @@ pipeline:
         target: NGINX_TAG
     commands:
       - export WWW_REF_TAG=$${DRONE_COMMIT_SHA}
-      - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
+      - kd --insecure-skip-tls-verify -f kube/cert.yml -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       branch: master
       event: push
@@ -146,7 +146,7 @@ pipeline:
         target: KEYCLOAK_URL
       - source: STAGING_KUBE_SERVER
         target: KUBE_SERVER
-      - source: STAGING_KUBE_TOKEN
+      - source: STAGING_API_REF_KUBE_TOKEN
         target: KUBE_TOKEN
       - source: WWW_REF_IMAGE
         target: WWW_REF_IMAGE
@@ -170,7 +170,7 @@ pipeline:
         target: NGINX_TAG
     commands:
       - export WWW_REF_TAG=$${DRONE_COMMIT_SHA}
-      - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
+      - kd --insecure-skip-tls-verify -f kube/cert.yml -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       event: deployment
       environment: staging
@@ -192,7 +192,7 @@ pipeline:
         target: KEYCLOAK_URL
       - source: PRODUCTION_KUBE_SERVER
         target: KUBE_SERVER
-      - source: PRODUCTION_KUBE_TOKEN
+      - source: PRODUCTION_API_REF_KUBE_TOKEN
         target: KUBE_TOKEN
       - source: WWW_REF_IMAGE
         target: WWW_REF_IMAGE
@@ -216,7 +216,7 @@ pipeline:
         target: NGINX_TAG
     commands:
       - export WWW_REF_TAG=$${DRONE_COMMIT_SHA}
-      - kd --insecure-skip-tls-verify -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
+      - kd --insecure-skip-tls-verify -f kube/cert.yml -f kube/secret.yml -f kube/deployment.yml -f kube/service.yml -f kube/ingress.yml -f kube/network-policy.yml
     when:
       event: deployment
       environment: production
