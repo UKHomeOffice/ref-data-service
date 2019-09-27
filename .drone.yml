@@ -107,7 +107,7 @@ pipeline:
       - source: WWW_REF_KEYCLOAK_CLIENT_ID
         target: WWW_REF_KEYCLOAK_CLIENT_ID
       - source: DEV_WWW_REF_KUBE_NAMESPACE
-        target: WWW_REF_KUBE_NAMESPACE
+        target: KUBE_NAMESPACE
       - source: WWW_REF_NAME
         target: WWW_REF_NAME
       - source: WWW_REF_PORT
@@ -153,7 +153,7 @@ pipeline:
       - source: WWW_REF_KEYCLOAK_CLIENT_ID
         target: WWW_REF_KEYCLOAK_CLIENT_ID
       - source: STAGING_WWW_REF_KUBE_NAMESPACE
-        target: WWW_REF_KUBE_NAMESPACE
+        target: KUBE_NAMESPACE
       - source: WWW_REF_NAME
         target: WWW_REF_NAME
       - source: WWW_REF_PORT
@@ -199,7 +199,7 @@ pipeline:
       - source: WWW_REF_KEYCLOAK_CLIENT_ID
         target: WWW_REF_KEYCLOAK_CLIENT_ID
       - source: PRODUCTION_WWW_REF_KUBE_NAMESPACE
-        target: WWW_REF_KUBE_NAMESPACE
+        target: KUBE_NAMESPACE
       - source: WWW_REF_NAME
         target: WWW_REF_NAME
       - source: WWW_REF_PORT
