@@ -102,17 +102,17 @@ pipeline:
         target: KUBE_SERVER
       - source: DEV_KUBE_TOKEN
         target: KUBE_TOKEN
-      - source: DEV_WWW_REF_IMAGE
+      - source: WWW_REF_IMAGE
         target: WWW_REF_IMAGE
-      - source: DEV_WWW_REF_KEYCLOAK_CLIENT_ID
+      - source: WWW_REF_KEYCLOAK_CLIENT_ID
         target: WWW_REF_KEYCLOAK_CLIENT_ID
       - source: DEV_WWW_REF_KUBE_NAMESPACE
         target: WWW_REF_KUBE_NAMESPACE
-      - source: DEV_WWW_REF_NAME
+      - source: WWW_REF_NAME
         target: WWW_REF_NAME
-      - source: DEV_WWW_REF_PORT
+      - source: WWW_REF_PORT
         target: WWW_REF_PORT
-      - source: DEV_WWW_REF_PROTOCOL
+      - source: WWW_REF_PROTOCOL
         target: WWW_REF_PROTOCOL
       - source: DEV_WWW_REF_READ_ONLY_MODE
         target: WWW_REF_READ_ONLY_MODE
@@ -148,17 +148,17 @@ pipeline:
         target: KUBE_SERVER
       - source: STAGING_KUBE_TOKEN
         target: KUBE_TOKEN
-      - source: STAGING_WWW_REF_IMAGE
+      - source: WWW_REF_IMAGE
         target: WWW_REF_IMAGE
-      - source: STAGING_WWW_REF_KEYCLOAK_CLIENT_ID
+      - source: WWW_REF_KEYCLOAK_CLIENT_ID
         target: WWW_REF_KEYCLOAK_CLIENT_ID
       - source: STAGING_WWW_REF_KUBE_NAMESPACE
         target: WWW_REF_KUBE_NAMESPACE
-      - source: STAGING_WWW_REF_NAME
+      - source: WWW_REF_NAME
         target: WWW_REF_NAME
-      - source: STAGING_WWW_REF_PORT
+      - source: WWW_REF_PORT
         target: WWW_REF_PORT
-      - source: STAGING_WWW_REF_PROTOCOL
+      - source: WWW_REF_PROTOCOL
         target: WWW_REF_PROTOCOL
       - source: STAGING_WWW_REF_READ_ONLY_MODE
         target: WWW_REF_READ_ONLY_MODE
@@ -194,17 +194,17 @@ pipeline:
         target: KUBE_SERVER
       - source: PRODUCTION_KUBE_TOKEN
         target: KUBE_TOKEN
-      - source: PRODUCTION_WWW_REF_IMAGE
+      - source: WWW_REF_IMAGE
         target: WWW_REF_IMAGE
-      - source: PRODUCTION_WWW_REF_KEYCLOAK_CLIENT_ID
+      - source: WWW_REF_KEYCLOAK_CLIENT_ID
         target: WWW_REF_KEYCLOAK_CLIENT_ID
       - source: PRODUCTION_WWW_REF_KUBE_NAMESPACE
         target: WWW_REF_KUBE_NAMESPACE
-      - source: PRODUCTION_WWW_REF_NAME
+      - source: WWW_REF_NAME
         target: WWW_REF_NAME
-      - source: PRODUCTION_WWW_REF_PORT
+      - source: WWW_REF_PORT
         target: WWW_REF_PORT
-      - source: PRODUCTION_WWW_REF_PROTOCOL
+      - source: WWW_REF_PROTOCOL
         target: WWW_REF_PROTOCOL
       - source: PRODUCTION_WWW_REF_READ_ONLY_MODE
         target: WWW_REF_READ_ONLY_MODE
