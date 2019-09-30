@@ -43,9 +43,9 @@ spec:
           - name: KEYCLOAK_AUTH_URL
             value: {{.KEYCLOAK_PROTOCOL}}{{.KEYCLOAK_URL}}
           - name: KEYCLOAK_CLIENT_ID
-            value: KEYCLOAK_CLIENT_ID
+            value: {{.KEYCLOAK_CLIENT_ID}}
           - name: KEYCLOAK_REALM
-            value: KEYCLOAK_REALM
+            value: {{.KEYCLOAK_REALM}}
         livenessProbe:
           httpGet:
             path: /_health
