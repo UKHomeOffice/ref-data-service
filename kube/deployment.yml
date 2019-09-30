@@ -34,27 +34,18 @@ spec:
           - name: frontend
             containerPort: {{.WWW_REF_PORT}}
         env:
-          - name: KEYCLOAK_AUTH_URL
-            valueFrom:
-              secretKeyRef:
-                name: {{.WWW_REF_NAME}}
-                key: KEYCLOAK_AUTH_URL
-          - name: KEYCLOAK_CLIENT_ID
-            valueFrom:
-              secretKeyRef:
-                name: {{.WWW_REF_NAME}}
-                key: KEYCLOAK_CLIENT_ID
-          - name: KEYCLOAK_REALM
-            valueFrom:
-              secretKeyRef:
-                name: {{.WWW_REF_NAME}}
-                key: KEYCLOAK_REALM
           - name: API_BASE_URL
             value: {{.API_REF_PROTOCOL}}{{.API_REF_URL}}
           - name: READ_ONLY_MODE
             value: {{.WWW_REF_READ_ONLY_MODE}}
           - name: ENVIRONMENT
             value: {{.ENVIRONMENT}}
+          - name: KEYCLOAK_AUTH_URL
+            value: {{.KEYCLOAK_PROTOCOL}}{{.KEYCLOAK_URL}}
+          - name: KEYCLOAK_CLIENT_ID
+            value: KEYCLOAK_CLIENT_ID
+          - name: KEYCLOAK_REALM
+            value: KEYCLOAK_REALM
         livenessProbe:
           httpGet:
             path: /_health
