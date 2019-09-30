@@ -19,7 +19,7 @@ pipeline:
   build:
     image: quay.io/ukhomeofficedigital/drone-docker
     commands:
-      - docker build -t ref-data-service:$${DRONE_COMMIT_SHA} .
+      - docker build -t ref-data-gov-tool:$${DRONE_COMMIT_SHA} .
     when:
       event: push
 
@@ -76,7 +76,7 @@ pipeline:
       - source: QUAY_USERNAME
         target: DOCKER_USERNAME
     registry: quay.io
-    repo: quay.io/ukhomeofficedigital/ref-data-service
+    repo: quay.io/ukhomeofficedigital/ref-data-gov-tool
     tags:
       - ${DRONE_COMMIT_SHA}
     when:
