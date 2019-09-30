@@ -100,7 +100,7 @@ pipeline:
         target: KEYCLOAK_URL
       - source: DEV_KUBE_SERVER
         target: KUBE_SERVER
-      - source: DEV_API_REF_KUBE_TOKEN
+      - source: DEV_KUBE_TOKEN
         target: KUBE_TOKEN
       - source: WWW_REF_IMAGE
         target: WWW_REF_IMAGE
@@ -146,7 +146,7 @@ pipeline:
         target: KEYCLOAK_URL
       - source: STAGING_KUBE_SERVER
         target: KUBE_SERVER
-      - source: STAGING_API_REF_KUBE_TOKEN
+      - source: STAGING_KUBE_TOKEN
         target: KUBE_TOKEN
       - source: WWW_REF_IMAGE
         target: WWW_REF_IMAGE
@@ -192,7 +192,7 @@ pipeline:
         target: KEYCLOAK_URL
       - source: PRODUCTION_KUBE_SERVER
         target: KUBE_SERVER
-      - source: PRODUCTION_API_REF_KUBE_TOKEN
+      - source: PRODUCTION_KUBE_TOKEN
         target: KUBE_TOKEN
       - source: WWW_REF_IMAGE
         target: WWW_REF_IMAGE
