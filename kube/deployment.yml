@@ -52,9 +52,9 @@ spec:
           - name: API_BASE_URL
             value: {{.API_REF_PROTOCOL}}{{.API_REF_URL}}
           - name: READ_ONLY_MODE
-            value: '{{.WWW_REF_READ_ONLY_MODE}}'
+            value: {{.WWW_REF_READ_ONLY_MODE}}
           - name: ENVIRONMENT
-            value: '{{.ENVIRONMENT}}'
+            value: {{.ENVIRONMENT}}
         livenessProbe:
           httpGet:
             path: /_health
