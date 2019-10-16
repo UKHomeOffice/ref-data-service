@@ -27,6 +27,7 @@ pipeline:
     image: quay.io/ukhomeofficedigital/cop-secrets
     environment:
       - DRONE_SERVER=https://drone.acp.homeoffice.gov.uk
+      - DEPLOY_ENV=dev
     secrets:
       - source: DEV_DRONE_AWS_ACCESS_KEY_ID
         target: AWS_ACCESS_KEY_ID
@@ -35,13 +36,14 @@ pipeline:
       - source: DRONE_PUBLIC_TOKEN
         target: DRONE_TOKEN
     when:
-      branch: master
-      event: push
+      environment: secrets
+      event: deployment
 
   synch_staging_secrets:
     image: quay.io/ukhomeofficedigital/cop-secrets
     environment:
       - DRONE_SERVER=https://drone.acp.homeoffice.gov.uk
+      - DEPLOY_ENV=staging
     secrets:
       - source: STAGING_DRONE_AWS_ACCESS_KEY_ID
         target: AWS_ACCESS_KEY_ID
@@ -50,13 +52,14 @@ pipeline:
       - source: DRONE_PUBLIC_TOKEN
         target: DRONE_TOKEN
     when:
+      environment: secrets
       event: deployment
-      environment: staging
 
   synch_production_secrets:
     image: quay.io/ukhomeofficedigital/cop-secrets
     environment:
       - DRONE_SERVER=https://drone.acp.homeoffice.gov.uk
+      - DEPLOY_ENV=production
     secrets:
       - source: PRODUCTION_DRONE_AWS_ACCESS_KEY_ID
         target: AWS_ACCESS_KEY_ID
@@ -65,8 +68,8 @@ pipeline:
       - source: DRONE_PUBLIC_TOKEN
         target: DRONE_TOKEN
     when:
+      environment: secrets
       event: deployment
-      environment: production
 
   image_to_quay:
     image: quay.io/ukhomeofficedigital/drone-docker
@@ -86,13 +89,13 @@ pipeline:
   deploy_to_dev:
     image: quay.io/ukhomeofficedigital/kd
     secrets:
-      - source: DEV_API_REF_PROTOCOL
+      - source: PROTOCOL_HTTPS
         target: API_REF_PROTOCOL
       - source: DEV_API_REF_URL
         target: API_REF_URL
       - source: DEV_ENVIRONMENT
         target: ENVIRONMENT
-      - source: DEV_KEYCLOAK_PROTOCOL
+      - source: PROTOCOL_HTTPS
         target: KEYCLOAK_PROTOCOL
       - source: DEV_KEYCLOAK_REALM
         target: KEYCLOAK_REALM
@@ -106,13 +109,13 @@ pipeline:
         target: WWW_REF_IMAGE
       - source: WWW_REF_KEYCLOAK_CLIENT_ID
         target: KEYCLOAK_CLIENT_ID
-      - source: DEV_WWW_REF_KUBE_NAMESPACE
+      - source: DEV_KUBE_NAMESPACE_REFDATA
         target: KUBE_NAMESPACE
       - source: WWW_REF_NAME
         target: WWW_REF_NAME
       - source: WWW_REF_PORT
         target: WWW_REF_PORT
-      - source: WWW_REF_PROTOCOL
+      - source: PROTOCOL_HTTPS
         target: WWW_REF_PROTOCOL
       - source: DEV_WWW_REF_READ_ONLY_MODE
         target: WWW_REF_READ_ONLY_MODE
@@ -132,13 +135,13 @@ pipeline:
   deploy_to_staging:
     image: quay.io/ukhomeofficedigital/kd
     secrets:
-      - source: STAGING_API_REF_PROTOCOL
+      - source: PROTOCOL_HTTPS
         target: API_REF_PROTOCOL
       - source: STAGING_API_REF_URL
         target: API_REF_URL
       - source: STAGING_ENVIRONMENT
         target: ENVIRONMENT
-      - source: STAGING_KEYCLOAK_PROTOCOL
+      - source: PROTOCOL_HTTPS
         target: KEYCLOAK_PROTOCOL
       - source: STAGING_KEYCLOAK_REALM
         target: KEYCLOAK_REALM
@@ -152,13 +155,13 @@ pipeline:
         target: WWW_REF_IMAGE
       - source: WWW_REF_KEYCLOAK_CLIENT_ID
         target: KEYCLOAK_CLIENT_ID
-      - source: STAGING_WWW_REF_KUBE_NAMESPACE
+      - source: STAGING_KUBE_NAMESPACE_REFDATA
         target: KUBE_NAMESPACE
       - source: WWW_REF_NAME
         target: WWW_REF_NAME
       - source: WWW_REF_PORT
         target: WWW_REF_PORT
-      - source: WWW_REF_PROTOCOL
+      - source: PROTOCOL_HTTPS
         target: WWW_REF_PROTOCOL
       - source: STAGING_WWW_REF_READ_ONLY_MODE
         target: WWW_REF_READ_ONLY_MODE
@@ -178,13 +181,13 @@ pipeline:
   deploy_to_prod:
     image: quay.io/ukhomeofficedigital/kd
     secrets:
-      - source: PRODUCTION_API_REF_PROTOCOL
+      - source: PROTOCOL_HTTPS
         target: API_REF_PROTOCOL
       - source: PRODUCTION_API_REF_URL
         target: API_REF_URL
       - source: PRODUCTION_ENVIRONMENT
         target: ENVIRONMENT
-      - source: PRODUCTION_KEYCLOAK_PROTOCOL
+      - source: PROTOCOL_HTTPS
         target: KEYCLOAK_PROTOCOL
       - source: PRODUCTION_KEYCLOAK_REALM
         target: KEYCLOAK_REALM
@@ -198,13 +201,13 @@ pipeline:
         target: WWW_REF_IMAGE
       - source: WWW_REF_KEYCLOAK_CLIENT_ID
         target: KEYCLOAK_CLIENT_ID
-      - source: PRODUCTION_WWW_REF_KUBE_NAMESPACE
+      - source: PRODUCTION_KUBE_NAMESPACE_REFDATA
         target: KUBE_NAMESPACE
       - source: WWW_REF_NAME
         target: WWW_REF_NAME
       - source: WWW_REF_PORT
         target: WWW_REF_PORT
-      - source: WWW_REF_PROTOCOL
+      - source: PROTOCOL_HTTPS
         target: WWW_REF_PROTOCOL
       - source: PRODUCTION_WWW_REF_READ_ONLY_MODE
         target: WWW_REF_READ_ONLY_MODE
