@@ -24,7 +24,7 @@ $ npm start
 To build the prototype's Docker container:
 
 ```bash
-docker build -t ref-data-gov-tool .
+docker build -t ref-data-service .
 ```
 
 To run the resulting Docker container:
@@ -36,7 +36,7 @@ docker run -p 8080:8080 \
   --env KEYCLOAK_CLIENT_ID=your-client-id \
   --env KEYCLOAK_REALM=your-realm \
   --env READ_ONLY_MODE=true \
-  ref-data-gov-tool
+  ref-data-service
 ```
 
 # Drone secrets
@@ -65,7 +65,7 @@ quay_username|docker (Global for all repositories and environments)
 slack_webhook|https://hooks.slack.com/services/xxx/yyy/zzz (Global for all repositories and environments)
 staging_drone_aws_access_key_id|https://console.aws.amazon.com/iam/home?region=eu-west-2#/users/bf-it-prod-drone?section=security_credentials
 staging_drone_aws_secret_access_key|https://console.aws.amazon.com/iam/home?region=eu-west-2#/users/bf-it-prod-drone?section=security_credentials
-www_ref_image|quay.io/ukhomeofficedigital/ref-data-gov-tool
+www_ref_image|quay.io/ukhomeofficedigital/ref-data-service
 www_ref_keycloak_client_id|keycloak client name
 www_ref_name|ref-data-service
 www_ref_port|8080
