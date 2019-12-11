@@ -26,7 +26,7 @@ const apiUrls = {
 
 const serviceDeskUrls = {
   addDataSet: `${serviceDeskBaseUrl}/customer/portal/3/create/51`,
-  feedback: `${serviceDeskBaseUrl}/customer/portal/3/create/50`,
+  feedback: `${serviceDeskBaseUrl}/customer/portal/3/create/54`,
   help: `${serviceDeskBaseUrl}/customer/portal/3/group/18`,
 };
 
