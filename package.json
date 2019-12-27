@@ -26,7 +26,6 @@
     "final-form": "^4.18.5",
     "govuk-frontend": "^2.8.0",
     "keycloak-js": "^4.7.0",
-    "npm": "^6.13.4",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-final-form": "^6.3.0",
