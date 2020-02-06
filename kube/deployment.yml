@@ -61,7 +61,7 @@ spec:
             port: {{.WWW_REF_PORT}}
           initialDelaySeconds: 5
           periodSeconds: 5
-      - name: proxy
+      - name: {{.WWW_REF_NAME}}-proxy
         image: {{.NGINX_IMAGE}}:{{.NGINX_TAG}}
         securityContext:
           runAsNonRoot: true
