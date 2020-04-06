@@ -13,7 +13,7 @@ RUN mkdir -p /src
 WORKDIR /src
 
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 COPY . /src
 
 RUN npm run build
