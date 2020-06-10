@@ -16,13 +16,12 @@ const EntitiesData = ({ data }) => {
 
   data.map((entity, n) => {
     let { entityName } = entity;
-    let { description, label, schemalastupdated } = entity.schema;
+    let { description, label } = entity.schema;
 
     entityRows.push(
       <tr className="govuk-table__row" key={n}>
         <th className="govuk-table__header" scope="row">{label}</th>
         <td className="govuk-table__cell">{description}</td>
-        <td className="govuk-table__cell">{schemalastupdated}</td>
         <td className="govuk-table__cell">
           <Link to={`/entities/${entityName}`}>View</Link>
 
@@ -91,7 +90,6 @@ class Entities extends React.Component {
                   <tr className="govuk-table__row">
                     <th className="govuk-table__header" scope="col">Name</th>
                     <th className="govuk-table__header" scope="col">Description</th>
-                    <th className="govuk-table__header" scope="col">Last Updated</th>
                     <th className="govuk-table__header" scope="col">Action</th>
                   </tr>
                 </thead>
